@@ -1,0 +1,13 @@
+var UsersDAO=require('../DAO/UsersDAO');
+exports.showAllProduct=function(func){
+	UsersDAO.findALLData(func);
+};
+exports.add=function(name,price,imgPath,func){
+	UsersDAO.addData(name,price,imgPath,func);
+};
+exports.checkShoppingCar=function(name,func){
+	UsersDAO.findByName(name,func);
+};
+exports.delOrder=function(id,func){
+	UsersDAO.delData(id,func);
+};

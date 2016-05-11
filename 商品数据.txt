@@ -1,0 +1,20 @@
+{
+    "name" : "小米5",
+    "price" : "1999",
+    "imgPath" : "./modules/index/images/mi5!160x110.jpg"
+},
+{
+    "name" : "小米4",
+    "price" : "1299",
+    "imgPath" : "./modules/index/images/mi4!160x110.jpg"
+},
+{
+    "name" : "小米4c",
+    "price" : "899",
+    "imgPath" : "./modules/index/images/mi4c!160x110.jpg"
+},
+{
+    "name" : "小米note",
+    "price" : "2999",
+    "imgPath" : "./modules/index/images/minote!160x110.jpg"
+}
