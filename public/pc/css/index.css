@@ -8,6 +8,7 @@
     width: 100%;
     height: 1.01rem;
     overflow: hidden;
+    border-bottom:0.01rem solid #555555 ;
 }
 .header_left{
     height: 100%;
