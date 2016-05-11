@@ -1,0 +1,171 @@
+.wrap{
+    background-color: #ffffff;
+    width: 11.4rem;
+    overflow: hidden;
+    margin:0 auto;
+}
+.order{
+    width: 10.48rem;
+    padding: 0.37rem 0.46rem 0.56rem 0.46rem;
+    overflow: hidden;
+}
+.order h1{
+    font-weight: bold;
+    font-size: 0.24rem;
+    color: #555555;
+    margin-bottom: 0.5rem;
+}
+.order_left{
+    width: 6.58rem;
+    padding-right: 0.3rem;
+    padding-bottom: 0.5rem;
+    overflow: hidden;
+    border-right: 0.01rem solid #e4e4e4;
+}
+.order_left table,.order_right table{
+    width: 100%;
+    overflow: hidden;
+}
+.order_left_title,.order_right_title{
+    width: 100%;
+    border-bottom: 0.03rem solid #dddddd;
+    font-size: 0.14rem;
+    color: #555555;
+    font-weight: bold;
+    line-height: 0.3rem;
+}
+.order_left_grid{
+    overflow: hidden;
+    vertical-align: middle;
+    text-align: center;
+    width: 0.98rem;
+    border-bottom: 0.01rem solid #e4e4e4;
+}
+.order_left_grid td{
+    height: 100%;
+}
+.product{
+    width: 3.33rem;
+}
+.product span{
+    display: inline-block;
+    border: 0.03rem solid #dddddd;
+    width: 0.19rem;
+    height: 0.19rem;
+    line-height: 0.19rem;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 0.16rem;
+    font-weight: bold;
+    color: #dddddd;
+    margin-right: 0.2rem;
+}
+.product img{
+    width: 0.98rem;
+    display: inline-block;
+    margin-right: 0.35rem;
+}
+.product p{
+    display: inline-block;
+    font-size: 0.16rem;
+    color: #02beeb;
+    width: 1.4rem;
+}
+.price p{
+    display: inline-block;
+    font-size: 0.16rem;
+    color: #555555;
+}
+.quantity span{
+    float: left;
+    border: 0.01rem solid #b1b1b1;
+    border-right: none;
+    border-left: none;
+    display: inline-block;
+    text-align: center;
+    width: 0.35rem;
+    height: 0.4rem;
+    line-height: 0.4rem;
+}
+.quantity button{
+    outline: none;
+    cursor: pointer;
+    float: left;
+    display: inline-block;
+    background-color: #ffffff;
+    width: 0.30rem;
+    height: 0.42rem;
+    border: 0.01rem solid #b1b1b1;
+}
+.total p{
+    font-weight: bold;
+    display: inline-block;
+    font-size: 0.16rem;
+    color: #555555;
+}
+.order_right{
+    width: 3.3rem;
+    overflow: hidden;
+}
+.subtotal{
+    font-size: 0.14rem;
+    line-height: 0.3rem;
+    border-bottom: 0.01rem solid #e4e4e4;
+}
+.subtotal td:nth-of-type(1){
+    font-weight: bold;
+}
+.subtotal td:nth-of-type(2){
+    text-align: right;
+}
+.shipping td:nth-of-type(1){
+    font-weight: bold;
+    vertical-align: bottom;
+    font-size: 0.14rem;
+}
+.shipping td:nth-of-type(2){
+    text-align: right;
+}
+.shipping div{
+    padding-top:0.1rem ;
+    line-height: 0.2rem;
+    height: 0.2rem;
+}
+.shipping .blank{
+    padding-top:0;
+    height: 0.1rem;
+}
+.shipping{
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 0.01rem solid #e4e4e4;
+}
+.final_price{
+    height: 0.3rem;
+    font-size: 0.14rem;
+    font-weight: bold;
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 0.03rem solid #e4e4e4;
+}
+.final_price td:nth-of-type(2){
+    text-align: right;
+}
+.pay_bth{
+    display: block;
+    margin-top: 0.2rem;
+    width: 100%;
+    height: 0.41rem;
+    background-color: #ff0055;
+    color: #ffffff;
+    font-size: 0.18rem;
+    border-radius: 0.03rem;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
