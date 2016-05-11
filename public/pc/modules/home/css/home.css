@@ -1,0 +1,299 @@
+.wrap{
+    background-color: #ffffff;
+    width: 11.4rem;
+    overflow: hidden;
+    margin:0 auto;
+}
+.home .banner{
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.banner_box{
+    width: 100%;
+    overflow: hidden;
+}
+.banner_box img{
+    width: 11.40rem;
+    height: 6.50rem;
+}
+.banner_btn_left,.banner_btn_right{
+    position: absolute;
+    width: 0.8rem;
+    height: 6.50rem;
+    display: table;
+    top: 0;
+    opacity:0.4;
+}
+.banner_btn_left{
+    left: 0;
+}
+.banner_btn_left a{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+.banner_btn_left span{
+    margin-left:0.3rem;
+    color: #ffffff;
+    font-size: 0.3rem;
+    line-height: 0.36rem;
+    display: block;
+    width: 0.36rem;
+    height: 0.36rem;
+    border-radius: 100%;
+    border: 3px solid #ffffff;
+}
+.banner_btn_right{
+    right: 0;
+}
+.banner_btn_right a{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+.banner_btn_right span{
+    margin-right:0.3rem;
+    color: #ffffff;
+    font-size: 0.3rem;
+    line-height: 0.36rem;
+    display: block;
+    width: 0.36rem;
+    height: 0.36rem;
+    border-radius: 100%;
+    border: 3px solid #ffffff;
+}
+.banner_pageDots{
+    position: absolute;
+    width: 100%;
+    bottom: 0.2rem;
+    left: 0;
+    right: 0;
+    list-style: none;
+    text-align: center;
+}
+.banner_pageDots li{
+    display: inline-block;
+    width: 0.08rem;
+    height: 0.08rem;
+    margin: 0 0.03rem;
+    border: 0.03rem solid #ffffff;
+    border-radius: 50%;
+    opacity: 0.4;
+    cursor: pointer;
+}
+.banner_pageDots .isSelected{
+    width: 0.14rem;
+    height: 0.14rem;
+    border:none;
+    opacity: 1;
+    background-color: #ffffff;
+}
+.banner_info{
+    width: 3.24rem;
+    height: 2.58rem;
+    position: absolute;
+    left: 1.2rem;
+    bottom: 2rem;
+}
+.banner_info h1{
+    font-size: 0.48rem;
+    color: #ebebeb;
+    display: block;
+    margin: 0.15rem 0;
+}
+.banner_info h4{
+    line-height: 0.3rem;
+    font-size: 0.22rem;
+    color: #ebebeb;
+    display: block;
+    margin: 0.15rem 0;
+}
+.banner_info a{
+    margin: 0.15rem 0;
+    display: block;
+    width: 1.37rem;
+    height: 0.47rem;
+    border-radius: 0.02rem;
+    background-color: #ffffff;
+    color: #888888;
+    font-size: 0.20rem;
+    line-height: 0.47rem;
+    text-align: center;
+}
+.show_product{
+    width: 10.48rem;
+    padding: 0.4rem 0.46rem;
+    overflow: hidden;
+}
+.show_product_box{
+    width: 100%;
+    overflow: hidden;
+}
+.show_product h1{
+    font-size: 0.26rem;
+    color: #555555;
+    display: block;
+    margin-bottom: 0.1rem;
+}
+.show_product h3{
+    font-size: 0.20rem;
+    line-height: 0.3rem;
+    color: #a1a1a1;
+    font-weight: 300;
+    display: block;
+    margin-bottom: 0.2rem;
+}
+.show_product_box_cell{
+    width: 2rem;
+    overflow: hidden;
+    margin:0 0.03rem;
+}
+.img_box{
+    width: 2rem;
+    height: 3rem;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+.hide,.show{
+    width: 2rem;
+    height: 3rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.hide{
+    opacity: 0;
+}
+.show{
+    opacity: 1;
+}
+.text_box{
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    line-height: 0.3rem;
+}
+.text_box h5{
+    font-size: 0.14rem;
+    color: #999999;
+    font-weight: bold;
+}
+.text_box p{
+    font-size: 0.16rem;
+    color: #000000;
+}
+.text_box span{
+    color: #000000;
+    font-size: 0.2rem;
+    font-weight: bold;
+}
+.img_box .cart_icon{
+    width: 0.22rem;
+    height: 0.26rem;
+    margin:0 0 0.15rem 0.05rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.cart_icon{
+    overflow: hidden;
+    position: relative;
+}
+.img_box .cart_icon strong{
+    font-weight: bold;
+    font-size: 0.2rem;
+    line-height: 0.16rem;
+    min-width: 0.18rem;
+    min-height: 0.15rem;
+}
+.cart_icon strong{
+    position: absolute;
+    bottom: 0;
+    color: #02b8e5;
+    border: 0.02rem solid #02b8e5;
+    display: inline-block;
+    text-align: center;
+}
+.img_box .cart_icon .cart_icon_handle{
+    border-top-left-radius: 0.99rem;
+    border-top-right-radius: 0.99rem;
+    height: 0.04rem;
+    width: 0.06rem;
+    bottom: 0.19rem;
+    left: 0.06rem;
+}
+.cart_icon .cart_icon_handle{
+    border: 0.02rem solid #02b8e5;
+    border-bottom: none;
+    position: absolute;
+}
+.customer_care{
+    width: 100%;
+    overflow: hidden;
+}
+.customer_care h1{
+    display: block;
+    text-align: center;
+}
+.customer_care{
+    width: 10.48rem;
+    padding: 0 0.46rem;
+    overflow: hidden;
+}
+.customer_care fieldset {
+    display: block;
+    -webkit-margin-start: 2px;
+    -webkit-margin-end: 2px;
+    -webkit-padding-before: 0.35em;
+    -webkit-padding-start: 0.75em;
+    -webkit-padding-end: 0.75em;
+    -webkit-padding-after: 0.625em;
+    min-width: -webkit-min-content;
+    border-top: 2px groove #eeeeee;
+}
+.customer_care legend{
+    padding: 0 0.15rem;
+    font-size: 0.22rem;
+    color: #555555;
+    font-weight: bold;
+    text-align: center;
+}
+.customer_care_grid{
+    width: 100%;
+    overflow: hidden;
+}
+.customer_care_cell{
+    width: 3.28rem;
+    overflow: hidden;
+    text-align: center;
+    padding:0 0.1rem 0.3rem 0.1rem;
+}
+.customer_care_cell h4{
+    color: #555555;
+    font-size: 0.18rem;
+    font-weight: bolder;
+    margin-bottom: 0.1rem;
+}
+.customer_care_cell p{
+    color:#777777;
+    font-size: 0.16rem;
+    line-height: 0.3rem;
+}
+.customer_care_cell img{
+    display: inline-block;
+    width: 0.48rem;
+    height: 0.48rem;
+    margin:0.2rem 0;
+}
+
+
+
+
+
+
+
+
+
+
