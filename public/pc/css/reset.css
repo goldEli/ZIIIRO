@@ -3,7 +3,6 @@
 .fl{float: left;}
 .fr{float: right;}
 a{text-decoration: none;cursor:pointer;color:black;}
-p,h1,h2,h3,h4,h5,h6{font-weight: normal;}
 i{font-style: normal;}
 body {
   width: 100%;
@@ -11,12 +10,14 @@ body {
   color: #777;
   font-family: "Helvetica",Helvetica,Arial,sans-serif;
   font-size:0.12rem;
-}
+  font-weight: 500;
+  }
 /*≥£”√*/
 
 *{
   /*outline: 1px solid #9cc6ff;*/
-  margin: 0;padding: 0;border: none;
+  margin: 0;padding: 0;
+  border: none;
 }
 
 
