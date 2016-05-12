@@ -25540,27 +25540,59 @@
 	var Main=React.createClass({displayName: "Main",
 	    render:function(){
 	        return(
-	            React.createElement("div", {className: "wrap"}, 
-	                React.createElement("div", {className: "header"}, 
-	                    React.createElement("div", {className: "left_box"}, 
-	                        React.createElement("div", {className: "more_btn fl"}, 
-	                            React.createElement("span", null), 
-	                            React.createElement("span", null), 
-	                            React.createElement("span", null)
+	            React.createElement("div", null, 
+	                React.createElement("div", {className: "wrap"}, 
+	                    React.createElement("div", {className: "header"}, 
+	                        React.createElement("div", {className: "left_box"}, 
+	                            React.createElement("div", {className: "more_btn fl"}, 
+	                                React.createElement("span", null), 
+	                                React.createElement("span", null), 
+	                                React.createElement("span", null)
+	                            )
+	                        ), 
+	                        React.createElement("div", {className: "middle_box"}, 
+	                            React.createElement("img", {src: "images/logo-big.png", alt: "logo"})
+	                        ), 
+	                        React.createElement("div", {className: "right_box"}, 
+	                            React.createElement("div", {className: "cart_icon fr"}, 
+	                                React.createElement("strong", null, "4"), 
+	                                React.createElement("span", {className: "cart_icon_handle"})
+	                            )
 	                        )
 	                    ), 
-	                    React.createElement("div", {className: "middle_box"}, 
-	                        React.createElement("img", {src: "images/logo-big.png", alt: "logo"})
-	                    ), 
-	                    React.createElement("div", {className: "right_box"}, 
-	                        React.createElement("div", {className: "cart_icon fr"}, 
-	                            React.createElement(Link, {to: "/order"}, React.createElement("strong", null, "4")), 
-	                            React.createElement("span", {className: "cart_icon_handle"})
+	                    React.createElement("div", {className: "footer"}, 
+	                        React.createElement("div", {className: "footer_box_cell fl"}, 
+	                            React.createElement("h1", null, "SUBSCRIBE TO OUR NEWSLETTER"), 
+	                            React.createElement("p", null, "Email "), React.createElement("i", null, "*"), 
+	                            React.createElement("input", {type: "text"}), 
+	                            React.createElement("button", null, "SUBSCRIBE!")
+	                        ), 
+	                        React.createElement("div", {className: "footer_box_cell fl"}, 
+	                            React.createElement("h1", null, "GET IN TOUCH!"), 
+	                            React.createElement("p", null, "Please feel free to join our social channels and get in touch with us and our customers and fans.")
+	                        ), 
+	                        React.createElement("div", {className: "footer_box_cell fl"}, 
+	                            React.createElement("h1", null, "YOUR ACCOUNT"), 
+	                            React.createElement("a", {href: "javascript:"}, React.createElement("h5", null, "my account")), 
+	                            React.createElement("a", {href: "javascript:"}, React.createElement("h5", null, "wishlist")), 
+	                            React.createElement("a", {href: "javascript:"}, React.createElement("h5", null, "cart")), 
+	                            React.createElement("a", {href: "javascript:"}, React.createElement("h5", null, "checkout"))
+	                        ), 
+	                        React.createElement("div", {className: "footer_box_cell fl"}, 
+	                            React.createElement("h1", null, "YOUR ACCOUNT"), 
+	                            React.createElement("a", {href: "javascript:"}, React.createElement("h5", null, "shop")), 
+	                            React.createElement("a", {href: "javascript:"}, React.createElement("h5", null, "support")), 
+	                            React.createElement("a", {href: "javascript:"}, React.createElement("h5", null, "news")), 
+	                            React.createElement("a", {href: "javascript:"}, React.createElement("h5", null, "resellers")), 
+	                            React.createElement("a", {href: "javascript:"}, React.createElement("h5", null, "about"))
+	                        ), 
+	                        React.createElement("div", {className: "footer_box_cell fl"}
 	                        )
 	                    )
 	                ), 
-	                React.createElement("div", {className: "footer"}
-
+	                React.createElement("div", {className: "copyRight"}, 
+	                    React.createElement("p", null, "Copyright 2014 ? ", React.createElement("a", {href: "javascript:"}, "ZIIIRO"), " — Contact us — Terms of Use — Privacy Policy"), 
+	                    React.createElement("img", {src: "images/payment.png", alt: "img"})
 	                )
 	            )
 	        )

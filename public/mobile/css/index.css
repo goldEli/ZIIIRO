@@ -13,7 +13,7 @@
 .footer{
     width: 100%;
     overflow: hidden;
-    border-bottom:0.06rem solid #000000 ;
+    border-top:0.06rem solid #000000 ;
 }
 .left_box,.right_box{
     height: 100%;
@@ -82,6 +82,78 @@
     border: 0.04rem solid #02b8e5;
     border-bottom: none;
     position: absolute;
+}
+
+.footer_box_cell{
+    margin-top: 0.7rem;
+    width: 100%;
+    overflow: hidden;
+    font-size: 0.16rem;
+    color: #818181;
+    margin-right: 0.3rem;
+}
+.footer_box_cell h1{
+    font-size: 0.3rem;
+    color: #555555;
+}
+.footer_box_cell p{
+    line-height: 0.3rem;
+    display: inline-block;
+    font-size: 0.28rem;
+    margin: 0.34rem 0 0.16rem 0;
+}
+.footer_box_cell i{
+    font-size: 0.4rem;
+}
+.footer_box_cell input{
+    font-size: 0.3rem;
+    border: 0.02rem solid #7f7f7f;
+    display: block;
+    padding-left: 0.3rem;
+    width: 6.68rem;
+    height: 0.6rem;
+    margin-bottom: 0.4rem;
+}
+.footer_box_cell button{
+    display: block;
+    background-color: #02b8e5;
+    height: 0.8rem;
+    width: 2.68rem;
+    color: #ffffff;
+    font-size: 0.34rem;
+    border-radius: 0.1rem;
+}
+.footer_box_cell h5{
+    font-weight: bolder;
+    line-height: 0.7rem;
+    font-size: 0.3rem;
+    display: block;
+    margin: 0.14rem 0;
+    border-bottom:0.02rem solid #eeeeee;
+    color: #999999;
+    text-transform: uppercase;
+}
+.copyRight{
+    background-color: #f6f8f9;
+    clear: both;
+    overflow: hidden;
+    width: 7.4rem;
+    height: 2.47rem;
+    padding-left: 0.3rem;
+}
+.copyRight p{
+    width: 7rem;
+    display: block;
+    font-size: 0.28rem;
+    margin: 0.52rem 0 0.33rem 0;
+}
+.copyRight p a{
+    font-weight: bolder;
+}
+.copyRight img{
+    display: block;
+    width: 5.6rem;
+    margin: 0 0 0.5rem 0;
 }
 
 
