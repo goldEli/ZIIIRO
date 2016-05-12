@@ -1,0 +1,164 @@
+.wrap{
+    background-color: #ffffff;
+    width: 11.4rem;
+    overflow: hidden;
+    margin:0 auto;
+}
+.details{
+    width: 10.48rem;
+    padding: 0.37rem 0.46rem 0.56rem 0.46rem;
+    overflow: hidden;
+}
+.show_img{
+    width: 5.24rem;
+    overflow: hidden;
+    text-align: center;
+}
+.text_info{
+    width: 3rem;
+    overflow: hidden;
+    text-align: left;
+    color: #555555;
+}
+.show_img img{
+    width: 2rem;
+}
+.text_info h1{
+    line-height: 0.6rem;
+    font-weight: bold;
+    font-size: 0.20rem;
+}
+.text_info h4{
+    display: inline-block;
+    margin-bottom: 0.15rem;
+    color: #000000;
+    font-weight: bolder;
+    font-size: 0.18rem;
+}
+.text_info p{
+    line-height: 0.3rem;
+    font-size: 0.16rem;
+}
+.text_info button{
+    display: block;
+    margin: 0.26rem 0 0.35rem 0;
+    cursor: pointer;
+    background-color: #02b8e5;
+    width: 1.5rem;
+    height: 0.41rem;
+    color: #ffffff;
+    font-size: 0.18rem;
+    border-radius: 0.03rem;
+}
+.text_info span{
+    display: block;
+    line-height: 0.28rem;
+    height: 0.28rem;
+    width: 100%;
+    font-size: 0.14rem;
+    color: #555555;
+    border-top: 0.01rem dashed #b3b3b3;
+}
+.text_info a{
+    color: #02b8e5;
+}
+.row{
+    width: 100%;
+    overflow: hidden;
+}
+.row_border{
+    padding-bottom: 0.3rem;
+    border-bottom: 0.01rem solid #b3b3b3;
+}
+.details_nav{
+    display: block;
+    height: 1rem;
+    line-height: 0.1rem;
+    text-align: center;
+}
+.details_nav span{
+    margin-top: 0.4rem;
+    display: inline-block;
+    height: 0.3rem;
+    padding: 0 0.2rem;
+    overflow: hidden;
+    border-left: 0.01rem solid #b3b3b3;
+}
+.details_nav span:nth-of-type(1){
+    border-left:none;
+}
+.details_nav .details_nav_active{
+    background-color: #02b8e5;
+    color: #ffffff;
+}
+.details_nav a{
+    display: block;
+    height: 0.3rem;
+    line-height: 0.3rem;
+    padding: 0 0.2rem;
+    font-size: 0.14rem;
+    font-weight: bold;
+    color: #555555;
+    border-radius: 0.15rem;
+}
+.product_features fieldset {
+    display: block;
+    -webkit-margin-start: 2px;
+    -webkit-margin-end: 2px;
+    -webkit-padding-before: 0.35em;
+    -webkit-padding-start: 0.75em;
+    -webkit-padding-end: 0.75em;
+    -webkit-padding-after: 0.625em;
+    min-width: -webkit-min-content;
+    border-top: 2px groove #eeeeee;
+}
+.product_features legend{
+    padding: 0 0.15rem;
+    font-size: 0.22rem;
+    color: #555555;
+    font-weight: bold;
+    text-align: center;
+}
+.product_features_cell{
+    padding: 0 0.09rem;
+    width: 3.3rem;
+    text-align: center;
+}
+.product_features_cell h3{
+    font-size: 0.2rem;
+    font-weight: bold;
+    line-height: 0.6rem;
+}
+.product_features_cell p{
+    font-size: 0.16rem;
+    line-height: 0.3rem;
+}
+.product_features_cell img{
+    width: 0.6rem;
+    height: 0.6rem;
+}
+.useMethod img{
+    display: block;
+    margin-bottom: 0.3rem;
+    width: 10.4rem;
+}
+.booklet h2{
+    font-weight: normal;
+    line-height: 0.6rem;
+    font-size: 0.16rem;
+}
+.booklet a{
+    color: #02b8e5;
+}
+
+
+
+
+
+
+
+
+
+
+
+

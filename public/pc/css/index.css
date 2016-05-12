@@ -54,12 +54,19 @@
     min-height: 0.29rem;
 }
 .cart_icon strong{
+    cursor: pointer;
+    transition: background-color 0.2s,background-color 0.2s;
+    background-color: transparent;
     position: absolute;
     bottom: 0;
     color: #02b8e5;
     border: 0.02rem solid #02b8e5;
     display: inline-block;
     text-align: center;
+}
+.cart_icon strong:hover{
+    background-color: #02b8e5;
+    color: #ffffff;
 }
 .header_right .cart_icon .cart_icon_handle{
     border-top-left-radius: 0.99rem;
