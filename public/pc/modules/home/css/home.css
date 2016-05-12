@@ -18,15 +18,25 @@
     height: 6.50rem;
 }
 .banner_btn_left,.banner_btn_right{
+    cursor: pointer;
+    transition: opacity 0.5s,right 0.5s,left 0.5s;
     position: absolute;
     width: 0.8rem;
     height: 6.50rem;
     display: table;
     top: 0;
+    opacity:0;
+}
+.banner_btn_left:hover{
     opacity:0.4;
+    left: 0;
+}
+.banner_btn_right:hover{
+    opacity:0.4;
+    right: 0;
 }
 .banner_btn_left{
-    left: 0;
+    left: -0.2rem;
 }
 .banner_btn_left a{
     display: table-cell;
@@ -34,6 +44,8 @@
     text-align: center;
 }
 .banner_btn_left span{
+    transition: background-color 0.5s,opacity 0.5s;
+    background-color: transparent;
     margin-left:0.3rem;
     color: #ffffff;
     font-size: 0.3rem;
@@ -44,8 +56,15 @@
     border-radius: 100%;
     border: 3px solid #ffffff;
 }
+/*.banner_btn_left span:hover{*/
+    /*background-color:#02b8e5;*/
+    /*border: 3px solid #02b8e5;*/
+/*}*/
+/*.banner_btn_left span:hover .banner_btn_left{*/
+    /*opacity: 1!important;*/
+/*}*/
 .banner_btn_right{
-    right: 0;
+    right: -0.2rem;
 }
 .banner_btn_right a{
     display: table-cell;
