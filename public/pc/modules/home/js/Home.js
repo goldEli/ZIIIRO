@@ -34,7 +34,7 @@ var Home=React.createClass({
                 </div>
                 <div className="show_product">
                     <h1>Unique. Minimal. Aesthetic.</h1>
-                    <h3>ZIIIRO watches are designed to make time for fun. Futuristic, minimalist, bold. Every design embodies the ZIIIRO vision of creating incredible timepieces with unique appearance and style. These space-age timekeepers remind us to zig while the world zags, and to take all the time we need to live and enjoy a life that¡¯s awesome.</h3>
+                    <h3>ZIIIRO watches are designed to make time for fun. Futuristic, minimalist, bold. Every design embodies the ZIIIRO vision of creating incredible timepieces with unique appearance and style. These space-age timekeepers remind us to zig while the world zags, and to take all the time we need to live and enjoy a life thatâ€™s awesome.</h3>
                     <div className="show_product_box">
                         <div className="show_product_box_cell fl">
                             <div className="img_box">

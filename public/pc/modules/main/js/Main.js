@@ -9,10 +9,10 @@ var Main=React.createClass({
             <div className="wrap">
                 <div className="header">
                     <div className="header_left fl">
-                        <img src="images/logo-big.png" alt="logo"/>
+                        <Link to="/home"><img src="images/logo-big.png" alt="logo"/></Link>
                         <div className="header_nav fl">
-                            <span><a href="javascript:">SHOP</a></span>
-                            <span><a href="javascript:">SUPPORT</a></span>
+                            <Link to="/search"><span><a href="javascript:">SHOP</a></span></Link>
+                            <Link to="/details"><span><a href="javascript:">SUPPORT</a></span></Link>
                             <span><a href="javascript:">NEWS</a></span>
                             <span><a href="javascript:">RESELLERS</a></span>
                             <span><a href="javascript:">ABOUT</a></span>
@@ -20,7 +20,7 @@ var Main=React.createClass({
                     </div>
                     <div className="header_right fr">
                         <div className="cart_icon fr">
-                            <strong>4</strong>
+                            <Link to="/order"><strong>4</strong></Link>
                             <span className="cart_icon_handle"></span>
                         </div>
                         <div className="header_right_nav fr">

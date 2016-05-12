@@ -15,6 +15,7 @@
     overflow: hidden;
 }
 .header_left img{
+    cursor:pointer;
     width: 1.82rem;
     height: 0.45rem;
     display: block;
