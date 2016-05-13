@@ -56,8 +56,8 @@
 	var hashHistory=__webpack_require__(166).hashHistory;
 
 
-	//var Login=require("../modules/login/js/Login").Login;
-	//var Home=require("../modules/home/js/Home").Home;
+	var Login=__webpack_require__(229).Login;
+	var Home=__webpack_require__(228).Home;
 	var Main=__webpack_require__(227).Main;
 	//var Order=require("../modules/order/js/Order").Order;
 	//var Search=require("../modules/search/js/Search").Search;
@@ -65,7 +65,9 @@
 
 	ReactDom.render(
 	    React.createElement(Router, {history: hashHistory}, 
-	            React.createElement(Route, {path: "/", component: Main}
+	            React.createElement(Route, {path: "/", component: Main}, 
+	                React.createElement(Route, {path: "/home", component: Home}), 
+	                React.createElement(Route, {path: "/login", component: Login})
 	            )
 	    )
 	    ,document.getElementById('main'));
@@ -25538,20 +25540,40 @@
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
 	var Main=React.createClass({displayName: "Main",
+	    hideSideBar:function(){
+	           $(this.refs.side_bar).css({'left':'-5.2rem'});
+	           $(this.refs.side_bar_background).css({'opacity':'0'});
+	           $(this.refs.side_bar_background).css({'zIndex':'-1'});
+	    },
+	    sideBar:function(){
+	        console.info(this.refs.side_bar);
+	        $(this.refs.side_bar).css({'left':'0'});
+	        $(this.refs.side_bar_background).css({'zIndex':'2'});
+	        $(this.refs.side_bar_background).css({'opacity':'0.6'});
+	    },
 	    render:function(){
 	        return(
 	            React.createElement("div", null, 
 	                React.createElement("div", {className: "wrap"}, 
+	                    React.createElement("div", {className: "side_bar", ref: "side_bar"}, 
+	                        React.createElement("h3", null, "SHOP"), 
+	                        React.createElement("h3", null, "SUPPORT"), 
+	                        React.createElement("h3", null, "NEWS"), 
+	                        React.createElement("h3", null, "RESELLERS"), 
+	                        React.createElement("h3", null, "ABOUT"), 
+	                        React.createElement(Link, {to: "/login"}, React.createElement("h3", null, "LOGIN"))
+	                    ), 
+	                    React.createElement("div", {onClick: this.hideSideBar.bind(this), className: "side_bar_background", ref: "side_bar_background"}), 
 	                    React.createElement("div", {className: "header"}, 
 	                        React.createElement("div", {className: "left_box"}, 
-	                            React.createElement("div", {className: "more_btn fl"}, 
+	                            React.createElement("div", {onClick: this.sideBar.bind(this), className: "more_btn fl"}, 
 	                                React.createElement("span", null), 
 	                                React.createElement("span", null), 
 	                                React.createElement("span", null)
 	                            )
 	                        ), 
 	                        React.createElement("div", {className: "middle_box"}, 
-	                            React.createElement("img", {src: "images/logo-big.png", alt: "logo"})
+	                            React.createElement(Link, {to: "/home"}, React.createElement("img", {src: "images/logo-big.png", alt: "logo"}))
 	                        ), 
 	                        React.createElement("div", {className: "right_box"}, 
 	                            React.createElement("div", {className: "cart_icon fr"}, 
@@ -25560,6 +25582,7 @@
 	                            )
 	                        )
 	                    ), 
+	                    this.props.children, 
 	                    React.createElement("div", {className: "footer"}, 
 	                        React.createElement("div", {className: "footer_box_cell fl"}, 
 	                            React.createElement("h1", null, "SUBSCRIBE TO OUR NEWSLETTER"), 
@@ -25598,7 +25621,163 @@
 	        )
 	    }
 	});
+
+
 	exports.Main=Main;
+
+/***/ },
+/* 228 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by Administrator on 2016/5/13.
+	 */
+	var React=__webpack_require__(1);
+	var Link=__webpack_require__(166).Link;
+	var Home=React.createClass({displayName: "Home",
+	    render:function(){
+	        return(
+	            React.createElement("div", {className: "home"}, 
+	                React.createElement("div", {className: "banner"}, 
+	                    React.createElement("img", {src: "images/banner-eon.jpg", alt: "banner"})
+	                ), 
+	                React.createElement("div", {className: "show_product"}, 
+	                    React.createElement("h1", null, "Unique. Minimal. Aesthetic."), 
+	                    React.createElement("h3", null, "ZIIIRO watches are designed to make time for fun. Futuristic, minimalist, bold. Every design embodies the ZIIIRO vision of creating incredible timepieces with unique appearance and style. These space-age timekeepers remind us to zig while the world zags, and to take all the time we need to live and enjoy a life that’s awesome."), 
+	                    React.createElement("div", {className: "show_product_box"}, 
+	                        React.createElement("div", {className: "show_product_box_cell fl"}, 
+	                            React.createElement("div", {className: "img_box"}, 
+	                                React.createElement("img", {className: "show", src: "images/ziiiro-celeste-watch-black-mono-front-200x300.jpg", alt: "img"}), 
+	                                React.createElement("img", {className: "hide", src: "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg", alt: "img"}), 
+	                                React.createElement("div", {className: "cart_icon fr"}, 
+	                                    React.createElement("strong", null, "+"), 
+	                                    React.createElement("span", {className: "cart_icon_handle"})
+	                                )
+	                            ), 
+	                            React.createElement("div", {className: "text_box"}, 
+	                                React.createElement("h5", null, "CELESTE"), 
+	                                React.createElement("p", null, "CELESTE Black/Mono"), 
+	                                React.createElement("span", null, "$199.00")
+	                            )
+	                        ), 
+	                        React.createElement("div", {className: "show_product_box_cell fl"}, 
+	                            React.createElement("div", {className: "img_box"}, 
+	                                React.createElement("img", {className: "show", src: "images/ziiiro-celeste-watch-black-mono-front-200x300.jpg", alt: "img"}), 
+	                                React.createElement("img", {className: "hide", src: "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg", alt: "img"}), 
+	                                React.createElement("div", {className: "cart_icon fr"}, 
+	                                    React.createElement("strong", null, "+"), 
+	                                    React.createElement("span", {className: "cart_icon_handle"})
+	                                )
+	                            ), 
+	                            React.createElement("div", {className: "text_box"}, 
+	                                React.createElement("h5", null, "CELESTE"), 
+	                                React.createElement("p", null, "CELESTE Black/Mono"), 
+	                                React.createElement("span", null, "$199.00")
+	                            )
+	                        ), 
+	                        React.createElement("div", {className: "show_product_box_cell fl"}, 
+	                            React.createElement("div", {className: "img_box"}, 
+	                                React.createElement("img", {className: "show", src: "images/ziiiro-celeste-watch-black-mono-front-200x300.jpg", alt: "img"}), 
+	                                React.createElement("div", {className: "cart_icon fr"}, 
+	                                    React.createElement("strong", null, "+"), 
+	                                    React.createElement("span", {className: "cart_icon_handle"})
+	                                )
+	                            ), 
+	                            React.createElement("div", {className: "text_box"}, 
+	                                React.createElement("h5", null, "CELESTE"), 
+	                                React.createElement("p", null, "CELESTE Black/Mono"), 
+	                                React.createElement("span", null, "$199.00")
+	                            )
+	                        )
+	                    ), 
+	                    React.createElement("div", {className: "customer_care"}, 
+	                        React.createElement("fieldset", null, 
+	                            React.createElement("legend", null, "CUSTOMER CARE")
+	                        ), 
+	                        React.createElement("div", {className: "customer_care_grid"}, 
+	                            React.createElement("div", {className: "customer_care_cell fl"}, 
+	                                React.createElement("img", {src: "images/star.png", alt: "img"}), 
+	                                React.createElement("h4", null, "FREE INTERNATIONAL SHIPPING"), 
+	                                React.createElement("p", null, "Get Free International Standard Shipping on all orders over US$145. Enjoy Free Shipping for all watches purchased from our online shop. Items are dispatched from our Hong Kong logistics warehouse.")
+	                            ), 
+	                            React.createElement("div", {className: "customer_care_cell fl"}, 
+	                                React.createElement("img", {src: "images/star.png", alt: "img"}), 
+	                                React.createElement("h4", null, "OUR DELIVERY PROMISE"), 
+	                                React.createElement("p", null, "To deliver on our promise of exceedingly personal service and ensure prompt delivery of your fabulous order, we guarantee to process all in stock items and make every attempt to ship out your package within 2-3 business days from our warehouse.")
+	                            ), 
+	                            React.createElement("div", {className: "customer_care_cell fl"}, 
+	                                React.createElement("img", {src: "images/star.png", alt: "img"}), 
+	                                React.createElement("h4", null, "AMAZING CUSTOMER SERVICE"), 
+	                                React.createElement("p", null, "We are committed to providing all customers with superior customer experience. If for any reason something goes wrong, we will work to resolve the issue quickly and as professionally as we can.")
+	                            )
+	                        )
+	                    )
+	                )
+	            )
+	        )
+	    }
+	});
+	exports.Home=Home;
+
+/***/ },
+/* 229 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by Administrator on 2016/5/13.
+	 */
+	var React=__webpack_require__(1);
+	var Link=__webpack_require__(166).Link;
+	var Login=React.createClass({displayName: "Login",
+	    render:function(){
+	        return(
+	            React.createElement("div", {className: "login_and_register"}, 
+	                React.createElement("div", {className: "warn"}, 
+	                    React.createElement("p", null, "Error: Please provide a valid email address.")
+	                ), 
+	                React.createElement("div", {className: "input_box"}, 
+	                    React.createElement("div", {className: "login fl"}, 
+	                        React.createElement("h2", null, "LOGIN"), 
+	                        React.createElement("div", {className: "login_grid"}, 
+	                            React.createElement("p", null, "Username or email address"), 
+	                            React.createElement("input", {type: "text"})
+	                        ), 
+	                        React.createElement("div", {className: "login_grid"}, 
+	                            React.createElement("p", null, "Password"), 
+	                            React.createElement("input", {type: "password"})
+	                        ), 
+	                        React.createElement("div", {className: "login_grid"}, 
+	                            React.createElement("a", {href: "javascript:"}, "LOGIN")
+	                        ), 
+	                        React.createElement("div", {className: "login_grid"}, 
+	                            React.createElement("input", {className: "checkbox", type: "checkbox"}), React.createElement("span", null, "Remember me")
+	                        ), 
+	                        React.createElement("a", {href: "javascript:"}, React.createElement("h5", null, "Lost your password?"))
+	                    ), 
+	                    React.createElement("div", {className: "register fl"}, 
+	                        React.createElement("h2", null, "REGISTER"), 
+	                        React.createElement("div", {className: "login_grid"}, 
+	                            React.createElement("p", null, "Email address"), 
+	                            React.createElement("input", {type: "text"})
+	                        ), 
+	                        React.createElement("div", {className: "login_grid"}, 
+	                            React.createElement("p", null, "Password"), 
+	                            React.createElement("input", {type: "password"}), 
+	                            React.createElement("div", {className: "safe_note"}, 
+	                                React.createElement("h4", null, "Very weak - Please enter a stronger password."), 
+	                                React.createElement("small", null, "The password should be at least seven characters long. To make it stronger, use upper and lower case letters, numbers and symbols like ! \" ? $ % ^  ).")
+	                            )
+	                        ), 
+	                        React.createElement("div", {className: "login_grid"}, 
+	                            React.createElement("a", {href: "javascript:"}, "REGISTER")
+	                        )
+	                    )
+	                )
+	            )
+	        )
+	    }
+	});
+	exports.Login=Login;
 
 /***/ }
 /******/ ]);

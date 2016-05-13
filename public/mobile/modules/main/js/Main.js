@@ -4,20 +4,40 @@
 var React=require('react');
 var Link=require('react-router').Link;
 var Main=React.createClass({
+    hideSideBar:function(){
+           $(this.refs.side_bar).css({'left':'-5.2rem'});
+           $(this.refs.side_bar_background).css({'opacity':'0'});
+           $(this.refs.side_bar_background).css({'zIndex':'-1'});
+    },
+    sideBar:function(){
+        console.info(this.refs.side_bar);
+        $(this.refs.side_bar).css({'left':'0'});
+        $(this.refs.side_bar_background).css({'zIndex':'2'});
+        $(this.refs.side_bar_background).css({'opacity':'0.6'});
+    },
     render:function(){
         return(
             <div>
                 <div className="wrap">
+                    <div className="side_bar" ref="side_bar">
+                        <h3>SHOP</h3>
+                        <h3>SUPPORT</h3>
+                        <h3>NEWS</h3>
+                        <h3>RESELLERS</h3>
+                        <h3>ABOUT</h3>
+                        <Link to="/login"><h3>LOGIN</h3></Link>
+                    </div>
+                    <div onClick={this.hideSideBar.bind(this)} className="side_bar_background" ref="side_bar_background"></div>
                     <div className="header">
                         <div className="left_box">
-                            <div className="more_btn fl">
+                            <div onClick={this.sideBar.bind(this)} className="more_btn fl">
                                 <span></span>
                                 <span></span>
                                 <span></span>
                             </div>
                         </div>
                         <div className="middle_box">
-                            <img src="images/logo-big.png" alt="logo"/>
+                            <Link to="/home"><img src="images/logo-big.png" alt="logo"/></Link>
                         </div>
                         <div className="right_box">
                             <div className="cart_icon fr">
@@ -26,6 +46,7 @@ var Main=React.createClass({
                             </div>
                         </div>
                     </div>
+                    {this.props.children}
                     <div className="footer">
                         <div className="footer_box_cell fl">
                             <h1>SUBSCRIBE TO OUR NEWSLETTER</h1>
@@ -64,4 +85,6 @@ var Main=React.createClass({
         )
     }
 });
+
+
 exports.Main=Main;

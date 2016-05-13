@@ -56,13 +56,6 @@
     border-radius: 100%;
     border: 3px solid #ffffff;
 }
-/*.banner_btn_left span:hover{*/
-    /*background-color:#02b8e5;*/
-    /*border: 3px solid #02b8e5;*/
-/*}*/
-/*.banner_btn_left span:hover .banner_btn_left{*/
-    /*opacity: 1!important;*/
-/*}*/
 .banner_btn_right{
     right: -0.2rem;
 }
