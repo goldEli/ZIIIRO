@@ -59,7 +59,7 @@
 	var Login=__webpack_require__(227).Login;
 	var Home=__webpack_require__(230).Home;
 	var Main=__webpack_require__(228).Main;
-	//var Order=require("../modules/order/js/Order").Order;
+	var Order=__webpack_require__(231).Order;
 	var Search=__webpack_require__(229).Search;
 	//var Details=require("../modules/details/js/Details").Details;
 
@@ -68,7 +68,8 @@
 	            React.createElement(Route, {path: "/", component: Main}, 
 	                React.createElement(Route, {path: "/home", component: Home}), 
 	                React.createElement(Route, {path: "/login", component: Login}), 
-	                React.createElement(Route, {path: "/search", component: Search})
+	                React.createElement(Route, {path: "/search", component: Search}), 
+	                React.createElement(Route, {path: "/order", component: Order})
 	            )
 	    )
 	    ,document.getElementById('main'));
@@ -25638,7 +25639,7 @@
 	                        ), 
 	                        React.createElement("div", {className: "right_box"}, 
 	                            React.createElement("div", {className: "cart_icon fr"}, 
-	                                React.createElement("strong", null, "4"), 
+	                                React.createElement(Link, {to: "/order"}, React.createElement("strong", null, "4")), 
 	                                React.createElement("span", {className: "cart_icon_handle"})
 	                            )
 	                        )
@@ -25675,7 +25676,7 @@
 	                    )
 	                ), 
 	                React.createElement("div", {className: "copyRight"}, 
-	                    React.createElement("p", null, "Copyright 2014 ? ", React.createElement("a", {href: "javascript:"}, "ZIIIRO"), " — Contact us — Terms of Use — Privacy Policy"), 
+	                    React.createElement("p", null, "Copyright 2014 © ", React.createElement("a", {href: "javascript:"}, "ZIIIRO"), " — Contact us — Terms of Use — Privacy Policy"), 
 	                    React.createElement("img", {src: "images/payment.png", alt: "img"})
 	                )
 	            )
@@ -25839,6 +25840,80 @@
 	    }
 	});
 	exports.Home=Home;
+
+/***/ },
+/* 231 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by Administrator on 2016/5/13.
+	 */
+	var React=__webpack_require__(1);
+	var Link=__webpack_require__(166).Link;
+	var Order=React.createClass({displayName: "Order",
+	    render:function(){
+	        return(
+	            React.createElement("div", {className: "order"}, 
+	                React.createElement("h1", null, "CART"), 
+	                React.createElement("div", {className: "order_left fl"}, 
+	                    React.createElement("table", null, 
+	                        React.createElement("tr", {className: "order_left_title"}, 
+	                            React.createElement("th", null, "PRODUCT"), 
+	                            React.createElement("th", null, "QUANTITY"), 
+	                            React.createElement("th", null, "TOTAL")
+	                        ), 
+	                        React.createElement("tr", {className: "order_left_grid"}, 
+	                            React.createElement("td", {className: "product"}, 
+	                                React.createElement("a", {href: "javascript:"}, React.createElement("span", null, "×")), 
+	                                React.createElement("a", {href: "javascript:"}, React.createElement("img", {src: "images/ziiiro-eclipse-metal-rosegold-front-200x300.jpg", alt: "img"})), 
+	                                React.createElement("a", {href: "javascript:"}, React.createElement("p", null, "ECLIPSE Steel Rose Gold"))
+	                            ), 
+	                            React.createElement("td", {className: "quantity"}, 
+	                                React.createElement("button", null, "+"), 
+	                                React.createElement("span", null, "1"), 
+	                                React.createElement("button", null, "-")
+	                            ), 
+	                            React.createElement("td", {className: "total"}, React.createElement("p", null, "$ 219.00"))
+	                        )
+	                    )
+	                ), 
+	                React.createElement("div", {className: "order_right"}, 
+	                    React.createElement("table", null, 
+	                        React.createElement("tr", {className: "order_right_title"}, 
+	                            React.createElement("th", null, "CART TOTALS"), 
+	                            React.createElement("th", null)
+	                        ), 
+	                        React.createElement("tr", {className: "subtotal"}, 
+	                            React.createElement("td", null, "Subtotal"), 
+	                            React.createElement("td", null, "$ 219.00")
+	                        ), 
+	                        React.createElement("tr", {className: "shipping"}, 
+	                            React.createElement("td", null, "Shipping", React.createElement("br", null), React.createElement("br", null)), 
+	                            React.createElement("td", null, 
+	                                React.createElement("div", null, 
+	                                    React.createElement("input", {type: "radio", name: "express"}), React.createElement("label", null, " Free Shipping")
+	                                ), 
+	                                React.createElement("div", null, 
+	                                    React.createElement("input", {type: "radio", name: "express"}), React.createElement("label", null, " Standard Delivery: $ 25.00")
+	                                ), 
+	                                React.createElement("div", null, 
+	                                    React.createElement("input", {type: "radio", name: "express"}), React.createElement("label", null, " Express Delivery: $ 35.00")
+	                                ), 
+	                                React.createElement("div", {className: "blank"})
+	                            )
+	                        ), 
+	                        React.createElement("tr", {className: "final_price"}, 
+	                            React.createElement("td", null, "Total"), 
+	                            React.createElement("td", null, "$ 219.00")
+	                        )
+	                    ), 
+	                    React.createElement("button", {className: "pay_bth"}, "PROCEED TO CHECKOUT")
+	                )
+	            )
+	        )
+	    }
+	});
+	exports.Order=Order;
 
 /***/ }
 /******/ ]);

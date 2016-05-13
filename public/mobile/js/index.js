@@ -13,7 +13,7 @@ var hashHistory=require("react-router").hashHistory;
 var Login=require("../modules/login/js/Login").Login;
 var Home=require("../modules/home/js/Home").Home;
 var Main=require("../modules/main/js/Main").Main;
-//var Order=require("../modules/order/js/Order").Order;
+var Order=require("../modules/order/js/Order").Order;
 var Search=require("../modules/search/js/Search").Search;
 //var Details=require("../modules/details/js/Details").Details;
 
@@ -23,6 +23,7 @@ ReactDom.render(
                 <Route path="/home" component={Home}></Route>
                 <Route path="/login" component={Login}></Route>
                 <Route path="/search" component={Search}></Route>
+                <Route path="/order" component={Order}></Route>
             </Route>
     </Router>
     ,document.getElementById('main'));

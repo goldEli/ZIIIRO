@@ -1,0 +1,170 @@
+.order{
+    width: 100%;
+    padding-top:0.64rem;
+    overflow: hidden;
+}
+.order h1{
+    font-weight: bold;
+    font-size: 0.3rem;
+    color: #555555;
+    padding-bottom: 0.68rem;
+    border-bottom:0.02rem solid #dddddd ;
+}
+.order_left{
+    width: 100%;
+    padding-right: 0.3rem;
+    padding-bottom: 0.5rem;
+    overflow: hidden;
+    border-right: 0.01rem solid #e4e4e4;
+}
+.order_left table,.order_right table{
+    width: 100%;
+    overflow: hidden;
+}
+.order_left_title,.order_right_title{
+    width: 100%;
+    border-bottom: 0.03rem solid #dddddd;
+    font-size: 0.24rem;
+    color: #555555;
+    font-weight: bold;
+    line-height: 0.6rem;
+}
+.order_left_grid{
+    overflow: hidden;
+    vertical-align: middle;
+    text-align: center;
+    width: 0.98rem;
+    border-bottom: 0.01rem solid #e4e4e4;
+}
+.order_left_grid td{
+    height: 100%;
+}
+.product{
+    width: 4rem;
+}
+.product span{
+    display: inline-block;
+    border: 0.03rem solid #dddddd;
+    width: 0.4rem;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 0.3rem;
+    font-weight: bold;
+    color: #dddddd;
+    margin-right: 0.2rem;
+}
+.product img{
+    width: 0.98rem;
+    display: inline-block;
+    margin-right: 0.35rem;
+}
+.product p{
+    padding-top: 0.2rem;
+    display: inline-block;
+    font-size: 0.22rem;
+    color: #02beeb;
+    width: 1.4rem;
+}
+.price p{
+    display: inline-block;
+    font-size: 0.22rem;
+    color: #555555;
+}
+.quantity span{
+    float: left;
+    font-size: 0.24rem;
+    border: 0.01rem solid #b1b1b1;
+    border-right: none;
+    border-left: none;
+    display: inline-block;
+    text-align: center;
+    width: 0.35rem;
+    height: 0.4rem;
+    line-height: 0.4rem;
+}
+.quantity button{
+    font-size: 0.3rem;
+    outline: none;
+    cursor: pointer;
+    float: left;
+    display: inline-block;
+    background-color: #ffffff;
+    width: 0.6rem;
+    height: 0.42rem;
+    border: 0.01rem solid #b1b1b1;
+}
+.total p{
+    font-weight: bold;
+    display: inline-block;
+    font-size: 0.22rem;
+    color: #555555;
+}
+.order_right{
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 0.7rem;
+}
+.order_right label{
+    font-size: 0.2rem;
+}
+.subtotal{
+    font-size: 0.24rem;
+    line-height: 0.6rem;
+    border-bottom: 0.01rem solid #e4e4e4;
+}
+.subtotal td:nth-of-type(1){
+    font-weight: bold;
+}
+.subtotal td:nth-of-type(2){
+    text-align: right;
+}
+.shipping td:nth-of-type(1){
+    font-weight: bold;
+    vertical-align: bottom;
+    font-size: 0.24rem;
+}
+.shipping td:nth-of-type(2){
+    text-align: right;
+}
+.shipping div{
+    padding-top:0.1rem ;
+    line-height: 0.2rem;
+    height: 0.4rem;
+}
+.shipping input{
+    height: 0.2rem;
+    width: 0.2rem;
+}
+.shipping .blank{
+    padding-top:0;
+    height: 0.1rem;
+}
+.shipping{
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 0.01rem solid #e4e4e4;
+}
+.final_price{
+    height: 0.6rem;
+    font-size: 0.24rem;
+    font-weight: bold;
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 0.03rem solid #e4e4e4;
+}
+.final_price td:nth-of-type(2){
+    text-align: right;
+}
+.pay_bth{
+    display: block;
+    margin-top: 0.6rem;
+    width: 100%;
+    height: 0.41rem;
+    background-color: #ff0055;
+    color: #ffffff;
+    font-size: 0.18rem;
+    border-radius: 0.03rem;
+    cursor: pointer;
+}

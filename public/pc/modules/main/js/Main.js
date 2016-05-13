@@ -59,7 +59,7 @@ var Main=React.createClass({
                         </div>
                     </div>
                     <div className="copyRight">
-                        <p className="fl">Copyright 2014 ? <a href="javascript:">ZIIIRO</a> ¡ª Contact us ¡ª Terms of Use ¡ª Privacy Policy</p>
+                        <p className="fl">Copyright 2014 &copy; <a href="javascript:">ZIIIRO</a> â€” Contact us â€” Terms of Use â€” Privacy Policy</p>
                         <img className="fr" src="images/payment.png" alt="img"/>
                     </div>
                 </div>

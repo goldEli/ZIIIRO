@@ -41,7 +41,7 @@ var Main=React.createClass({
                         </div>
                         <div className="right_box">
                             <div className="cart_icon fr">
-                                <strong>4</strong>
+                                <Link to="/order"><strong>4</strong></Link>
                                 <span className="cart_icon_handle"></span>
                             </div>
                         </div>
@@ -78,7 +78,7 @@ var Main=React.createClass({
                     </div>
                 </div>
                 <div className="copyRight">
-                    <p>Copyright 2014 ? <a href="javascript:">ZIIIRO</a> — Contact us — Terms of Use — Privacy Policy</p>
+                    <p>Copyright 2014 &copy; <a href="javascript:">ZIIIRO</a> — Contact us — Terms of Use — Privacy Policy</p>
                     <img src="images/payment.png" alt="img"/>
                 </div>
             </div>
