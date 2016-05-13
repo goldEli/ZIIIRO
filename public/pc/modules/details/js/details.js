@@ -10,22 +10,22 @@ var Details=React.createClass({
                 <div className="product_details">
                     <div className="row row_border">
                         <div className="show_img fl">
-                            <img src="images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg" alt="img"/>
+                            <img src="images/ziiiro-celeste-watch-black-mono-blue-side-510x650.jpg" alt="img"/>
                         </div>
                         <div className="text_info fl">
                             <h1>CELESTE Black / Mono</h1>
                             <h4>$ 199.00</h4>
                             <p>The design of Celeste is inspired by the Northern Lights, anyone who has experienced nature's most fascinating phenomenon never forgets it. Now, you get to experience the Aurora on your wrist, every day.</p>
                             <button>ADD TO CART</button>
-                    <span>
-                        SKU:Z0005WBBG
-                    </span>
-                    <span>
-                        Category:<a href="javascript:">Celeste</a>
-                    </span>
-                    <span>
-                        Tags:<a href="javascript:">black</a><a href="javascript:">blue</a><a href="javascript:">metal</a>
-                    </span>
+                            <span>
+                                SKU:Z0005WBBG
+                            </span>
+                            <span>
+                                Category:<a href="javascript:">Celeste</a>
+                            </span>
+                            <span>
+                                Tags:<a href="javascript:">black</a><a href="javascript:">blue</a><a href="javascript:">metal</a>
+                            </span>
                         </div>
                     </div>
                     <p className="details_nav row">

@@ -21,7 +21,7 @@ var Main=React.createClass({
                 <div className="wrap">
                     <div className="side_bar" ref="side_bar">
                         <Link to="/search"><h3>SHOP</h3></Link>
-                        <h3>SUPPORT</h3>
+                        <Link to="/details"><h3>SUPPORT</h3></Link>
                         <h3>NEWS</h3>
                         <h3>RESELLERS</h3>
                         <h3>ABOUT</h3>
