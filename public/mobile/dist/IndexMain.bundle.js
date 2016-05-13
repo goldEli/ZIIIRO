@@ -56,18 +56,19 @@
 	var hashHistory=__webpack_require__(166).hashHistory;
 
 
-	var Login=__webpack_require__(229).Login;
-	var Home=__webpack_require__(228).Home;
-	var Main=__webpack_require__(227).Main;
+	var Login=__webpack_require__(227).Login;
+	var Home=__webpack_require__(230).Home;
+	var Main=__webpack_require__(228).Main;
 	//var Order=require("../modules/order/js/Order").Order;
-	//var Search=require("../modules/search/js/Search").Search;
+	var Search=__webpack_require__(229).Search;
 	//var Details=require("../modules/details/js/Details").Details;
 
 	ReactDom.render(
 	    React.createElement(Router, {history: hashHistory}, 
 	            React.createElement(Route, {path: "/", component: Main}, 
 	                React.createElement(Route, {path: "/home", component: Home}), 
-	                React.createElement(Route, {path: "/login", component: Login})
+	                React.createElement(Route, {path: "/login", component: Login}), 
+	                React.createElement(Route, {path: "/search", component: Search})
 	            )
 	    )
 	    ,document.getElementById('main'));
@@ -25535,6 +25536,66 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
+	 * Created by Administrator on 2016/5/13.
+	 */
+	var React=__webpack_require__(1);
+	var Link=__webpack_require__(166).Link;
+	var Login=React.createClass({displayName: "Login",
+	    render:function(){
+	        return(
+	            React.createElement("div", {className: "login_and_register"}, 
+	                React.createElement("div", {className: "warn"}, 
+	                    React.createElement("p", null, "Error: Please provide a valid email address.")
+	                ), 
+	                React.createElement("div", {className: "input_box"}, 
+	                    React.createElement("div", {className: "login fl"}, 
+	                        React.createElement("h2", null, "LOGIN"), 
+	                        React.createElement("div", {className: "login_grid"}, 
+	                            React.createElement("p", null, "Username or email address"), 
+	                            React.createElement("input", {type: "text"})
+	                        ), 
+	                        React.createElement("div", {className: "login_grid"}, 
+	                            React.createElement("p", null, "Password"), 
+	                            React.createElement("input", {type: "password"})
+	                        ), 
+	                        React.createElement("div", {className: "login_grid"}, 
+	                            React.createElement("a", {href: "javascript:"}, "LOGIN")
+	                        ), 
+	                        React.createElement("div", {className: "login_grid"}, 
+	                            React.createElement("input", {className: "checkbox", type: "checkbox"}), React.createElement("span", null, "Remember me")
+	                        ), 
+	                        React.createElement("a", {href: "javascript:"}, React.createElement("h5", null, "Lost your password?"))
+	                    ), 
+	                    React.createElement("div", {className: "register fl"}, 
+	                        React.createElement("h2", null, "REGISTER"), 
+	                        React.createElement("div", {className: "login_grid"}, 
+	                            React.createElement("p", null, "Email address"), 
+	                            React.createElement("input", {type: "text"})
+	                        ), 
+	                        React.createElement("div", {className: "login_grid"}, 
+	                            React.createElement("p", null, "Password"), 
+	                            React.createElement("input", {type: "password"}), 
+	                            React.createElement("div", {className: "safe_note"}, 
+	                                React.createElement("h4", null, "Very weak - Please enter a stronger password."), 
+	                                React.createElement("small", null, "The password should be at least seven characters long. To make it stronger, use upper and lower case letters, numbers and symbols like ! \" ? $ % ^  ).")
+	                            )
+	                        ), 
+	                        React.createElement("div", {className: "login_grid"}, 
+	                            React.createElement("a", {href: "javascript:"}, "REGISTER")
+	                        )
+	                    )
+	                )
+	            )
+	        )
+	    }
+	});
+	exports.Login=Login;
+
+/***/ },
+/* 228 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
 	 * Created by Administrator on 2016/5/12.
 	 */
 	var React=__webpack_require__(1);
@@ -25556,7 +25617,7 @@
 	            React.createElement("div", null, 
 	                React.createElement("div", {className: "wrap"}, 
 	                    React.createElement("div", {className: "side_bar", ref: "side_bar"}, 
-	                        React.createElement("h3", null, "SHOP"), 
+	                        React.createElement(Link, {to: "/search"}, React.createElement("h3", null, "SHOP")), 
 	                        React.createElement("h3", null, "SUPPORT"), 
 	                        React.createElement("h3", null, "NEWS"), 
 	                        React.createElement("h3", null, "RESELLERS"), 
@@ -25626,7 +25687,67 @@
 	exports.Main=Main;
 
 /***/ },
-/* 228 */
+/* 229 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by Administrator on 2016/5/13.
+	 */
+	var React=__webpack_require__(1);
+	var Link=__webpack_require__(166).Link;
+	var Search=React.createClass({displayName: "Search",
+	    render:function(){
+	        return(
+	            React.createElement("div", {className: "search"}, 
+	                React.createElement("div", {className: "search_input"}, 
+	                    React.createElement("div", {className: "search_input_area fr"}, 
+	                        React.createElement("button", null, "search"), 
+	                        React.createElement("input", {type: "text"})
+	                    ), 
+	                    React.createElement("p", null, "Showing all 66 results")
+	                ), 
+	                React.createElement("div", {className: "show_product"}, 
+	                    React.createElement("div", {className: "show_product_box"}, 
+	                        React.createElement("div", {className: "show_product_box_cell fl"}, 
+	                            React.createElement("div", {className: "img_box"}, 
+	                                React.createElement("img", {className: "show", src: "images/ziiiro-celeste-watch-black-mono-front-200x300.jpg", alt: "img"}), 
+	                                React.createElement("img", {className: "hide", src: "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg", alt: "img"}), 
+	                                React.createElement("div", {className: "cart_icon fr"}, 
+	                                    React.createElement("strong", null, "+"), 
+	                                    React.createElement("span", {className: "cart_icon_handle"})
+	                                )
+	                            ), 
+	                            React.createElement("div", {className: "text_box"}, 
+	                                React.createElement("h5", null, "CELESTE"), 
+	                                React.createElement("p", null, "CELESTE Black/Mono"), 
+	                                React.createElement("span", null, "$199.00")
+	                            )
+	                        ), 
+	                        React.createElement("div", {className: "show_product_box_cell fl"}, 
+	                            React.createElement("div", {className: "img_box"}, 
+	                                React.createElement("img", {className: "show", src: "images/ziiiro-celeste-watch-black-mono-front-200x300.jpg", alt: "img"}), 
+	                                React.createElement("img", {className: "hide", src: "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg", alt: "img"}), 
+	                                React.createElement("div", {className: "cart_icon fr"}, 
+	                                    React.createElement("strong", null, "+"), 
+	                                    React.createElement("span", {className: "cart_icon_handle"})
+	                                )
+	                            ), 
+	                            React.createElement("div", {className: "text_box"}, 
+	                                React.createElement("h5", null, "CELESTE"), 
+	                                React.createElement("p", null, "CELESTE Black/Mono"), 
+	                                React.createElement("span", null, "$199.00")
+	                            )
+	                        )
+	                    )
+	                )
+	            )
+	        )
+	    }
+	});
+	exports.Search=Search;
+
+/***/ },
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -25718,66 +25839,6 @@
 	    }
 	});
 	exports.Home=Home;
-
-/***/ },
-/* 229 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Created by Administrator on 2016/5/13.
-	 */
-	var React=__webpack_require__(1);
-	var Link=__webpack_require__(166).Link;
-	var Login=React.createClass({displayName: "Login",
-	    render:function(){
-	        return(
-	            React.createElement("div", {className: "login_and_register"}, 
-	                React.createElement("div", {className: "warn"}, 
-	                    React.createElement("p", null, "Error: Please provide a valid email address.")
-	                ), 
-	                React.createElement("div", {className: "input_box"}, 
-	                    React.createElement("div", {className: "login fl"}, 
-	                        React.createElement("h2", null, "LOGIN"), 
-	                        React.createElement("div", {className: "login_grid"}, 
-	                            React.createElement("p", null, "Username or email address"), 
-	                            React.createElement("input", {type: "text"})
-	                        ), 
-	                        React.createElement("div", {className: "login_grid"}, 
-	                            React.createElement("p", null, "Password"), 
-	                            React.createElement("input", {type: "password"})
-	                        ), 
-	                        React.createElement("div", {className: "login_grid"}, 
-	                            React.createElement("a", {href: "javascript:"}, "LOGIN")
-	                        ), 
-	                        React.createElement("div", {className: "login_grid"}, 
-	                            React.createElement("input", {className: "checkbox", type: "checkbox"}), React.createElement("span", null, "Remember me")
-	                        ), 
-	                        React.createElement("a", {href: "javascript:"}, React.createElement("h5", null, "Lost your password?"))
-	                    ), 
-	                    React.createElement("div", {className: "register fl"}, 
-	                        React.createElement("h2", null, "REGISTER"), 
-	                        React.createElement("div", {className: "login_grid"}, 
-	                            React.createElement("p", null, "Email address"), 
-	                            React.createElement("input", {type: "text"})
-	                        ), 
-	                        React.createElement("div", {className: "login_grid"}, 
-	                            React.createElement("p", null, "Password"), 
-	                            React.createElement("input", {type: "password"}), 
-	                            React.createElement("div", {className: "safe_note"}, 
-	                                React.createElement("h4", null, "Very weak - Please enter a stronger password."), 
-	                                React.createElement("small", null, "The password should be at least seven characters long. To make it stronger, use upper and lower case letters, numbers and symbols like ! \" ? $ % ^  ).")
-	                            )
-	                        ), 
-	                        React.createElement("div", {className: "login_grid"}, 
-	                            React.createElement("a", {href: "javascript:"}, "REGISTER")
-	                        )
-	                    )
-	                )
-	            )
-	        )
-	    }
-	});
-	exports.Login=Login;
 
 /***/ }
 /******/ ]);

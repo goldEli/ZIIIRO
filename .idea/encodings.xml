@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/public/mobile/modules/home/js/Home.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/mobile/modules/main/js/Main.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/public/mobile/modules/search/js/Search.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/pc/modules/details/js/Details.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/pc/modules/home/js/Home.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/pc/modules/order/js/Order.js" charset="UTF-8" />

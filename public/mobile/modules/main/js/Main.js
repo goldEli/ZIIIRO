@@ -20,7 +20,7 @@ var Main=React.createClass({
             <div>
                 <div className="wrap">
                     <div className="side_bar" ref="side_bar">
-                        <h3>SHOP</h3>
+                        <Link to="/search"><h3>SHOP</h3></Link>
                         <h3>SUPPORT</h3>
                         <h3>NEWS</h3>
                         <h3>RESELLERS</h3>
