@@ -4,6 +4,9 @@
 .fr{float: right;}
 a{text-decoration: none;cursor:pointer;color:black;}
 i{font-style: normal;}
+html{
+  font-size:100px !important;
+}
 body {
   width: 100%;
   background: #f6f8f9;

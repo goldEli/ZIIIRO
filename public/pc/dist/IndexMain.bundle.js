@@ -26062,13 +26062,60 @@
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
 	var Details=React.createClass({displayName: "Details",
+	    componentDidMount:function(){
+	        $(function(){
+	            var magnifyArea=this.refs.magnifyArea;
+	            $(this.refs.imgDetails_box).mouseenter(function(){
+	                $(magnifyArea).css({display:'block'});
+	                $(this.refs.magnifyShow).css({'display':'block'});
+	            }.bind(this));
+	            $(this.refs.imgDetails_box).mousemove(function(){
+	                $(magnifyArea).css({
+	                    top:getPoints(event).y,
+	                    left:getPoints(event).x
+	                });
+	                if($(magnifyArea).position().left<0){
+	                    $(magnifyArea).css({left:'0'});
+	                }
+	                if($(magnifyArea).position().left/100>'1'){
+	                    $(magnifyArea).css({left:'1rem'});
+	                }
+	                if($(magnifyArea).position().top<0){
+	                    $(magnifyArea).css({top:'0'});
+	                }
+	                if($(magnifyArea).position().top/100>'1.5'){
+	                    $(magnifyArea).css({top:'1.5rem'});
+	                }
+	                //放大后显示
+	                var showX=$(magnifyArea).position().left/100/2*5.1;
+	                var showY=$(magnifyArea).position().top/100/3*6.5;
+	                $(this.refs.magnifyShow).css({'background-position':'-'+showX+'rem -'+showY+'rem'});
+
+	            }.bind(this));
+	            $(this.refs.imgDetails_box).mouseleave(function(){
+	                $(magnifyArea).css({display:'none'});
+	                $(this.refs.magnifyShow).css({'display':'none'});
+	            }.bind(this));
+	            function getPoints(event){
+	                return({
+	                    x:(event.pageX-318)/100-0.5+'rem',
+	                    y:(event.pageY-153)/100-0.5+'rem'
+	                })
+	            }
+	        }.bind(this));
+	    },
 	    render: function () {
 	        return(
 	            React.createElement("div", {className: "details"}, 
 	                React.createElement("div", {className: "product_details"}, 
 	                    React.createElement("div", {className: "row row_border"}, 
+	                        React.createElement("div", {className: "magnify_show", ref: "magnifyShow"}), 
+	                        React.createElement("div", {className: "magnify_show1"}), 
 	                        React.createElement("div", {className: "show_img fl"}, 
-	                            React.createElement("img", {src: "images/ziiiro-celeste-watch-black-mono-blue-side-510x650.jpg", alt: "img"})
+	                            React.createElement("div", {className: "imgDetails_box", ref: "imgDetails_box"}, 
+	                                React.createElement("img", {src: "images/ziiiro-celeste-watch-black-mono-blue-side-510x650.jpg", alt: "img"}), 
+	                                React.createElement("div", {ref: "magnifyArea", className: "magnify_area"})
+	                            )
 	                        ), 
 	                        React.createElement("div", {className: "text_info fl"}, 
 	                            React.createElement("h1", null, "CELESTE Black / Mono"), 

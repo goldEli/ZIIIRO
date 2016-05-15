@@ -4,13 +4,60 @@
 var React=require('react');
 var Link=require('react-router').Link;
 var Details=React.createClass({
+    componentDidMount:function(){
+        $(function(){
+            var magnifyArea=this.refs.magnifyArea;
+            $(this.refs.imgDetails_box).mouseenter(function(){
+                $(magnifyArea).css({display:'block'});
+                $(this.refs.magnifyShow).css({'display':'block'});
+            }.bind(this));
+            $(this.refs.imgDetails_box).mousemove(function(){
+                $(magnifyArea).css({
+                    top:getPoints(event).y,
+                    left:getPoints(event).x
+                });
+                if($(magnifyArea).position().left<0){
+                    $(magnifyArea).css({left:'0'});
+                }
+                if($(magnifyArea).position().left/100>'1'){
+                    $(magnifyArea).css({left:'1rem'});
+                }
+                if($(magnifyArea).position().top<0){
+                    $(magnifyArea).css({top:'0'});
+                }
+                if($(magnifyArea).position().top/100>'1.5'){
+                    $(magnifyArea).css({top:'1.5rem'});
+                }
+                //放大后显示
+                var showX=$(magnifyArea).position().left/100/2*5.1;
+                var showY=$(magnifyArea).position().top/100/3*6.5;
+                $(this.refs.magnifyShow).css({'background-position':'-'+showX+'rem -'+showY+'rem'});
+
+            }.bind(this));
+            $(this.refs.imgDetails_box).mouseleave(function(){
+                $(magnifyArea).css({display:'none'});
+                $(this.refs.magnifyShow).css({'display':'none'});
+            }.bind(this));
+            function getPoints(event){
+                return({
+                    x:(event.pageX-318)/100-0.5+'rem',
+                    y:(event.pageY-153)/100-0.5+'rem'
+                })
+            }
+        }.bind(this));
+    },
     render: function () {
         return(
             <div className="details">
                 <div className="product_details">
                     <div className="row row_border">
+                        <div className="magnify_show" ref="magnifyShow"></div>
+                        <div className="magnify_show1" ></div>
                         <div className="show_img fl">
-                            <img src="images/ziiiro-celeste-watch-black-mono-blue-side-510x650.jpg" alt="img"/>
+                            <div className="imgDetails_box" ref="imgDetails_box">
+                                <img src="images/ziiiro-celeste-watch-black-mono-blue-side-510x650.jpg" alt="img"/>
+                                <div ref="magnifyArea" className="magnify_area"></div>
+                            </div>
                         </div>
                         <div className="text_info fl">
                             <h1>CELESTE Black / Mono</h1>
