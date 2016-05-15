@@ -3,11 +3,86 @@
  */
 var React=require('react');
 var Home=React.createClass({
+    componentDidMount:function(){
+        var arr=[this.refs.banner_box,this.refs.banner_box1,this.
+            refs.banner_box2,this.refs.banner_box3,
+            this.refs.banner_box4];
+        var index=0;
+        var timer;
+        var dots;
+        $(function(){
+            //向右或者向左轮播
+            $(this.refs.leftBtn).click(function(){
+                stopMove();
+                moveImage(false);
+                startMove();
+            });
+            $(this.refs.rightBtn).click(function(){
+                stopMove();
+                moveImage(true);
+                startMove();
+            });
+            //轮播圆点按钮isSelected
+            var str=[];
+            for(var i=0;i<arr.length;++i){
+                str+='<li></li>';
+            }
+            $(this.refs.banner_pageDots).html(str);
+            dots=$(this.refs.banner_pageDots).find('li');
+            $(dots[0]).attr('class','isSelected');
+            $(dots).click(function(){
+                stopMove();
+                $(dots).attr('class','');
+                $(this).attr('class','isSelected');
+                $(arr).css({'left':'-11.40rem'});
+                $(arr[$(this).index()]).css({'left':0});
+                index=$(this).index();
+                startMove();
+            })
+        }.bind(this));
+        //自动向右播放图片
+        startMove();
+        function startMove(){
+            timer=setInterval(function(){
+                moveImage(true)
+            },3000);
+        }
+        //停止动画
+        function stopMove(){
+            clearInterval(timer);
+            $(arr).finish();
+        }
+        function moveImage(direction){
+            var d=direction ? 1 : -1;
+            for(var i=0;i<arr.length;++i){
+                if($(arr[i]).position().left==0){
+                    $(arr[i]).animate({left:11.4*d+'rem'});
+                }
+            }
+            if(direction){
+                ++index;
+                if(index==arr.length){
+                    index=0;
+                }
+            }  else{
+                --index;
+                if(index==-1){
+                    index=arr.length-1;
+                }
+            }
+            $(arr[index]).css({left:-11.4*d+'rem'});
+            $(arr[index]).animate({
+                left:0
+            });
+            $(dots).attr('class','');
+            $(dots[index]).attr('class','isSelected');
+        }
+    },
     render:function(){
         return (
             <div className="home">
                 <div className="banner">
-                    <div className="banner_box">
+                    <div className="banner_box" ref="banner_box">
                         <img src="images/banner-eon.jpg" alt="banner"/>
                         <div className="banner_info">
                             <h1>EON</h1>
@@ -15,21 +90,52 @@ var Home=React.createClass({
                             <a href="javascript:">SHOP NOW</a>
                         </div>
                     </div>
+
+                    <div className="banner_box1" ref="banner_box1">
+                        <img src="images/banner-orbit.jpg" alt="banner"/>
+                        <div className="banner_info1">
+                            <h1>ORBIT</h1>
+                            <h4>Available in 4 colors</h4>
+                            <a href="javascript:">SHOP NOW</a>
+                        </div>
+                    </div>
+
+                    <div className="banner_box2" ref="banner_box2">
+                        <img src="images/banner-eclipse-steel.jpg" alt="banner"/>
+                        <div className="banner_info2">
+                            <h1>ECLIPSE STEEL</h1>
+                            <h4>illuminated by Super-Luminova</h4>
+                            <a href="javascript:">SHOP NOW</a>
+                        </div>
+                    </div>
+
+                    <div className="banner_box3" ref="banner_box3">
+                        <img src="images/banner-mercury-5.jpg" alt="banner"/>
+                        <div className="banner_info3">
+                            <h1>MERCURY</h1>
+                            <h4>Our watches are unisex</h4>
+                            <a href="javascript:">SHOP NOW</a>
+                        </div>
+                    </div>
+
+                    <div className="banner_box4" ref="banner_box4">
+                        <img src="images/banner-titan-1.jpg" alt="banner"/>
+                        <div className="banner_info4">
+                            <h1>TITAN</h1>
+                            <h4>Super-light aluminium</h4>
+                            <a href="javascript:">SHOP NOW</a>
+                        </div>
+                    </div>
+
                     <div className="banner_btn">
-                        <div className="banner_btn_left">
+                        <div className="banner_btn_left" ref="leftBtn">
                             <a href="javascript:"><span>&lt;</span></a>
                         </div>
-                        <div className="banner_btn_right">
+                        <div className="banner_btn_right" ref="rightBtn">
                             <a href="javascript:"><span>&gt;</span></a>
                         </div>
                     </div>
-                    <ol className="banner_pageDots">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li className="isSelected"></li>
+                    <ol className="banner_pageDots" ref="banner_pageDots">
                     </ol>
                 </div>
                 <div className="show_product">
