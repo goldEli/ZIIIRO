@@ -66,6 +66,7 @@
 	ReactDom.render(
 	    React.createElement(Router, {history: hashHistory}, 
 	            React.createElement(Route, {path: "/", component: Main}, 
+	                React.createElement(IndexRoute, {path: "/home", component: Home}), 
 	                React.createElement(Route, {path: "/home", component: Home}), 
 	                React.createElement(Route, {path: "/login", component: Login}), 
 	                React.createElement(Route, {path: "/order", component: Order}), 
@@ -25538,14 +25539,13 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React=__webpack_require__(1);
+	var hashHistory=__webpack_require__(166).hashHistory;
 	var Login=React.createClass({displayName: "Login",
 		componentDidMount:function(){
 			var warn=this.refs.warn;
 			var warnBox=this.refs.warnBox;
 			var userNameR=this.refs.userNameR;
 			var pwdR=this.refs.pwdR;
-			var pwdStrength=this.refs.pwdStrength;
-			var pwdStrengthNote=this.refs.pwdStrengthNote;
 
 			var userNameL=this.refs.userNameL;
 			var pwdL=this.refs.pwdL;
@@ -25562,17 +25562,79 @@
 				$(warn).html('The password you entered is incorrect.');
 			};
 			/**��¼��֤*/
-			
+			$(this.refs.loginBtn).click(function(){
+				if($(userNameL).val()){
+					$.ajax({
+						type:'post',
+						url:'/users/checkUserName',
+						data:{
+							name:$(userNameL).val()
+						},
+						success:function(data){
+							if(data=='suc'){
+								if($(pwdL).val()){
+									$.ajax({
+										type:'post',
+										url:'/users/login',
+										data:{
+											name:$(userNameL).val(),
+											pwd:$(pwdL).val()
+										},
+										success:function(data){
+											if(data=='suc'){
+												hashHistory.push('/');
+											}else{
+												$(warn).css({'backgroundColor':'#b20000'});
+												$(warnBox).show();
+												$(warn).html(data);
+											}
+										}
+									});
+								}else{
+									$(warn).css({'backgroundColor':'#b20000'});
+									$(warnBox).show();
+									$(warn).html('Error:Password is required.');
+								}
+							}else{
+								$(warn).css({'backgroundColor':'#b20000'});
+								$(warnBox).show();
+								$(warn).html(data);
+							}
+						}
+					});
+				}else{
+					$(warn).css({'backgroundColor':'#b20000'});
+					$(warnBox).show();
+					$(warn).html('Error:Username is required.');
+				}
+			});
 			/**ע����֤*/
 			var userOk=false;
 			var pwdOk=false;
 			//��֤ע���û�
 			function userValidR(){
 				if(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test($(userNameR).val())){
-					$(warnBox).hide();
-					$(warn).html('');
-					userOk=true;
+					$.ajax({
+						type:'post',
+						url:'/users/checkUserName',
+						data:{
+							name:$(userNameR).val()
+						},
+						success:function(data){
+							if(data=='suc'){
+								$(warnBox).show();
+								$(warn).css({'backgroundColor':'#b20000'});
+								$(warn).html('Error:Username is existed.');
+								userOk=false;
+							}else{
+								$(warnBox).hide();
+								$(warn).html('');
+								userOk=true;
+							}
+						}
+					});
 				}else{
+					$(warn).css({'backgroundColor':'#b20000'});
 					$(warnBox).show();
 					$(warn).html('');
 					userNameWarnR();
@@ -25598,6 +25660,7 @@
 							pwdOk=true;
 						}else{
 							pwdOk=false;
+							$(warn).css({'backgroundColor':'#b20000'});
 							$(warnBox).show();
 							$(warn).html('');
 							pwdWarnR();
@@ -25605,6 +25668,7 @@
 					}
 				}else{
 					pwdOk=false;
+					$(warn).css({'backgroundColor':'#b20000'});
 					$(warnBox).show();
 					$(warn).html('');
 					pwdWarnR();
@@ -25620,7 +25684,19 @@
 				userValidR();
 				pwdValidR();
 				if(userOk && pwdOk){
-					console.info('suc');
+					$.ajax({
+						type:"post",
+						url:'/users/addUser',
+						data:{
+							name:$(userNameR).val(),
+							pwd:$(pwdR).val()
+						},
+						success:function(){
+							$(warnBox).show();
+							$(warn).css({'backgroundColor':'green'});
+							$(warn).html('RegisterSuccess , Please login!');
+						}
+					});
 				}
 				if(userOk){
 					pwdValidR();

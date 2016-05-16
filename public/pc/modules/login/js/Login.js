@@ -1,12 +1,11 @@
 var React=require('react');
+var hashHistory=require("react-router").hashHistory;
 var Login=React.createClass({
 	componentDidMount:function(){
 		var warn=this.refs.warn;
 		var warnBox=this.refs.warnBox;
 		var userNameR=this.refs.userNameR;
 		var pwdR=this.refs.pwdR;
-		var pwdStrength=this.refs.pwdStrength;
-		var pwdStrengthNote=this.refs.pwdStrengthNote;
 
 		var userNameL=this.refs.userNameL;
 		var pwdL=this.refs.pwdL;
@@ -23,17 +22,79 @@ var Login=React.createClass({
 			$(warn).html('The password you entered is incorrect.');
 		};
 		/**登录验证*/
-		
+		$(this.refs.loginBtn).click(function(){
+			if($(userNameL).val()){
+				$.ajax({
+					type:'post',
+					url:'/users/checkUserName',
+					data:{
+						name:$(userNameL).val()
+					},
+					success:function(data){
+						if(data=='suc'){
+							if($(pwdL).val()){
+								$.ajax({
+									type:'post',
+									url:'/users/login',
+									data:{
+										name:$(userNameL).val(),
+										pwd:$(pwdL).val()
+									},
+									success:function(data){
+										if(data=='suc'){
+											hashHistory.push('/');
+										}else{
+											$(warn).css({'backgroundColor':'#b20000'});
+											$(warnBox).show();
+											$(warn).html(data);
+										}
+									}
+								});
+							}else{
+								$(warn).css({'backgroundColor':'#b20000'});
+								$(warnBox).show();
+								$(warn).html('Error:Password is required.');
+							}
+						}else{
+							$(warn).css({'backgroundColor':'#b20000'});
+							$(warnBox).show();
+							$(warn).html(data);
+						}
+					}
+				});
+			}else{
+				$(warn).css({'backgroundColor':'#b20000'});
+				$(warnBox).show();
+				$(warn).html('Error:Username is required.');
+			}
+		});
 		/**注册验证*/
 		var userOk=false;
 		var pwdOk=false;
 		//验证注册用户
 		function userValidR(){
 			if(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test($(userNameR).val())){
-				$(warnBox).hide();
-				$(warn).html('');
-				userOk=true;
+				$.ajax({
+					type:'post',
+					url:'/users/checkUserName',
+					data:{
+						name:$(userNameR).val()
+					},
+					success:function(data){
+						if(data=='suc'){
+							$(warnBox).show();
+							$(warn).css({'backgroundColor':'#b20000'});
+							$(warn).html('Error:Username is existed.');
+							userOk=false;
+						}else{
+							$(warnBox).hide();
+							$(warn).html('');
+							userOk=true;
+						}
+					}
+				});
 			}else{
+				$(warn).css({'backgroundColor':'#b20000'});
 				$(warnBox).show();
 				$(warn).html('');
 				userNameWarnR();
@@ -59,6 +120,7 @@ var Login=React.createClass({
 						pwdOk=true;
 					}else{
 						pwdOk=false;
+						$(warn).css({'backgroundColor':'#b20000'});
 						$(warnBox).show();
 						$(warn).html('');
 						pwdWarnR();
@@ -66,6 +128,7 @@ var Login=React.createClass({
 				}
 			}else{
 				pwdOk=false;
+				$(warn).css({'backgroundColor':'#b20000'});
 				$(warnBox).show();
 				$(warn).html('');
 				pwdWarnR();
@@ -81,7 +144,19 @@ var Login=React.createClass({
 			userValidR();
 			pwdValidR();
 			if(userOk && pwdOk){
-				console.info('suc');
+				$.ajax({
+					type:"post",
+					url:'/users/addUser',
+					data:{
+						name:$(userNameR).val(),
+						pwd:$(pwdR).val()
+					},
+					success:function(){
+						$(warnBox).show();
+						$(warn).css({'backgroundColor':'green'});
+						$(warn).html('RegisterSuccess , Please login!');
+					}
+				});
 			}
 			if(userOk){
 				pwdValidR();

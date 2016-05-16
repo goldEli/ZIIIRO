@@ -1,40 +1,51 @@
 var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://localhost:27017/shoppingCar';
+var url = 'mongodb://localhost:27017/ZIIIRO';
 var ObjectID=require('mongodb').ObjectID;
 
-exports.findALLData=function(func){
+exports.addData=function(name,pwd,func){
 	MongoClient.connect(url,function(err,db){
 		if(err){
 			console.info('发生错误:'+err)
 		}else{
-			db.collection("orderInfo").find().toArray(func);
+			db.collection("users").insert({name:name,pwd:pwd},func);
 		}
-	})
-};
-exports.addData=function(name,price,imgPath,func){
-	MongoClient.connect(url,function(err,db){
-		if(err){
-			console.info('发生错误:'+err)
-		}else{
-			db.collection("orderInfo").insert({name:name,price:price,imgPath:imgPath},func);
-		}
-	}); 
+	});
 };
 exports.findByName=function(name,func){
 	MongoClient.connect(url,function(err,db){
 		if(err){
 			console.info('发生错误:'+err)
 		}else{
-			db.collection("orderInfo").find({name:name}).toArray(func);
+			db.collection("users").find({name:name}).toArray(func);
 		}
 	});
 };
+exports.findByNamePwd=function(name,pwd,func){
+	MongoClient.connect(url,function(err,db){
+		if(err){
+			console.info('发生错误:'+err)
+		}else{
+			db.collection("users").find({pwd:pwd,name:name}).toArray(func);
+		}
+	});
+};
+//--------------------------
+exports.findALLData=function(func){
+	MongoClient.connect(url,function(err,db){
+		if(err){
+			console.info('发生错误:'+err)
+		}else{
+			db.collection("users").find().toArray(func);
+		}
+	})
+};
+
 exports.delData=function(id,func){
 	MongoClient.connect(url,function(err,db){
 		if(err){
 			console.info('发生错误:'+err)
 		}else{
-			db.collection("orderInfo").remove({"_id":ObjectID(id)},func);
+			db.collection("users").remove({"_id":ObjectID(id)},func);
 		}
 	});
 };
