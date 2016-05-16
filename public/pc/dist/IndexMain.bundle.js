@@ -25538,26 +25538,144 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React=__webpack_require__(1);
-	var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____Class0.hasOwnProperty(____Class0____Key)){Login[____Class0____Key]=____Class0[____Class0____Key];}}var ____SuperProtoOf____Class0=____Class0===null?null:____Class0.prototype;Login.prototype=Object.create(____SuperProtoOf____Class0);Login.prototype.constructor=Login;Login.__superConstructor__=____Class0;function Login(){"use strict";if(____Class0!==null){____Class0.apply(this,arguments);}}
-		Object.defineProperty(Login.prototype,"render",{writable:true,configurable:true,value:function(){"use strict";
+	var Login=React.createClass({displayName: "Login",
+		componentDidMount:function(){
+			var warn=this.refs.warn;
+			var warnBox=this.refs.warnBox;
+			var userNameR=this.refs.userNameR;
+			var pwdR=this.refs.pwdR;
+			var pwdStrength=this.refs.pwdStrength;
+			var pwdStrengthNote=this.refs.pwdStrengthNote;
+
+			var userNameL=this.refs.userNameL;
+			var pwdL=this.refs.pwdL;
+			function userNameWarnR(){
+				$(warn).html('Error: Please provide a valid email address.');
+			};
+			function pwdWarnR(){
+				$(warn).html('Error: Please enter a stronger password.');
+			};
+			function userNameWarnL(){
+				$(warn).html('Error: Invalid username.');
+			};
+			function pwdWarnL(){
+				$(warn).html('The password you entered is incorrect.');
+			};
+			/**��¼��֤*/
+			
+			/**ע����֤*/
+			var userOk=false;
+			var pwdOk=false;
+			//��֤ע���û�
+			function userValidR(){
+				if(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test($(userNameR).val())){
+					$(warnBox).hide();
+					$(warn).html('');
+					userOk=true;
+				}else{
+					$(warnBox).show();
+					$(warn).html('');
+					userNameWarnR();
+					userOk=false;
+				}
+			}
+			//��֤ע������
+			function pwdValidR(){
+				if(/^[a-zA-Z0-9]{4,24}$/.test($(pwdR).val()) ){
+					var arr=$(pwdR).val();
+					var hasNum=false;
+					var hasLetter=false;
+					for(var i=0;i<arr.length;++i){
+						if(/^[0-9]$/.test(arr[i])){
+							hasNum=true;
+						}
+						if(/^[a-zA-Z]$/.test(arr[i])){
+							hasLetter=true;
+						}
+						if(hasNum && hasLetter){
+							$(warnBox).hide();
+							$(warn).html('');
+							pwdOk=true;
+						}else{
+							pwdOk=false;
+							$(warnBox).show();
+							$(warn).html('');
+							pwdWarnR();
+						}
+					}
+				}else{
+					pwdOk=false;
+					$(warnBox).show();
+					$(warn).html('');
+					pwdWarnR();
+				}
+			}
+			$(userNameR).change(function(){
+				userValidR();
+			});
+			$(pwdR).change(function(){
+				pwdValidR();
+			});
+			$(this.refs.regBtn).click(function(){
+				userValidR();
+				pwdValidR();
+				if(userOk && pwdOk){
+					console.info('suc');
+				}
+				if(userOk){
+					pwdValidR();
+				}else{
+					userValidR();
+				}
+			});
+		},
+		pwdStrength:function(){
+			var pwdR=this.refs.pwdR;
+			var pwdStrength=this.refs.pwdStrength;
+			var pwdStrengthNote=this.refs.pwdStrengthNote;
+			if(/^[a-zA-Z0-9]{4,24}$/.test($(pwdR).val()) ) {
+				var arr = $(pwdR).val();
+				var hasNum = false;
+				var hasLetter = false;
+				for (var i = 0; i < arr.length; ++i) {
+					if (/^[0-9]$/.test(arr[i])) {
+						hasNum = true;
+					}
+					if (/^[a-zA-Z]$/.test(arr[i])) {
+						hasLetter = true;
+					}
+					if (hasNum && hasLetter) {
+						$(pwdStrength).html('Strong');
+						$(pwdStrengthNote).html('');
+					} else {
+						$(pwdStrength).html('Very weak - Please enter a stronger password.');
+						$(pwdStrengthNote).html('The password should be at least seven characters long. To make it stronger, use upper and lower case letters, numbers and symbols like ! " ? $ % ^  ).');
+					}
+				}
+			}else{
+				$(pwdStrength).html('Very weak - Please enter a stronger password.');
+				$(pwdStrengthNote).html('The password should be at least seven characters long. To make it stronger, use upper and lower case letters, numbers and symbols like ! " ? $ % ^  ).');
+			}
+		},
+		render:function(){
 			return (
 				React.createElement("div", {className: "login_and_register"}, 
-					React.createElement("div", {className: "warn"}, 
-						React.createElement("p", null, "Error: Please provide a valid email address.")
+					React.createElement("div", {ref: "warnBox", className: "warn"}, 
+						React.createElement("p", {ref: "warn"})
 					), 
 					React.createElement("div", {className: "input_box"}, 
 						React.createElement("div", {className: "login fl"}, 
 							React.createElement("h2", null, "LOGIN"), 
 							React.createElement("div", {className: "login_grid"}, 
 								React.createElement("p", null, "Username or email address"), 
-								React.createElement("input", {type: "text"})
+								React.createElement("input", {ref: "userNameL", type: "text"})
 							), 
 							React.createElement("div", {className: "login_grid"}, 
 								React.createElement("p", null, "Password"), 
-								React.createElement("input", {type: "password"})
+								React.createElement("input", {ref: "pwdL", type: "password"})
 							), 
 							React.createElement("div", {className: "login_grid"}, 
-								React.createElement("a", {href: "javascript:"}, "LOGIN")
+								React.createElement("a", {ref: "loginBtn", href: "javascript:"}, "LOGIN")
 							), 
 							React.createElement("div", {className: "login_grid"}, 
 								React.createElement("input", {className: "checkbox", type: "checkbox"}), React.createElement("span", null, "Remember me")
@@ -25568,25 +25686,25 @@
 							React.createElement("h2", null, "REGISTER"), 
 							React.createElement("div", {className: "login_grid"}, 
 								React.createElement("p", null, "Email address"), 
-								React.createElement("input", {type: "text"})
+								React.createElement("input", {ref: "userNameR", type: "text"})
 							), 
 							React.createElement("div", {className: "login_grid"}, 
 								React.createElement("p", null, "Password"), 
-								React.createElement("input", {type: "password"}), 
+								React.createElement("input", {ref: "pwdR", onChange: this.pwdStrength.bind(this), type: "password"}), 
 								React.createElement("div", {className: "safe_note"}, 
-									React.createElement("h4", null, "Very weak - Please enter a stronger password."), 
-									React.createElement("small", null, "The password should be at least seven characters long. To make it stronger, use upper and lower case letters, numbers and symbols like ! \" ? $ % ^  ).")
+									React.createElement("h4", {ref: "pwdStrength"}), 
+									React.createElement("small", {ref: "pwdStrengthNote"})
 								)
 							), 
 							React.createElement("div", {className: "login_grid"}, 
-								React.createElement("a", {href: "javascript:"}, "REGISTER")
+								React.createElement("a", {ref: "regBtn", href: "javascript:"}, "REGISTER")
 							)
 						)
 					)
 				)
 			)
-		}});
-
+		}
+	});
 	exports.Login=Login;
 
 /***/ },
@@ -26098,8 +26216,8 @@
 	            }.bind(this));
 	            function getPoints(event){
 	                return({
-	                    x:(event.pageX-318)/100-0.5+'rem',
-	                    y:(event.pageY-153)/100-0.5+'rem'
+	                    x:(event.pageX-318)/91-0.5+'rem',
+	                    y:(event.pageY-153)/91-0.5+'rem'
 	                })
 	            }
 	        }.bind(this));

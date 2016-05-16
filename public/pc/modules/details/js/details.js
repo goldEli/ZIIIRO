@@ -40,8 +40,8 @@ var Details=React.createClass({
             }.bind(this));
             function getPoints(event){
                 return({
-                    x:(event.pageX-318)/100-0.5+'rem',
-                    y:(event.pageY-153)/100-0.5+'rem'
+                    x:(event.pageX-318)/91-0.5+'rem',
+                    y:(event.pageY-153)/91-0.5+'rem'
                 })
             }
         }.bind(this));
