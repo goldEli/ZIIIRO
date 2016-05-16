@@ -61,7 +61,7 @@
 	var Main=__webpack_require__(229).Main;
 	var Order=__webpack_require__(230).Order;
 	var Search=__webpack_require__(231).Search;
-	var Details=__webpack_require__(232).Details;
+	var Details=__webpack_require__(233).Details;
 
 	ReactDom.render(
 	    React.createElement(Router, {history: hashHistory}, 
@@ -25868,6 +25868,13 @@
 	        }
 	    },
 	    render:function(){
+	        $.ajax({
+	            type:'post',
+	            url:'/hot/showAllProduct',
+	            success:function(data){
+	                console.info(data);
+	            }
+	        });
 	        return (
 	            React.createElement("div", {className: "home"}, 
 	                React.createElement("div", {className: "banner"}, 
@@ -26151,8 +26158,34 @@
 	 */
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
+	var ShowItem=__webpack_require__(232).ShowItem;
 	var Search=React.createClass({displayName: "Search",
+	    getInitialState: function(){
+	    return {
+	        data: []
+	        };
+	    },
+	    componentWillMount:function(){
+	        $.ajax({
+	            type:'post',
+	            url:'/product/showAllProduct',
+	            success:function(data){
+	                this.setState({data:data});
+	            }.bind(this)
+
+
+	        });
+	    },
 	    render:function(){
+	        var arr=[];
+	        if(this.state.data.length>0){
+	            console.info(1);
+	            arr=this.state.data.map(function(element){
+	                arr=element;
+	                return React.createElement(ShowItem, {data: arr})
+	            }.bind(this));
+	        }
+	        console.info(arr);
 	        return(
 	            React.createElement("div", {className: "search"}, 
 	                React.createElement("div", {className: "search_input"}, 
@@ -26179,66 +26212,7 @@
 	                    React.createElement("a", {href: "javascript:"}, React.createElement("p", null, "VALENTINES BUNDLES"))
 	                ), 
 	                React.createElement("div", {className: "show_result fl"}, 
-	                    React.createElement("div", {className: "show_product_box_cell fl"}, 
-	                        React.createElement("div", {className: "img_box"}, 
-	                            React.createElement("img", {className: "show", src: "images/ziiiro-celeste-watch-black-mono-front-200x300.jpg", alt: "img"}), 
-	                            React.createElement("img", {className: "hide", src: "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg", alt: "img"}), 
-	                            React.createElement("div", {className: "cart_icon fr"}, 
-	                                React.createElement("strong", null, "+"), 
-	                                React.createElement("span", {className: "cart_icon_handle"})
-	                            )
-	                        ), 
-	                        React.createElement("div", {className: "text_box"}, 
-	                            React.createElement("h5", null, "CELESTE"), 
-	                            React.createElement("p", null, "CELESTE Black/Mono"), 
-	                            React.createElement("span", null, "$199.00")
-	                        )
-	                    ), 
-	                    React.createElement("div", {className: "show_product_box_cell fl"}, 
-	                        React.createElement("div", {className: "img_box"}, 
-	                            React.createElement("img", {className: "show", src: "images/ziiiro-celeste-watch-black-mono-front-200x300.jpg", alt: "img"}), 
-	                            React.createElement("img", {className: "hide", src: "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg", alt: "img"}), 
-	                            React.createElement("div", {className: "cart_icon fr"}, 
-	                                React.createElement("strong", null, "+"), 
-	                                React.createElement("span", {className: "cart_icon_handle"})
-	                            )
-	                        ), 
-	                        React.createElement("div", {className: "text_box"}, 
-	                            React.createElement("h5", null, "CELESTE"), 
-	                            React.createElement("p", null, "CELESTE Black/Mono"), 
-	                            React.createElement("span", null, "$199.00")
-	                        )
-	                    ), 
-	                    React.createElement("div", {className: "show_product_box_cell fl"}, 
-	                        React.createElement("div", {className: "img_box"}, 
-	                            React.createElement("img", {className: "show", src: "images/ziiiro-celeste-watch-black-mono-front-200x300.jpg", alt: "img"}), 
-	                            React.createElement("img", {className: "hide", src: "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg", alt: "img"}), 
-	                            React.createElement("div", {className: "cart_icon fr"}, 
-	                                React.createElement("strong", null, "+"), 
-	                                React.createElement("span", {className: "cart_icon_handle"})
-	                            )
-	                        ), 
-	                        React.createElement("div", {className: "text_box"}, 
-	                            React.createElement("h5", null, "CELESTE"), 
-	                            React.createElement("p", null, "CELESTE Black/Mono"), 
-	                            React.createElement("span", null, "$199.00")
-	                        )
-	                    ), 
-	                    React.createElement("div", {className: "show_product_box_cell fl"}, 
-	                        React.createElement("div", {className: "img_box"}, 
-	                            React.createElement("img", {className: "show", src: "images/ziiiro-celeste-watch-black-mono-front-200x300.jpg", alt: "img"}), 
-	                            React.createElement("img", {className: "hide", src: "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg", alt: "img"}), 
-	                            React.createElement("div", {className: "cart_icon fr"}, 
-	                                React.createElement("strong", null, "+"), 
-	                                React.createElement("span", {className: "cart_icon_handle"})
-	                            )
-	                        ), 
-	                        React.createElement("div", {className: "text_box"}, 
-	                            React.createElement("h5", null, "CELESTE"), 
-	                            React.createElement("p", null, "CELESTE Black/Mono"), 
-	                            React.createElement("span", null, "$199.00")
-	                        )
-	                    )
+	                    arr
 	                )
 	            )
 	        )
@@ -26248,6 +26222,39 @@
 
 /***/ },
 /* 232 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by Administrator on 2016/5/16.
+	 */
+	var React=__webpack_require__(1);
+	var ShowItem=React.createClass({displayName: "ShowItem",
+	    render:function(){
+	        var data=this.props.data;
+	        console.info(data);
+	        return(
+	            React.createElement("div", {className: "show_product_box_cell fl"}, 
+	                React.createElement("div", {className: "img_box"}, 
+	                    React.createElement("img", {className: "show", src: data.imgPathS[1], alt: "img"}), 
+	                    React.createElement("img", {className: "hide", src: data.imgPathS[0], alt: "img"}), 
+	                    React.createElement("div", {className: "cart_icon fr"}, 
+	                        React.createElement("strong", null, "+"), 
+	                        React.createElement("span", {className: "cart_icon_handle"})
+	                    )
+	                ), 
+	                React.createElement("div", {className: "text_box"}, 
+	                    React.createElement("h5", null, data.category), 
+	                    React.createElement("p", null, data.name), 
+	                    React.createElement("span", null, data.price)
+	                )
+	            )
+	        )
+	    }
+	});
+	exports.ShowItem=ShowItem;
+
+/***/ },
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**

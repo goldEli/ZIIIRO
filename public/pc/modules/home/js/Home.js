@@ -79,6 +79,13 @@ var Home=React.createClass({
         }
     },
     render:function(){
+        $.ajax({
+            type:'post',
+            url:'/hot/showAllProduct',
+            success:function(data){
+                console.info(data);
+            }
+        });
         return (
             <div className="home">
                 <div className="banner">

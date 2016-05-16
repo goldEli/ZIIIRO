@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var product=require('./routes/product');
+var hot=require('./routes/hot');
 
 
 var app = express();
@@ -26,7 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/product',product)
+app.use('/product',product);
+app.use('/hot',hot);
 
 var server = app.listen(3000, function () {
   var host = server.address().address;
