@@ -71,66 +71,66 @@
     overflow: hidden;
     margin-left: 0.5rem;
 }
-.show_product_box{
+.search_show_product_box{
     width: 100%;
     overflow: hidden;
 }
-.show_product_box_cell{
+.search_show_product_box_cell{
     width: 1.8rem;
     overflow: hidden;
     margin:0 0.03rem;
 }
-.img_box{
+.search_img_box{
     width: 1.8rem;
     height: 3rem;
     overflow: hidden;
     position: relative;
     cursor: pointer;
 }
-.hide,.show{
+.search_hide,.search_show{
     width: 1.8rem;
     position: absolute;
     top: 0;
     left: 0;
 }
-.hide{
+.search_hide{
     transition: opacity 0.2s;
     opacity: 0;
 }
-.show{
+.search_show{
     transition: opacity 0.2s;
     opacity: 1;
 }
-.img_box:hover .hide{
+.search_img_box:hover .search_hide{
     opacity: 1;
 }
-.img_box:hover .show{
+.search_img_box:hover .search_show{
     opacity: 0;
 }
-.img_box:hover .cart_icon{
+.search_img_box:hover .cart_icon{
     bottom: 0.2rem;
 }
-.text_box{
+.search_text_box{
     width: 100%;
     overflow: hidden;
     text-align: center;
     line-height: 0.3rem;
 }
-.text_box h5{
+.search_text_box h5{
     font-size: 0.14rem;
     color: #999999;
     font-weight: bold;
 }
-.text_box p{
+.search_text_box p{
     font-size: 0.16rem;
     color: #000000;
 }
-.text_box span{
+.search_text_box span{
     color: #000000;
     font-size: 0.2rem;
     font-weight: bold;
 }
-.img_box .cart_icon{
+.search_img_box .cart_icon{
     transition: bottom 0.2s;
     width: 0.22rem;
     height: 0.26rem;
@@ -143,7 +143,7 @@
     overflow: hidden;
     position: relative;
 }
-.img_box .cart_icon strong{
+.search_img_box .cart_icon strong{
     font-weight: bold;
     font-size: 0.2rem;
     line-height: 0.16rem;
@@ -162,7 +162,7 @@
     color: #ffffff;
     background-color: #02b8e5;
 }
-.img_box .cart_icon .cart_icon_handle{
+.search_img_box .cart_icon .cart_icon_handle{
     border-top-left-radius: 0.99rem;
     border-top-right-radius: 0.99rem;
     height: 0.04rem;

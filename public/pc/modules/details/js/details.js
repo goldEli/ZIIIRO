@@ -3,6 +3,8 @@
  */
 var React=require('react');
 var Link=require('react-router').Link;
+var hashHistory=require("react-router").hashHistory;
+require('../css/details.css');
 var Details=React.createClass({
     componentDidMount:function(){
         $(function(){
@@ -47,6 +49,7 @@ var Details=React.createClass({
         }.bind(this));
     },
     render: function () {
+        console.info(this.props.location.query.id);
         return(
             <div className="details">
                 <div className="product_details">

@@ -4,13 +4,36 @@
 var React=require('react');
 var Link=require('react-router').Link;
 var ShowItem=require('./ShowItem').ShowItem;
+require('../css/search.css');
 var Search=React.createClass({
     getInitialState: function(){
     return {
-        data: []
+        data: [],
+        searchItems:9
         };
     },
+    search:function(){
+        console.info(this.refs.searchInput.value);
+        if(this.refs.searchInput.value){
+            $.ajax({
+                type:'post',
+                url:'/product/search',
+                data:{
+                    name:this.refs.searchInput.value,
+                    price:this.refs.searchInput.value,
+                    category:this.refs.searchInput.value
+                },
+                success:function(data){
+                    this.setState({
+                        data:data,
+                        searchItems:data.length
+                    })
+                }.bind(this)
+            });
+        }
+    },
     componentWillMount:function(){
+        console.info('componentWillMount');
         $.ajax({
             type:'post',
             url:'/product/showAllProduct',
@@ -22,21 +45,19 @@ var Search=React.createClass({
     render:function(){
         var arr=[];
         if(this.state.data.length>0){
-            console.info(1);
             arr=this.state.data.map(function(element){
                 arr=element;
                 return <ShowItem data={arr}/>
             }.bind(this));
         }
-        console.info(arr);
         return(
             <div className="search">
                 <div className="search_input">
                     <div className="search_input_area fr">
-                        <button>search</button>
-                        <input type="text"/>
+                        <button onClick={this.search.bind(this)}>search</button>
+                        <input ref="searchInput" type="text"/>
                     </div>
-                    <p>Showing all 66 results</p>
+                    <p>Showing all <i>{this.state.searchItems}</i> results</p>
                 </div>
                 <div className="side_nav fl">
                     <h1>WATCH MODELS</h1>

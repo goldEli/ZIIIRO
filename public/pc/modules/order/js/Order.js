@@ -3,6 +3,7 @@
  */
 var React=require('react');
 var Link=require('react-router').Link;
+require('../css/order.css');
 var Order=React.createClass({
     render:function(){
         return(

@@ -1,5 +1,6 @@
 var React=require('react');
 var hashHistory=require("react-router").hashHistory;
+require('../css/login.css');
 var Login=React.createClass({
 	componentDidMount:function(){
 		var warn=this.refs.warn;
