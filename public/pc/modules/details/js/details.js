@@ -6,6 +6,30 @@ var Link=require('react-router').Link;
 var hashHistory=require("react-router").hashHistory;
 require('../css/details.css');
 var Details=React.createClass({
+    getInitialState:function(){
+        return({
+            imgPath:null,
+          dataDetails:[]
+        })
+    },
+    componentWillMount:function(){
+        $.ajax({
+            type:'post',
+            url:'/product/details',
+            data:{
+                id:this.props.location.query.id
+            },
+            success:function(data){
+                $(this.refs.magnifyShow).css({
+                    'background':'url("/pc/'+data[0].imgPathB+'") no-repeat'
+                });
+                this.setState({
+                    imgPath:data[0].imgPathS[2],
+                    dataDetails:data[0]
+                });
+            }.bind(this)
+        });
+    },
     componentDidMount:function(){
         $(function(){
             var magnifyArea=this.refs.magnifyArea;
@@ -49,7 +73,7 @@ var Details=React.createClass({
         }.bind(this));
     },
     render: function () {
-        console.info(this.props.location.query.id);
+        var data=this.state.dataDetails;
         return(
             <div className="details">
                 <div className="product_details">
@@ -58,39 +82,39 @@ var Details=React.createClass({
                         <div className="magnify_show1" ></div>
                         <div className="show_img fl">
                             <div className="imgDetails_box" ref="imgDetails_box">
-                                <img src="images/ziiiro-celeste-watch-black-mono-blue-side-510x650.jpg" alt="img"/>
+                                <img src={this.state.imgPath} alt="img"/>
                                 <div ref="magnifyArea" className="magnify_area"></div>
                             </div>
                         </div>
                         <div className="text_info fl">
-                            <h1>CELESTE Black / Mono</h1>
-                            <h4>$ 199.00</h4>
-                            <p>The design of Celeste is inspired by the Northern Lights, anyone who has experienced nature's most fascinating phenomenon never forgets it. Now, you get to experience the Aurora on your wrist, every day.</p>
+                            <h1>{data.name}</h1>
+                            <h4>{data.price}</h4>
+                            <p>{data.info}</p>
                             <button>ADD TO CART</button>
-                            <span>
-                                SKU:Z0005WBBG
-                            </span>
-                            <span>
-                                Category:<a href="javascript:">Celeste</a>
-                            </span>
-                            <span>
-                                Tags:<a href="javascript:">black</a><a href="javascript:">blue</a><a href="javascript:">metal</a>
-                            </span>
+                        <span>
+                            SKU:Z0005WBBG
+                        </span>
+                        <span>
+                            Category:<a href="javascript:">{data.category}</a>
+                        </span>
+                        <span>
+                            Tags:<a href="javascript:">black</a><a href="javascript:">blue</a><a href="javascript:">metal</a>
+                        </span>
                         </div>
                     </div>
                     <p className="details_nav row">
-                    <span>
-                        <a className="details_nav_active" href="javascript:">DESCRIPTION</a>
-                    </span>
-                    <span>
-                        <a href="javascript:">ADDITIONAL INFORMATION</a>
-                    </span>
-                    <span>
-                        <a href="javascript:">REVIEWS</a>
-                    </span>
-                    <span>
-                        <a href="javascript:">SHIPPING</a>
-                    </span>
+                <span>
+                    <a className="details_nav_active" href="javascript:">DESCRIPTION</a>
+                </span>
+                <span>
+                    <a href="javascript:">ADDITIONAL INFORMATION</a>
+                </span>
+                <span>
+                    <a href="javascript:">REVIEWS</a>
+                </span>
+                <span>
+                    <a href="javascript:">SHIPPING</a>
+                </span>
                     </p>
                     <div className="row product_features">
                         <fieldset>
@@ -117,7 +141,7 @@ var Details=React.createClass({
                             <legend>HOW TO READ THE TIME</legend>
                         </fieldset>
                         <div className="useMethod row">
-                            <img src="images/Howto_Celeste.jpg" alt="img"/>
+                            <img src={data.imgUse} alt="img"/>
                         </div>
                         <fieldset>
                             <legend>BOOKLET and CATALOGS</legend>

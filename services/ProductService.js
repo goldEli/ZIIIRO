@@ -6,5 +6,5 @@ exports.search=function(name,price,category,func){
 	ProductDAO.findByInput(name,price,category,func);
 };
 exports.details=function(id,func){
-	ProductDAO.findALLData(id,func);
+	ProductDAO.findById(id,func);
 };

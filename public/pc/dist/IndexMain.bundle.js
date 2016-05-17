@@ -58,15 +58,15 @@
 
 	var Login=__webpack_require__(227).Login;
 	var Home=__webpack_require__(232).Home;
-	var Main=__webpack_require__(234).Main;
-	var Order=__webpack_require__(235).Order;
-	var Search=__webpack_require__(236).Search;
-	var Details=__webpack_require__(238).Details;
+	var Main=__webpack_require__(236).Main;
+	var Order=__webpack_require__(237).Order;
+	var Search=__webpack_require__(240).Search;
+	var Details=__webpack_require__(244).Details;
 
 	ReactDom.render(
 	    React.createElement(Router, {history: hashHistory}, 
 	            React.createElement(Route, {path: "/", component: Main}, 
-	                React.createElement(IndexRoute, {path: "/home", component: Home}), 
+	                React.createElement(IndexRoute, {component: Home}), 
 	                React.createElement(Route, {path: "/home", component: Home}), 
 	                React.createElement(Route, {path: "/login", component: Login}), 
 	                React.createElement(Route, {path: "/order", component: Order}), 
@@ -26139,9 +26139,9 @@
 	/**
 	 * Created by Administrator on 2016/5/12.
 	 */
-	__webpack_require__(239);
+	__webpack_require__(233);
 	var React=__webpack_require__(1);
-	var HotItem=__webpack_require__(233).HotItem;
+	var HotItem=__webpack_require__(235).HotItem;
 	var hashHistory=__webpack_require__(166).hashHistory;
 	var Home=React.createClass({displayName: "Home",
 	    getInitialState:function(){
@@ -26341,22 +26341,62 @@
 /* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(234);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(231)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./home.css", function() {
+				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./home.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(230)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".wrap{\r\n    background-color: #ffffff;\r\n    width: 11.4rem;\r\n    overflow: hidden;\r\n    margin:0 auto;\r\n}\r\n.home .banner{\r\n    width: 100%;\r\n    overflow: hidden;\r\n    position: relative;\r\n}\r\n.banner{\r\n    height: 6.50rem;\r\n}\r\n.banner_box{\r\n    position: absolute;\r\n    top:0;\r\n    left: 0;\r\n}\r\n.banner_box1,\r\n.banner_box2,\r\n.banner_box3,\r\n.banner_box4\r\n{\r\n    position: absolute;\r\n    top:0;\r\n    left: 11.4rem;\r\n}\r\n.banner_box{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.banner_box img{\r\n    width: 11.40rem;\r\n    height: 6.50rem;\r\n}\r\n.banner_info{\r\n    width: 3.24rem;\r\n    height: 2.58rem;\r\n    position: absolute;\r\n    left: 1.2rem;\r\n    bottom: 2rem;\r\n}\r\n.banner_info h1{\r\n    font-size: 0.48rem;\r\n    color: #ebebeb;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info h4{\r\n    line-height: 0.3rem;\r\n    font-size: 0.22rem;\r\n    color: #ebebeb;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info a{\r\n    margin: 0.15rem 0;\r\n    display: block;\r\n    width: 1.37rem;\r\n    height: 0.47rem;\r\n    border-radius: 0.02rem;\r\n    background-color: #ffffff;\r\n    color: #888888;\r\n    font-size: 0.20rem;\r\n    line-height: 0.47rem;\r\n    text-align: center;\r\n}\r\n/*------------1*/\r\n.banner_box1{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.banner_box1 img{\r\n    width: 11.40rem;\r\n    height: 6.50rem;\r\n}\r\n.banner_info1{\r\n    width: 3.24rem;\r\n    height: 2.58rem;\r\n    position: absolute;\r\n    right: 0;\r\n    top: 1rem;\r\n}\r\n.banner_info1 h1{\r\n    font-size: 0.48rem;\r\n    color: #555555;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info1 h4{\r\n    line-height: 0.3rem;\r\n    font-size: 0.22rem;\r\n    color: #555555;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info1 a{\r\n    margin: 0.15rem 0;\r\n    display: block;\r\n    width: 1.37rem;\r\n    height: 0.47rem;\r\n    border-radius: 0.02rem;\r\n    background-color: #ffffff;\r\n    color: #888888;\r\n    font-size: 0.20rem;\r\n    line-height: 0.47rem;\r\n    text-align: center;\r\n}\r\n/*----------2*/\r\n.banner_box2{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.banner_box2 img{\r\n    width: 11.40rem;\r\n    height: 6.50rem;\r\n}\r\n.banner_info2{\r\n    width: 3.24rem;\r\n    height: 2.58rem;\r\n    position: absolute;\r\n    left: 1.2rem;\r\n    bottom: 1rem;\r\n}\r\n.banner_info2 h1{\r\n    font-size: 0.48rem;\r\n    color: #ebebeb;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info2 h4{\r\n    line-height: 0.3rem;\r\n    font-size: 0.22rem;\r\n    color: #ebebeb;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info2 a{\r\n    margin: 0.15rem 0;\r\n    display: block;\r\n    width: 1.37rem;\r\n    height: 0.47rem;\r\n    border-radius: 0.02rem;\r\n    background-color: #ffffff;\r\n    color: #888888;\r\n    font-size: 0.20rem;\r\n    line-height: 0.47rem;\r\n    text-align: center;\r\n}\r\n/*-----------3*/\r\n.banner_box3{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.banner_box3 img{\r\n    width: 11.40rem;\r\n    height: 6.50rem;\r\n}\r\n.banner_info3{\r\n    width: 3.24rem;\r\n    height: 2.58rem;\r\n    position: absolute;\r\n    right: 1.2rem;\r\n    top: 0.8rem;\r\n}\r\n.banner_info3 h1{\r\n    font-size: 0.48rem;\r\n    color: #ebebeb;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info3 h4{\r\n    line-height: 0.3rem;\r\n    font-size: 0.22rem;\r\n    color: #ebebeb;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info3 a{\r\n    margin: 0.15rem 0;\r\n    display: block;\r\n    width: 1.37rem;\r\n    height: 0.47rem;\r\n    border-radius: 0.02rem;\r\n    background-color: #ffffff;\r\n    color: #888888;\r\n    font-size: 0.20rem;\r\n    line-height: 0.47rem;\r\n    text-align: center;\r\n}\r\n/*---------------4*/\r\n.banner_box4{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.banner_box4 img{\r\n    width: 11.40rem;\r\n    height: 6.50rem;\r\n}\r\n.banner_info4{\r\n    width: 3.24rem;\r\n    height: 2.58rem;\r\n    position: absolute;\r\n    right: 1.2rem;\r\n    bottom: 0.8rem;\r\n}\r\n.banner_info4 h1{\r\n    font-size: 0.48rem;\r\n    color: #ebebeb;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info4 h4{\r\n    line-height: 0.3rem;\r\n    font-size: 0.22rem;\r\n    color: #ebebeb;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info4 a{\r\n    margin: 0.15rem 0;\r\n    display: block;\r\n    width: 1.37rem;\r\n    height: 0.47rem;\r\n    border-radius: 0.02rem;\r\n    background-color: #ffffff;\r\n    color: #888888;\r\n    font-size: 0.20rem;\r\n    line-height: 0.47rem;\r\n    text-align: center;\r\n}\r\n.banner_btn_left,.banner_btn_right{\r\n    cursor: pointer;\r\n    transition: opacity 0.5s,right 0.5s,left 0.5s;\r\n    position: absolute;\r\n    width: 0.8rem;\r\n    height: 6.50rem;\r\n    display: table;\r\n    top: 0;\r\n    opacity:0;\r\n}\r\n.banner_btn_left:hover{\r\n    opacity:0.4;\r\n    left: 0;\r\n}\r\n.banner_btn_right:hover{\r\n    opacity:0.4;\r\n    right: 0;\r\n}\r\n.banner_btn_left{\r\n    left: -0.2rem;\r\n}\r\n.banner_btn_left a{\r\n    display: table-cell;\r\n    vertical-align: middle;\r\n    text-align: center;\r\n}\r\n.banner_btn_left span{\r\n    transition: background-color 0.5s,opacity 0.5s;\r\n    background-color: transparent;\r\n    margin-left:0.3rem;\r\n    color: #ffffff;\r\n    font-size: 0.3rem;\r\n    line-height: 0.36rem;\r\n    display: block;\r\n    width: 0.36rem;\r\n    height: 0.36rem;\r\n    border-radius: 100%;\r\n    border: 3px solid #ffffff;\r\n}\r\n.banner_btn_right{\r\n    right: -0.2rem;\r\n}\r\n.banner_btn_right a{\r\n    display: table-cell;\r\n    vertical-align: middle;\r\n    text-align: center;\r\n}\r\n.banner_btn_right span{\r\n    margin-right:0.3rem;\r\n    color: #ffffff;\r\n    font-size: 0.3rem;\r\n    line-height: 0.36rem;\r\n    display: block;\r\n    width: 0.36rem;\r\n    height: 0.36rem;\r\n    border-radius: 100%;\r\n    border: 3px solid #ffffff;\r\n}\r\n.banner_pageDots{\r\n    position: absolute;\r\n    width: 100%;\r\n    bottom: 0.2rem;\r\n    left: 0;\r\n    right: 0;\r\n    list-style: none;\r\n    text-align: center;\r\n}\r\n.banner_pageDots li{\r\n    display: inline-block;\r\n    width: 0.08rem;\r\n    height: 0.08rem;\r\n    margin: 0 0.03rem;\r\n    border: 0.03rem solid #ffffff;\r\n    border-radius: 50%;\r\n    opacity: 0.4;\r\n    cursor: pointer;\r\n}\r\n.banner_pageDots .isSelected{\r\n    width: 0.14rem;\r\n    height: 0.14rem;\r\n    border:none;\r\n    opacity: 1;\r\n    background-color: #ffffff;\r\n}\r\n.show_product{\r\n    width: 10.48rem;\r\n    padding: 0.4rem 0.46rem;\r\n    overflow: hidden;\r\n}\r\n.show_product_box{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.show_product h1{\r\n    font-size: 0.26rem;\r\n    color: #555555;\r\n    display: block;\r\n    margin-bottom: 0.1rem;\r\n}\r\n.show_product h3{\r\n    font-size: 0.20rem;\r\n    line-height: 0.3rem;\r\n    color: #a1a1a1;\r\n    font-weight: 300;\r\n    display: block;\r\n    margin-bottom: 0.2rem;\r\n}\r\n.show_product_box_cell{\r\n    width: 2rem;\r\n    overflow: hidden;\r\n    margin:0 0.03rem;\r\n}\r\n.img_box{\r\n    width: 2rem;\r\n    height: 3rem;\r\n    overflow: hidden;\r\n    position: relative;\r\n    cursor: pointer;\r\n}\r\n.img_box:hover .hide{\r\n    opacity: 1;\r\n}\r\n.img_box:hover .show{\r\n    opacity: 0;\r\n}\r\n.img_box:hover .cart_icon{\r\n    bottom: 0;\r\n}\r\n.hide,.show{\r\n    width: 2rem;\r\n    height: 3rem;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n}\r\n.hide{\r\n    transition: opacity 0.2s;\r\n    opacity: 0;\r\n}\r\n.show{\r\n    transition: opacity 0.2s;\r\n    opacity: 1;\r\n}\r\n.text_box{\r\n    width: 100%;\r\n    overflow: hidden;\r\n    text-align: center;\r\n    line-height: 0.3rem;\r\n}\r\n.text_box h5{\r\n    font-size: 0.14rem;\r\n    color: #999999;\r\n    font-weight: bold;\r\n}\r\n.text_box p{\r\n    font-size: 0.16rem;\r\n    color: #000000;\r\n}\r\n.text_box span{\r\n    color: #000000;\r\n    font-size: 0.2rem;\r\n    font-weight: bold;\r\n}\r\n.img_box .cart_icon{\r\n    transition: bottom 0.2s;\r\n    width: 0.22rem;\r\n    height: 0.26rem;\r\n    margin:0 0 0.15rem 0.05rem;\r\n    position: absolute;\r\n    bottom: -0.41rem;\r\n    left: 0;\r\n}\r\n.cart_icon{\r\n    overflow: hidden;\r\n    position: relative;\r\n}\r\n.img_box .cart_icon strong{\r\n    font-weight: bold;\r\n    font-size: 0.2rem;\r\n    line-height: 0.16rem;\r\n    min-width: 0.18rem;\r\n    min-height: 0.15rem;\r\n}\r\n.cart_icon strong{\r\n    position: absolute;\r\n    bottom: 0;\r\n    color: #02b8e5;\r\n    border: 0.02rem solid #02b8e5;\r\n    display: inline-block;\r\n    text-align: center;\r\n}\r\n.cart_icon strong:hover{\r\n    color: #ffffff;\r\n    background-color: #02b8e5;\r\n}\r\n.img_box .cart_icon .cart_icon_handle{\r\n    border-top-left-radius: 0.99rem;\r\n    border-top-right-radius: 0.99rem;\r\n    height: 0.04rem;\r\n    width: 0.06rem;\r\n    bottom: 0.19rem;\r\n    left: 0.06rem;\r\n}\r\n.cart_icon .cart_icon_handle{\r\n    border: 0.02rem solid #02b8e5;\r\n    border-bottom: none;\r\n    position: absolute;\r\n}\r\n.customer_care{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.customer_care h1{\r\n    display: block;\r\n    text-align: center;\r\n}\r\n.customer_care{\r\n    width: 10.48rem;\r\n    padding: 0 0.46rem;\r\n    overflow: hidden;\r\n}\r\n.customer_care fieldset {\r\n    display: block;\r\n    -webkit-margin-start: 2px;\r\n    -webkit-margin-end: 2px;\r\n    -webkit-padding-before: 0.35em;\r\n    -webkit-padding-start: 0.75em;\r\n    -webkit-padding-end: 0.75em;\r\n    -webkit-padding-after: 0.625em;\r\n    min-width: -webkit-min-content;\r\n    border-top: 2px groove #eeeeee;\r\n}\r\n.customer_care legend{\r\n    padding: 0 0.15rem;\r\n    font-size: 0.22rem;\r\n    color: #555555;\r\n    font-weight: bold;\r\n    text-align: center;\r\n}\r\n.customer_care_grid{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.customer_care_cell{\r\n    width: 3.28rem;\r\n    overflow: hidden;\r\n    text-align: center;\r\n    padding:0 0.1rem 0.3rem 0.1rem;\r\n}\r\n.customer_care_cell h4{\r\n    color: #555555;\r\n    font-size: 0.18rem;\r\n    font-weight: bolder;\r\n    margin-bottom: 0.1rem;\r\n}\r\n.customer_care_cell p{\r\n    color:#777777;\r\n    font-size: 0.16rem;\r\n    line-height: 0.3rem;\r\n}\r\n.customer_care_cell img{\r\n    display: inline-block;\r\n    width: 0.48rem;\r\n    height: 0.48rem;\r\n    margin:0.2rem 0;\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/**
 	 * Created by Administrator on 2016/5/17.
 	 */
 	var React=__webpack_require__(1);
 	var hashHistory=__webpack_require__(166).hashHistory;
 	var HotItem=React.createClass({displayName: "HotItem",
-	    toDetail:function(){
+	    toDetail:function(event){
 	        hashHistory.push("/details?id="+event.target.getAttribute("data"));
 	    },
 	    render:function(){
 	        var data=this.props.dataHot.product;
 	        return(
-	            React.createElement("div", {onClick: this.toDetail.bind(this), className: "show_product_box_cell fl"}, 
+	            React.createElement("div", {className: "show_product_box_cell fl"}, 
 	                React.createElement("div", {className: "img_box"}, 
 	                    React.createElement("img", {className: "show", src: data.imgPathS[1], alt: "img"}), 
-	                    React.createElement("img", {className: "hide", src: data.imgPathS[0], data: data['_id'], alt: "img"}), 
+	                    React.createElement("img", {className: "hide", onClick: this.toDetail.bind(this), src: data.imgPathS[0], data: data['_id'], alt: "img"}), 
 	                    React.createElement("div", {className: "cart_icon fr"}, 
 	                        React.createElement("strong", null, "+"), 
 	                        React.createElement("span", {className: "cart_icon_handle"})
@@ -26374,7 +26414,7 @@
 	exports.HotItem=HotItem;
 
 /***/ },
-/* 234 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26477,7 +26517,7 @@
 	exports.Main=Main;
 
 /***/ },
-/* 235 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26485,7 +26525,7 @@
 	 */
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
-	__webpack_require__(244);
+	__webpack_require__(238);
 	var Order=React.createClass({displayName: "Order",
 	    render:function(){
 	        return(
@@ -26554,7 +26594,47 @@
 	exports.Order=Order;
 
 /***/ },
-/* 236 */
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(239);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(231)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./order.css", function() {
+				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./order.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(230)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".wrap{\r\n    background-color: #ffffff;\r\n    width: 11.4rem;\r\n    overflow: hidden;\r\n    margin:0 auto;\r\n}\r\n.order{\r\n    width: 10.48rem;\r\n    padding: 0.37rem 0.46rem 0.56rem 0.46rem;\r\n    overflow: hidden;\r\n}\r\n.order h1{\r\n    font-weight: bold;\r\n    font-size: 0.24rem;\r\n    color: #555555;\r\n    margin-bottom: 0.5rem;\r\n}\r\n.order_left{\r\n    width: 6.58rem;\r\n    padding-right: 0.3rem;\r\n    padding-bottom: 0.5rem;\r\n    overflow: hidden;\r\n    border-right: 0.01rem solid #e4e4e4;\r\n}\r\n.order_left table,.order_right table{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.order_left_title,.order_right_title{\r\n    width: 100%;\r\n    border-bottom: 0.03rem solid #dddddd;\r\n    font-size: 0.14rem;\r\n    color: #555555;\r\n    font-weight: bold;\r\n    line-height: 0.3rem;\r\n}\r\n.order_left_grid{\r\n    overflow: hidden;\r\n    vertical-align: middle;\r\n    text-align: center;\r\n    width: 0.98rem;\r\n    border-bottom: 0.01rem solid #e4e4e4;\r\n}\r\n.order_left_grid td{\r\n    height: 100%;\r\n}\r\n.product{\r\n    width: 3.33rem;\r\n}\r\n.product span{\r\n    display: inline-block;\r\n    border: 0.03rem solid #dddddd;\r\n    width: 0.19rem;\r\n    height: 0.19rem;\r\n    line-height: 0.19rem;\r\n    text-align: center;\r\n    border-radius: 50%;\r\n    font-size: 0.16rem;\r\n    font-weight: bold;\r\n    color: #dddddd;\r\n    margin-right: 0.2rem;\r\n}\r\n.product img{\r\n    width: 0.98rem;\r\n    display: inline-block;\r\n    margin-right: 0.35rem;\r\n}\r\n.product p{\r\n    display: inline-block;\r\n    font-size: 0.16rem;\r\n    color: #02beeb;\r\n    width: 1.4rem;\r\n}\r\n.price p{\r\n    display: inline-block;\r\n    font-size: 0.16rem;\r\n    color: #555555;\r\n}\r\n.quantity span{\r\n    float: left;\r\n    border: 0.01rem solid #b1b1b1;\r\n    border-right: none;\r\n    border-left: none;\r\n    display: inline-block;\r\n    text-align: center;\r\n    width: 0.35rem;\r\n    height: 0.4rem;\r\n    line-height: 0.4rem;\r\n}\r\n.quantity button{\r\n    outline: none;\r\n    cursor: pointer;\r\n    float: left;\r\n    display: inline-block;\r\n    background-color: #ffffff;\r\n    width: 0.30rem;\r\n    height: 0.42rem;\r\n    border: 0.01rem solid #b1b1b1;\r\n}\r\n.total p{\r\n    font-weight: bold;\r\n    display: inline-block;\r\n    font-size: 0.16rem;\r\n    color: #555555;\r\n}\r\n.order_right{\r\n    width: 3.3rem;\r\n    overflow: hidden;\r\n}\r\n.subtotal{\r\n    font-size: 0.14rem;\r\n    line-height: 0.3rem;\r\n    border-bottom: 0.01rem solid #e4e4e4;\r\n}\r\n.subtotal td:nth-of-type(1){\r\n    font-weight: bold;\r\n}\r\n.subtotal td:nth-of-type(2){\r\n    text-align: right;\r\n}\r\n.shipping td:nth-of-type(1){\r\n    font-weight: bold;\r\n    vertical-align: bottom;\r\n    font-size: 0.14rem;\r\n}\r\n.shipping td:nth-of-type(2){\r\n    text-align: right;\r\n}\r\n.shipping div{\r\n    padding-top:0.1rem ;\r\n    line-height: 0.2rem;\r\n    height: 0.2rem;\r\n}\r\n.shipping .blank{\r\n    padding-top:0;\r\n    height: 0.1rem;\r\n}\r\n.shipping{\r\n    width: 100%;\r\n    overflow: hidden;\r\n    border-bottom: 0.01rem solid #e4e4e4;\r\n}\r\n.final_price{\r\n    height: 0.3rem;\r\n    font-size: 0.14rem;\r\n    font-weight: bold;\r\n    width: 100%;\r\n    overflow: hidden;\r\n    border-bottom: 0.03rem solid #e4e4e4;\r\n}\r\n.final_price td:nth-of-type(2){\r\n    text-align: right;\r\n}\r\n.pay_bth{\r\n    display: block;\r\n    margin-top: 0.2rem;\r\n    width: 100%;\r\n    height: 0.41rem;\r\n    background-color: #ff0055;\r\n    color: #ffffff;\r\n    font-size: 0.18rem;\r\n    border-radius: 0.03rem;\r\n    cursor: pointer;\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26562,8 +26642,8 @@
 	 */
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
-	var ShowItem=__webpack_require__(237).ShowItem;
-	__webpack_require__(246);
+	var ShowItem=__webpack_require__(241).ShowItem;
+	__webpack_require__(242);
 	var Search=React.createClass({displayName: "Search",
 	    getInitialState: function(){
 	    return {
@@ -26644,21 +26724,25 @@
 	exports.Search=Search;
 
 /***/ },
-/* 237 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Created by Administrator on 2016/5/16.
 	 */
 	var React=__webpack_require__(1);
+	var hashHistory=__webpack_require__(166).hashHistory;
 	var ShowItem=React.createClass({displayName: "ShowItem",
+	    toDetail:function(event){
+	        hashHistory.push("/details?id="+event.target.getAttribute("data"));
+	    },
 	    render:function(){
 	        var data=this.props.data;
 	        return(
 	            React.createElement("div", {className: "search_show_product_box_cell fl"}, 
-	                React.createElement("div", {className: "search_img_box"}, 
+	                React.createElement("div", {className: "search_img_box", onClick: this.toDetail.bind(this)}, 
 	                    React.createElement("img", {className: "search_show", src: data.imgPathS[1], alt: "img"}), 
-	                    React.createElement("img", {className: "search_hide", src: data.imgPathS[0], alt: "img"}), 
+	                    React.createElement("img", {className: "search_hide", src: data.imgPathS[0], data: data['_id'], alt: "img"}), 
 	                    React.createElement("div", {className: "cart_icon fr"}, 
 	                        React.createElement("strong", null, "+"), 
 	                        React.createElement("span", {className: "cart_icon_handle"})
@@ -26676,7 +26760,47 @@
 	exports.ShowItem=ShowItem;
 
 /***/ },
-/* 238 */
+/* 242 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(243);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(231)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./search.css", function() {
+				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./search.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(230)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".wrap{\r\n    background-color: #ffffff;\r\n    width: 11.4rem;\r\n    overflow: hidden;\r\n    margin:0 auto;\r\n}\r\n.search{\r\n    width: 10.48rem;\r\n    padding: 0.37rem 0.46rem 0.56rem 0.46rem;\r\n    overflow: hidden;\r\n}\r\n.search_input{\r\n    height: 0.33rem;\r\n    width: 100%;\r\n    overflow: hidden;\r\n    margin-bottom: 0.2rem;\r\n}\r\n.search_input p{\r\n    margin-right:0.2rem;\r\n    line-height: 0.33rem;\r\n    font-size: 0.16rem;\r\n    display: block;\r\n    float: right;\r\n}\r\n.search_input_area input{\r\n    outline: none;\r\n    width: 1.6rem;\r\n    padding-left: 0.1rem;\r\n    display: inline-block;\r\n    float: right;\r\n    height: 0.31rem;\r\n    border: 0.01rem solid #555555;\r\n}\r\n.search_input_area button{\r\n    outline: none;\r\n    cursor: pointer;\r\n    width: 0.6rem;\r\n    display: inline-block;\r\n    float: right;\r\n    background-color: #ff0055;\r\n    height: 0.33rem;\r\n    color: #ffffff;\r\n    font-size: 0.14rem;\r\n    font-weight: bolder;\r\n}\r\n.side_nav{\r\n    width: 2.4rem;\r\n    overflow: hidden;\r\n}\r\n.side_nav h1{\r\n    display: block;\r\n    font-size: 0.14rem;\r\n    color: #555555;\r\n    line-height: 0.3rem;\r\n    border-bottom:0.03rem solid #e4e4e4;\r\n    margin-bottom: 0.2rem;\r\n}\r\n.side_nav p{\r\n    display: block;\r\n    font-size: 0.14rem;\r\n    color: #555555;\r\n    line-height: 0.4rem;\r\n    border-bottom:0.01rem solid #e4e4e4;\r\n}\r\n.side_nav p:hover{\r\n    text-decoration: underline;\r\n    color: #393939;\r\n}\r\n.show_result{\r\n    width: 7.5rem;\r\n    overflow: hidden;\r\n    margin-left: 0.5rem;\r\n}\r\n.search_show_product_box{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.search_show_product_box_cell{\r\n    width: 1.8rem;\r\n    overflow: hidden;\r\n    margin:0 0.03rem;\r\n}\r\n.search_img_box{\r\n    width: 1.8rem;\r\n    height: 3rem;\r\n    overflow: hidden;\r\n    position: relative;\r\n    cursor: pointer;\r\n}\r\n.search_hide,.search_show{\r\n    width: 1.8rem;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n}\r\n.search_hide{\r\n    transition: opacity 0.2s;\r\n    opacity: 0;\r\n}\r\n.search_show{\r\n    transition: opacity 0.2s;\r\n    opacity: 1;\r\n}\r\n.search_img_box:hover .search_hide{\r\n    opacity: 1;\r\n}\r\n.search_img_box:hover .search_show{\r\n    opacity: 0;\r\n}\r\n.search_img_box:hover .cart_icon{\r\n    bottom: 0.2rem;\r\n}\r\n.search_text_box{\r\n    width: 100%;\r\n    overflow: hidden;\r\n    text-align: center;\r\n    line-height: 0.3rem;\r\n}\r\n.search_text_box h5{\r\n    font-size: 0.14rem;\r\n    color: #999999;\r\n    font-weight: bold;\r\n}\r\n.search_text_box p{\r\n    font-size: 0.16rem;\r\n    color: #000000;\r\n}\r\n.search_text_box span{\r\n    color: #000000;\r\n    font-size: 0.2rem;\r\n    font-weight: bold;\r\n}\r\n.search_img_box .cart_icon{\r\n    transition: bottom 0.2s;\r\n    width: 0.22rem;\r\n    height: 0.26rem;\r\n    margin:0 0 0.15rem 0.05rem;\r\n    position: absolute;\r\n    bottom: -0.41rem;\r\n    left: 0;\r\n}\r\n.cart_icon{\r\n    overflow: hidden;\r\n    position: relative;\r\n}\r\n.search_img_box .cart_icon strong{\r\n    font-weight: bold;\r\n    font-size: 0.2rem;\r\n    line-height: 0.16rem;\r\n    min-width: 0.18rem;\r\n    min-height: 0.15rem;\r\n}\r\n.cart_icon strong{\r\n    position: absolute;\r\n    bottom: 0;\r\n    color: #02b8e5;\r\n    border: 0.02rem solid #02b8e5;\r\n    display: inline-block;\r\n    text-align: center;\r\n}\r\n.cart_icon strong:hover{\r\n    color: #ffffff;\r\n    background-color: #02b8e5;\r\n}\r\n.search_img_box .cart_icon .cart_icon_handle{\r\n    border-top-left-radius: 0.99rem;\r\n    border-top-right-radius: 0.99rem;\r\n    height: 0.04rem;\r\n    width: 0.06rem;\r\n    bottom: 0.19rem;\r\n    left: 0.06rem;\r\n}\r\n.cart_icon .cart_icon_handle{\r\n    border: 0.02rem solid #02b8e5;\r\n    border-bottom: none;\r\n    position: absolute;\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26685,8 +26809,32 @@
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
 	var hashHistory=__webpack_require__(166).hashHistory;
-	__webpack_require__(241);
+	__webpack_require__(245);
 	var Details=React.createClass({displayName: "Details",
+	    getInitialState:function(){
+	        return({
+	            imgPath:null,
+	          dataDetails:[]
+	        })
+	    },
+	    componentWillMount:function(){
+	        $.ajax({
+	            type:'post',
+	            url:'/product/details',
+	            data:{
+	                id:this.props.location.query.id
+	            },
+	            success:function(data){
+	                $(this.refs.magnifyShow).css({
+	                    'background':'url("/pc/'+data[0].imgPathB+'") no-repeat'
+	                });
+	                this.setState({
+	                    imgPath:data[0].imgPathS[2],
+	                    dataDetails:data[0]
+	                });
+	            }.bind(this)
+	        });
+	    },
 	    componentDidMount:function(){
 	        $(function(){
 	            var magnifyArea=this.refs.magnifyArea;
@@ -26730,7 +26878,7 @@
 	        }.bind(this));
 	    },
 	    render: function () {
-	        console.info(this.props.location.query.id);
+	        var data=this.state.dataDetails;
 	        return(
 	            React.createElement("div", {className: "details"}, 
 	                React.createElement("div", {className: "product_details"}, 
@@ -26739,39 +26887,39 @@
 	                        React.createElement("div", {className: "magnify_show1"}), 
 	                        React.createElement("div", {className: "show_img fl"}, 
 	                            React.createElement("div", {className: "imgDetails_box", ref: "imgDetails_box"}, 
-	                                React.createElement("img", {src: "images/ziiiro-celeste-watch-black-mono-blue-side-510x650.jpg", alt: "img"}), 
+	                                React.createElement("img", {src: this.state.imgPath, alt: "img"}), 
 	                                React.createElement("div", {ref: "magnifyArea", className: "magnify_area"})
 	                            )
 	                        ), 
 	                        React.createElement("div", {className: "text_info fl"}, 
-	                            React.createElement("h1", null, "CELESTE Black / Mono"), 
-	                            React.createElement("h4", null, "$ 199.00"), 
-	                            React.createElement("p", null, "The design of Celeste is inspired by the Northern Lights, anyone who has experienced nature's most fascinating phenomenon never forgets it. Now, you get to experience the Aurora on your wrist, every day."), 
+	                            React.createElement("h1", null, data.name), 
+	                            React.createElement("h4", null, data.price), 
+	                            React.createElement("p", null, data.info), 
 	                            React.createElement("button", null, "ADD TO CART"), 
-	                            React.createElement("span", null, 
-	                                "SKU:Z0005WBBG"
-	                            ), 
-	                            React.createElement("span", null, 
-	                                "Category:", React.createElement("a", {href: "javascript:"}, "Celeste")
-	                            ), 
-	                            React.createElement("span", null, 
-	                                "Tags:", React.createElement("a", {href: "javascript:"}, "black"), React.createElement("a", {href: "javascript:"}, "blue"), React.createElement("a", {href: "javascript:"}, "metal")
-	                            )
+	                        React.createElement("span", null, 
+	                            "SKU:Z0005WBBG"
+	                        ), 
+	                        React.createElement("span", null, 
+	                            "Category:", React.createElement("a", {href: "javascript:"}, data.category)
+	                        ), 
+	                        React.createElement("span", null, 
+	                            "Tags:", React.createElement("a", {href: "javascript:"}, "black"), React.createElement("a", {href: "javascript:"}, "blue"), React.createElement("a", {href: "javascript:"}, "metal")
+	                        )
 	                        )
 	                    ), 
 	                    React.createElement("p", {className: "details_nav row"}, 
-	                    React.createElement("span", null, 
-	                        React.createElement("a", {className: "details_nav_active", href: "javascript:"}, "DESCRIPTION")
-	                    ), 
-	                    React.createElement("span", null, 
-	                        React.createElement("a", {href: "javascript:"}, "ADDITIONAL INFORMATION")
-	                    ), 
-	                    React.createElement("span", null, 
-	                        React.createElement("a", {href: "javascript:"}, "REVIEWS")
-	                    ), 
-	                    React.createElement("span", null, 
-	                        React.createElement("a", {href: "javascript:"}, "SHIPPING")
-	                    )
+	                React.createElement("span", null, 
+	                    React.createElement("a", {className: "details_nav_active", href: "javascript:"}, "DESCRIPTION")
+	                ), 
+	                React.createElement("span", null, 
+	                    React.createElement("a", {href: "javascript:"}, "ADDITIONAL INFORMATION")
+	                ), 
+	                React.createElement("span", null, 
+	                    React.createElement("a", {href: "javascript:"}, "REVIEWS")
+	                ), 
+	                React.createElement("span", null, 
+	                    React.createElement("a", {href: "javascript:"}, "SHIPPING")
+	                )
 	                    ), 
 	                    React.createElement("div", {className: "row product_features"}, 
 	                        React.createElement("fieldset", null, 
@@ -26798,7 +26946,7 @@
 	                            React.createElement("legend", null, "HOW TO READ THE TIME")
 	                        ), 
 	                        React.createElement("div", {className: "useMethod row"}, 
-	                            React.createElement("img", {src: "images/Howto_Celeste.jpg", alt: "img"})
+	                            React.createElement("img", {src: data.imgUse, alt: "img"})
 	                        ), 
 	                        React.createElement("fieldset", null, 
 	                            React.createElement("legend", null, "BOOKLET and CATALOGS")
@@ -26816,53 +26964,13 @@
 	exports.Details=Details;
 
 /***/ },
-/* 239 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(240);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(231)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./home.css", function() {
-				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./home.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 240 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(230)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".wrap{\r\n    background-color: #ffffff;\r\n    width: 11.4rem;\r\n    overflow: hidden;\r\n    margin:0 auto;\r\n}\r\n.home .banner{\r\n    width: 100%;\r\n    overflow: hidden;\r\n    position: relative;\r\n}\r\n.banner{\r\n    height: 6.50rem;\r\n}\r\n.banner_box{\r\n    position: absolute;\r\n    top:0;\r\n    left: 0;\r\n}\r\n.banner_box1,\r\n.banner_box2,\r\n.banner_box3,\r\n.banner_box4\r\n{\r\n    position: absolute;\r\n    top:0;\r\n    left: 11.4rem;\r\n}\r\n.banner_box{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.banner_box img{\r\n    width: 11.40rem;\r\n    height: 6.50rem;\r\n}\r\n.banner_info{\r\n    width: 3.24rem;\r\n    height: 2.58rem;\r\n    position: absolute;\r\n    left: 1.2rem;\r\n    bottom: 2rem;\r\n}\r\n.banner_info h1{\r\n    font-size: 0.48rem;\r\n    color: #ebebeb;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info h4{\r\n    line-height: 0.3rem;\r\n    font-size: 0.22rem;\r\n    color: #ebebeb;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info a{\r\n    margin: 0.15rem 0;\r\n    display: block;\r\n    width: 1.37rem;\r\n    height: 0.47rem;\r\n    border-radius: 0.02rem;\r\n    background-color: #ffffff;\r\n    color: #888888;\r\n    font-size: 0.20rem;\r\n    line-height: 0.47rem;\r\n    text-align: center;\r\n}\r\n/*------------1*/\r\n.banner_box1{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.banner_box1 img{\r\n    width: 11.40rem;\r\n    height: 6.50rem;\r\n}\r\n.banner_info1{\r\n    width: 3.24rem;\r\n    height: 2.58rem;\r\n    position: absolute;\r\n    right: 0;\r\n    top: 1rem;\r\n}\r\n.banner_info1 h1{\r\n    font-size: 0.48rem;\r\n    color: #555555;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info1 h4{\r\n    line-height: 0.3rem;\r\n    font-size: 0.22rem;\r\n    color: #555555;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info1 a{\r\n    margin: 0.15rem 0;\r\n    display: block;\r\n    width: 1.37rem;\r\n    height: 0.47rem;\r\n    border-radius: 0.02rem;\r\n    background-color: #ffffff;\r\n    color: #888888;\r\n    font-size: 0.20rem;\r\n    line-height: 0.47rem;\r\n    text-align: center;\r\n}\r\n/*----------2*/\r\n.banner_box2{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.banner_box2 img{\r\n    width: 11.40rem;\r\n    height: 6.50rem;\r\n}\r\n.banner_info2{\r\n    width: 3.24rem;\r\n    height: 2.58rem;\r\n    position: absolute;\r\n    left: 1.2rem;\r\n    bottom: 1rem;\r\n}\r\n.banner_info2 h1{\r\n    font-size: 0.48rem;\r\n    color: #ebebeb;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info2 h4{\r\n    line-height: 0.3rem;\r\n    font-size: 0.22rem;\r\n    color: #ebebeb;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info2 a{\r\n    margin: 0.15rem 0;\r\n    display: block;\r\n    width: 1.37rem;\r\n    height: 0.47rem;\r\n    border-radius: 0.02rem;\r\n    background-color: #ffffff;\r\n    color: #888888;\r\n    font-size: 0.20rem;\r\n    line-height: 0.47rem;\r\n    text-align: center;\r\n}\r\n/*-----------3*/\r\n.banner_box3{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.banner_box3 img{\r\n    width: 11.40rem;\r\n    height: 6.50rem;\r\n}\r\n.banner_info3{\r\n    width: 3.24rem;\r\n    height: 2.58rem;\r\n    position: absolute;\r\n    right: 1.2rem;\r\n    top: 0.8rem;\r\n}\r\n.banner_info3 h1{\r\n    font-size: 0.48rem;\r\n    color: #ebebeb;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info3 h4{\r\n    line-height: 0.3rem;\r\n    font-size: 0.22rem;\r\n    color: #ebebeb;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info3 a{\r\n    margin: 0.15rem 0;\r\n    display: block;\r\n    width: 1.37rem;\r\n    height: 0.47rem;\r\n    border-radius: 0.02rem;\r\n    background-color: #ffffff;\r\n    color: #888888;\r\n    font-size: 0.20rem;\r\n    line-height: 0.47rem;\r\n    text-align: center;\r\n}\r\n/*---------------4*/\r\n.banner_box4{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.banner_box4 img{\r\n    width: 11.40rem;\r\n    height: 6.50rem;\r\n}\r\n.banner_info4{\r\n    width: 3.24rem;\r\n    height: 2.58rem;\r\n    position: absolute;\r\n    right: 1.2rem;\r\n    bottom: 0.8rem;\r\n}\r\n.banner_info4 h1{\r\n    font-size: 0.48rem;\r\n    color: #ebebeb;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info4 h4{\r\n    line-height: 0.3rem;\r\n    font-size: 0.22rem;\r\n    color: #ebebeb;\r\n    display: block;\r\n    margin: 0.15rem 0;\r\n}\r\n.banner_info4 a{\r\n    margin: 0.15rem 0;\r\n    display: block;\r\n    width: 1.37rem;\r\n    height: 0.47rem;\r\n    border-radius: 0.02rem;\r\n    background-color: #ffffff;\r\n    color: #888888;\r\n    font-size: 0.20rem;\r\n    line-height: 0.47rem;\r\n    text-align: center;\r\n}\r\n.banner_btn_left,.banner_btn_right{\r\n    cursor: pointer;\r\n    transition: opacity 0.5s,right 0.5s,left 0.5s;\r\n    position: absolute;\r\n    width: 0.8rem;\r\n    height: 6.50rem;\r\n    display: table;\r\n    top: 0;\r\n    opacity:0;\r\n}\r\n.banner_btn_left:hover{\r\n    opacity:0.4;\r\n    left: 0;\r\n}\r\n.banner_btn_right:hover{\r\n    opacity:0.4;\r\n    right: 0;\r\n}\r\n.banner_btn_left{\r\n    left: -0.2rem;\r\n}\r\n.banner_btn_left a{\r\n    display: table-cell;\r\n    vertical-align: middle;\r\n    text-align: center;\r\n}\r\n.banner_btn_left span{\r\n    transition: background-color 0.5s,opacity 0.5s;\r\n    background-color: transparent;\r\n    margin-left:0.3rem;\r\n    color: #ffffff;\r\n    font-size: 0.3rem;\r\n    line-height: 0.36rem;\r\n    display: block;\r\n    width: 0.36rem;\r\n    height: 0.36rem;\r\n    border-radius: 100%;\r\n    border: 3px solid #ffffff;\r\n}\r\n.banner_btn_right{\r\n    right: -0.2rem;\r\n}\r\n.banner_btn_right a{\r\n    display: table-cell;\r\n    vertical-align: middle;\r\n    text-align: center;\r\n}\r\n.banner_btn_right span{\r\n    margin-right:0.3rem;\r\n    color: #ffffff;\r\n    font-size: 0.3rem;\r\n    line-height: 0.36rem;\r\n    display: block;\r\n    width: 0.36rem;\r\n    height: 0.36rem;\r\n    border-radius: 100%;\r\n    border: 3px solid #ffffff;\r\n}\r\n.banner_pageDots{\r\n    position: absolute;\r\n    width: 100%;\r\n    bottom: 0.2rem;\r\n    left: 0;\r\n    right: 0;\r\n    list-style: none;\r\n    text-align: center;\r\n}\r\n.banner_pageDots li{\r\n    display: inline-block;\r\n    width: 0.08rem;\r\n    height: 0.08rem;\r\n    margin: 0 0.03rem;\r\n    border: 0.03rem solid #ffffff;\r\n    border-radius: 50%;\r\n    opacity: 0.4;\r\n    cursor: pointer;\r\n}\r\n.banner_pageDots .isSelected{\r\n    width: 0.14rem;\r\n    height: 0.14rem;\r\n    border:none;\r\n    opacity: 1;\r\n    background-color: #ffffff;\r\n}\r\n.show_product{\r\n    width: 10.48rem;\r\n    padding: 0.4rem 0.46rem;\r\n    overflow: hidden;\r\n}\r\n.show_product_box{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.show_product h1{\r\n    font-size: 0.26rem;\r\n    color: #555555;\r\n    display: block;\r\n    margin-bottom: 0.1rem;\r\n}\r\n.show_product h3{\r\n    font-size: 0.20rem;\r\n    line-height: 0.3rem;\r\n    color: #a1a1a1;\r\n    font-weight: 300;\r\n    display: block;\r\n    margin-bottom: 0.2rem;\r\n}\r\n.show_product_box_cell{\r\n    width: 2rem;\r\n    overflow: hidden;\r\n    margin:0 0.03rem;\r\n}\r\n.img_box{\r\n    width: 2rem;\r\n    height: 3rem;\r\n    overflow: hidden;\r\n    position: relative;\r\n    cursor: pointer;\r\n}\r\n.img_box:hover .hide{\r\n    opacity: 1;\r\n}\r\n.img_box:hover .show{\r\n    opacity: 0;\r\n}\r\n.img_box:hover .cart_icon{\r\n    bottom: 0;\r\n}\r\n.hide,.show{\r\n    width: 2rem;\r\n    height: 3rem;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n}\r\n.hide{\r\n    transition: opacity 0.2s;\r\n    opacity: 0;\r\n}\r\n.show{\r\n    transition: opacity 0.2s;\r\n    opacity: 1;\r\n}\r\n.text_box{\r\n    width: 100%;\r\n    overflow: hidden;\r\n    text-align: center;\r\n    line-height: 0.3rem;\r\n}\r\n.text_box h5{\r\n    font-size: 0.14rem;\r\n    color: #999999;\r\n    font-weight: bold;\r\n}\r\n.text_box p{\r\n    font-size: 0.16rem;\r\n    color: #000000;\r\n}\r\n.text_box span{\r\n    color: #000000;\r\n    font-size: 0.2rem;\r\n    font-weight: bold;\r\n}\r\n.img_box .cart_icon{\r\n    transition: bottom 0.2s;\r\n    width: 0.22rem;\r\n    height: 0.26rem;\r\n    margin:0 0 0.15rem 0.05rem;\r\n    position: absolute;\r\n    bottom: -0.41rem;\r\n    left: 0;\r\n}\r\n.cart_icon{\r\n    overflow: hidden;\r\n    position: relative;\r\n}\r\n.img_box .cart_icon strong{\r\n    font-weight: bold;\r\n    font-size: 0.2rem;\r\n    line-height: 0.16rem;\r\n    min-width: 0.18rem;\r\n    min-height: 0.15rem;\r\n}\r\n.cart_icon strong{\r\n    position: absolute;\r\n    bottom: 0;\r\n    color: #02b8e5;\r\n    border: 0.02rem solid #02b8e5;\r\n    display: inline-block;\r\n    text-align: center;\r\n}\r\n.cart_icon strong:hover{\r\n    color: #ffffff;\r\n    background-color: #02b8e5;\r\n}\r\n.img_box .cart_icon .cart_icon_handle{\r\n    border-top-left-radius: 0.99rem;\r\n    border-top-right-radius: 0.99rem;\r\n    height: 0.04rem;\r\n    width: 0.06rem;\r\n    bottom: 0.19rem;\r\n    left: 0.06rem;\r\n}\r\n.cart_icon .cart_icon_handle{\r\n    border: 0.02rem solid #02b8e5;\r\n    border-bottom: none;\r\n    position: absolute;\r\n}\r\n.customer_care{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.customer_care h1{\r\n    display: block;\r\n    text-align: center;\r\n}\r\n.customer_care{\r\n    width: 10.48rem;\r\n    padding: 0 0.46rem;\r\n    overflow: hidden;\r\n}\r\n.customer_care fieldset {\r\n    display: block;\r\n    -webkit-margin-start: 2px;\r\n    -webkit-margin-end: 2px;\r\n    -webkit-padding-before: 0.35em;\r\n    -webkit-padding-start: 0.75em;\r\n    -webkit-padding-end: 0.75em;\r\n    -webkit-padding-after: 0.625em;\r\n    min-width: -webkit-min-content;\r\n    border-top: 2px groove #eeeeee;\r\n}\r\n.customer_care legend{\r\n    padding: 0 0.15rem;\r\n    font-size: 0.22rem;\r\n    color: #555555;\r\n    font-weight: bold;\r\n    text-align: center;\r\n}\r\n.customer_care_grid{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.customer_care_cell{\r\n    width: 3.28rem;\r\n    overflow: hidden;\r\n    text-align: center;\r\n    padding:0 0.1rem 0.3rem 0.1rem;\r\n}\r\n.customer_care_cell h4{\r\n    color: #555555;\r\n    font-size: 0.18rem;\r\n    font-weight: bolder;\r\n    margin-bottom: 0.1rem;\r\n}\r\n.customer_care_cell p{\r\n    color:#777777;\r\n    font-size: 0.16rem;\r\n    line-height: 0.3rem;\r\n}\r\n.customer_care_cell img{\r\n    display: inline-block;\r\n    width: 0.48rem;\r\n    height: 0.48rem;\r\n    margin:0.2rem 0;\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 241 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(242);
+	var content = __webpack_require__(246);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(231)(content, {});
@@ -26882,96 +26990,15 @@
 	}
 
 /***/ },
-/* 242 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(230)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".wrap{\r\n    background-color: #ffffff;\r\n    width: 11.4rem;\r\n    overflow: hidden;\r\n    margin:0 auto;\r\n}\r\n.details{\r\n    width: 10.48rem;\r\n    padding: 0.37rem 0.46rem 0.56rem 0.46rem;\r\n    overflow: hidden;\r\n}\r\n.show_img{\r\n    padding: 0.3rem 0 0 2rem;\r\n    width: 3.24rem;\r\n    overflow: hidden;\r\n    text-align: center;\r\n}\r\n.text_info{\r\n    width: 3rem;\r\n    overflow: hidden;\r\n    text-align: left;\r\n    color: #555555;\r\n}\r\n.imgDetails_box{\r\n    width: 2rem;\r\n    position:relative;\r\n}\r\n.imgDetails_box img{\r\n    cursor: pointer;\r\n    width: 2rem;\r\n}\r\n.magnify_area{\r\n    display: none;\r\n    position: absolute;\r\n    top:1.5rem;\r\n    left: 1rem;\r\n    width: 1rem;\r\n    height: 1rem;\r\n    background:rgba(255,250,250,0.6);\r\n    z-index: 10;\r\n}\r\n.magnify_show{\r\n    position: absolute;\r\n    top: 1.7rem;\r\n    left: 6rem;\r\n    width: 2.55rem;\r\n    height: 2.2rem;\r\n    background-size:5.1rem 6.5rem ;\r\n    background: url(\"/pc/images/ziiiro-celeste-watch-black-mono-blue-side-510x650.jpg\") no-repeat;\r\n    display: none;\r\n    z-index: 10;\r\n}\r\n/*.magnify_show1{*/\r\n    /*position: absolute;*/\r\n    /*top: 5rem;*/\r\n    /*left: 6rem;*/\r\n    /*width: 2.55rem;*/\r\n    /*height: 2.17rem;*/\r\n    /*background-size:5.1rem 6.5rem ;*/\r\n    /*background: url(\"../images/ziiiro-celeste-watch-black-mono-blue-side-510x650.jpg\") no-repeat;*/\r\n    /*z-index: 10;*/\r\n/*}*/\r\n.text_info h1{\r\n    line-height: 0.6rem;\r\n    font-weight: bold;\r\n    font-size: 0.20rem;\r\n}\r\n.text_info h4{\r\n    display: inline-block;\r\n    margin-bottom: 0.15rem;\r\n    color: #000000;\r\n    font-weight: bolder;\r\n    font-size: 0.18rem;\r\n}\r\n.text_info p{\r\n    line-height: 0.3rem;\r\n    font-size: 0.16rem;\r\n}\r\n.text_info button{\r\n    display: block;\r\n    margin: 0.26rem 0 0.35rem 0;\r\n    cursor: pointer;\r\n    background-color: #02b8e5;\r\n    width: 1.5rem;\r\n    height: 0.41rem;\r\n    color: #ffffff;\r\n    font-size: 0.18rem;\r\n    border-radius: 0.03rem;\r\n}\r\n.text_info span{\r\n    display: block;\r\n    line-height: 0.28rem;\r\n    height: 0.28rem;\r\n    width: 100%;\r\n    font-size: 0.14rem;\r\n    color: #555555;\r\n    border-top: 0.01rem dashed #b3b3b3;\r\n}\r\n.text_info a{\r\n    color: #02b8e5;\r\n}\r\n.row{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.row_border{\r\n    padding-bottom: 0.3rem;\r\n    border-bottom: 0.01rem solid #b3b3b3;\r\n}\r\n.details_nav{\r\n    display: block;\r\n    height: 1rem;\r\n    line-height: 0.1rem;\r\n    text-align: center;\r\n}\r\n.details_nav span{\r\n    margin-top: 0.4rem;\r\n    display: inline-block;\r\n    height: 0.3rem;\r\n    padding: 0 0.2rem;\r\n    overflow: hidden;\r\n    border-left: 0.01rem solid #b3b3b3;\r\n}\r\n.details_nav span:nth-of-type(1){\r\n    border-left:none;\r\n}\r\n.details_nav .details_nav_active{\r\n    background-color: #02b8e5;\r\n    color: #ffffff;\r\n}\r\n.details_nav a{\r\n    display: block;\r\n    height: 0.3rem;\r\n    line-height: 0.3rem;\r\n    padding: 0 0.2rem;\r\n    font-size: 0.14rem;\r\n    font-weight: bold;\r\n    color: #555555;\r\n    border-radius: 0.15rem;\r\n}\r\n.product_features fieldset {\r\n    display: block;\r\n    -webkit-margin-start: 2px;\r\n    -webkit-margin-end: 2px;\r\n    -webkit-padding-before: 0.35em;\r\n    -webkit-padding-start: 0.75em;\r\n    -webkit-padding-end: 0.75em;\r\n    -webkit-padding-after: 0.625em;\r\n    min-width: -webkit-min-content;\r\n    border-top: 2px groove #eeeeee;\r\n}\r\n.product_features legend{\r\n    padding: 0 0.15rem;\r\n    font-size: 0.22rem;\r\n    color: #555555;\r\n    font-weight: bold;\r\n    text-align: center;\r\n}\r\n.product_features_cell{\r\n    padding: 0 0.09rem;\r\n    width: 3.3rem;\r\n    text-align: center;\r\n}\r\n.product_features_cell h3{\r\n    font-size: 0.2rem;\r\n    font-weight: bold;\r\n    line-height: 0.6rem;\r\n}\r\n.product_features_cell p{\r\n    font-size: 0.16rem;\r\n    line-height: 0.3rem;\r\n}\r\n.product_features_cell img{\r\n    width: 0.6rem;\r\n    height: 0.6rem;\r\n}\r\n.useMethod img{\r\n    display: block;\r\n    margin-bottom: 0.3rem;\r\n    width: 10.4rem;\r\n}\r\n.booklet h2{\r\n    font-weight: normal;\r\n    line-height: 0.6rem;\r\n    font-size: 0.16rem;\r\n}\r\n.booklet a{\r\n    color: #02b8e5;\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 243 */,
-/* 244 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(245);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(231)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./order.css", function() {
-				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./order.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 245 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(230)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".wrap{\r\n    background-color: #ffffff;\r\n    width: 11.4rem;\r\n    overflow: hidden;\r\n    margin:0 auto;\r\n}\r\n.order{\r\n    width: 10.48rem;\r\n    padding: 0.37rem 0.46rem 0.56rem 0.46rem;\r\n    overflow: hidden;\r\n}\r\n.order h1{\r\n    font-weight: bold;\r\n    font-size: 0.24rem;\r\n    color: #555555;\r\n    margin-bottom: 0.5rem;\r\n}\r\n.order_left{\r\n    width: 6.58rem;\r\n    padding-right: 0.3rem;\r\n    padding-bottom: 0.5rem;\r\n    overflow: hidden;\r\n    border-right: 0.01rem solid #e4e4e4;\r\n}\r\n.order_left table,.order_right table{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.order_left_title,.order_right_title{\r\n    width: 100%;\r\n    border-bottom: 0.03rem solid #dddddd;\r\n    font-size: 0.14rem;\r\n    color: #555555;\r\n    font-weight: bold;\r\n    line-height: 0.3rem;\r\n}\r\n.order_left_grid{\r\n    overflow: hidden;\r\n    vertical-align: middle;\r\n    text-align: center;\r\n    width: 0.98rem;\r\n    border-bottom: 0.01rem solid #e4e4e4;\r\n}\r\n.order_left_grid td{\r\n    height: 100%;\r\n}\r\n.product{\r\n    width: 3.33rem;\r\n}\r\n.product span{\r\n    display: inline-block;\r\n    border: 0.03rem solid #dddddd;\r\n    width: 0.19rem;\r\n    height: 0.19rem;\r\n    line-height: 0.19rem;\r\n    text-align: center;\r\n    border-radius: 50%;\r\n    font-size: 0.16rem;\r\n    font-weight: bold;\r\n    color: #dddddd;\r\n    margin-right: 0.2rem;\r\n}\r\n.product img{\r\n    width: 0.98rem;\r\n    display: inline-block;\r\n    margin-right: 0.35rem;\r\n}\r\n.product p{\r\n    display: inline-block;\r\n    font-size: 0.16rem;\r\n    color: #02beeb;\r\n    width: 1.4rem;\r\n}\r\n.price p{\r\n    display: inline-block;\r\n    font-size: 0.16rem;\r\n    color: #555555;\r\n}\r\n.quantity span{\r\n    float: left;\r\n    border: 0.01rem solid #b1b1b1;\r\n    border-right: none;\r\n    border-left: none;\r\n    display: inline-block;\r\n    text-align: center;\r\n    width: 0.35rem;\r\n    height: 0.4rem;\r\n    line-height: 0.4rem;\r\n}\r\n.quantity button{\r\n    outline: none;\r\n    cursor: pointer;\r\n    float: left;\r\n    display: inline-block;\r\n    background-color: #ffffff;\r\n    width: 0.30rem;\r\n    height: 0.42rem;\r\n    border: 0.01rem solid #b1b1b1;\r\n}\r\n.total p{\r\n    font-weight: bold;\r\n    display: inline-block;\r\n    font-size: 0.16rem;\r\n    color: #555555;\r\n}\r\n.order_right{\r\n    width: 3.3rem;\r\n    overflow: hidden;\r\n}\r\n.subtotal{\r\n    font-size: 0.14rem;\r\n    line-height: 0.3rem;\r\n    border-bottom: 0.01rem solid #e4e4e4;\r\n}\r\n.subtotal td:nth-of-type(1){\r\n    font-weight: bold;\r\n}\r\n.subtotal td:nth-of-type(2){\r\n    text-align: right;\r\n}\r\n.shipping td:nth-of-type(1){\r\n    font-weight: bold;\r\n    vertical-align: bottom;\r\n    font-size: 0.14rem;\r\n}\r\n.shipping td:nth-of-type(2){\r\n    text-align: right;\r\n}\r\n.shipping div{\r\n    padding-top:0.1rem ;\r\n    line-height: 0.2rem;\r\n    height: 0.2rem;\r\n}\r\n.shipping .blank{\r\n    padding-top:0;\r\n    height: 0.1rem;\r\n}\r\n.shipping{\r\n    width: 100%;\r\n    overflow: hidden;\r\n    border-bottom: 0.01rem solid #e4e4e4;\r\n}\r\n.final_price{\r\n    height: 0.3rem;\r\n    font-size: 0.14rem;\r\n    font-weight: bold;\r\n    width: 100%;\r\n    overflow: hidden;\r\n    border-bottom: 0.03rem solid #e4e4e4;\r\n}\r\n.final_price td:nth-of-type(2){\r\n    text-align: right;\r\n}\r\n.pay_bth{\r\n    display: block;\r\n    margin-top: 0.2rem;\r\n    width: 100%;\r\n    height: 0.41rem;\r\n    background-color: #ff0055;\r\n    color: #ffffff;\r\n    font-size: 0.18rem;\r\n    border-radius: 0.03rem;\r\n    cursor: pointer;\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
-
-	// exports
-
-
-/***/ },
 /* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(247);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(231)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./search.css", function() {
-				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./search.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 247 */
-/***/ function(module, exports, __webpack_require__) {
-
 	exports = module.exports = __webpack_require__(230)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".wrap{\r\n    background-color: #ffffff;\r\n    width: 11.4rem;\r\n    overflow: hidden;\r\n    margin:0 auto;\r\n}\r\n.search{\r\n    width: 10.48rem;\r\n    padding: 0.37rem 0.46rem 0.56rem 0.46rem;\r\n    overflow: hidden;\r\n}\r\n.search_input{\r\n    height: 0.33rem;\r\n    width: 100%;\r\n    overflow: hidden;\r\n    margin-bottom: 0.2rem;\r\n}\r\n.search_input p{\r\n    margin-right:0.2rem;\r\n    line-height: 0.33rem;\r\n    font-size: 0.16rem;\r\n    display: block;\r\n    float: right;\r\n}\r\n.search_input_area input{\r\n    outline: none;\r\n    width: 1.6rem;\r\n    padding-left: 0.1rem;\r\n    display: inline-block;\r\n    float: right;\r\n    height: 0.31rem;\r\n    border: 0.01rem solid #555555;\r\n}\r\n.search_input_area button{\r\n    outline: none;\r\n    cursor: pointer;\r\n    width: 0.6rem;\r\n    display: inline-block;\r\n    float: right;\r\n    background-color: #ff0055;\r\n    height: 0.33rem;\r\n    color: #ffffff;\r\n    font-size: 0.14rem;\r\n    font-weight: bolder;\r\n}\r\n.side_nav{\r\n    width: 2.4rem;\r\n    overflow: hidden;\r\n}\r\n.side_nav h1{\r\n    display: block;\r\n    font-size: 0.14rem;\r\n    color: #555555;\r\n    line-height: 0.3rem;\r\n    border-bottom:0.03rem solid #e4e4e4;\r\n    margin-bottom: 0.2rem;\r\n}\r\n.side_nav p{\r\n    display: block;\r\n    font-size: 0.14rem;\r\n    color: #555555;\r\n    line-height: 0.4rem;\r\n    border-bottom:0.01rem solid #e4e4e4;\r\n}\r\n.side_nav p:hover{\r\n    text-decoration: underline;\r\n    color: #393939;\r\n}\r\n.show_result{\r\n    width: 7.5rem;\r\n    overflow: hidden;\r\n    margin-left: 0.5rem;\r\n}\r\n.search_show_product_box{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.search_show_product_box_cell{\r\n    width: 1.8rem;\r\n    overflow: hidden;\r\n    margin:0 0.03rem;\r\n}\r\n.search_img_box{\r\n    width: 1.8rem;\r\n    height: 3rem;\r\n    overflow: hidden;\r\n    position: relative;\r\n    cursor: pointer;\r\n}\r\n.search_hide,.search_show{\r\n    width: 1.8rem;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n}\r\n.search_hide{\r\n    transition: opacity 0.2s;\r\n    opacity: 0;\r\n}\r\n.search_show{\r\n    transition: opacity 0.2s;\r\n    opacity: 1;\r\n}\r\n.search_img_box:hover .search_hide{\r\n    opacity: 1;\r\n}\r\n.search_img_box:hover .search_show{\r\n    opacity: 0;\r\n}\r\n.search_img_box:hover .cart_icon{\r\n    bottom: 0.2rem;\r\n}\r\n.search_text_box{\r\n    width: 100%;\r\n    overflow: hidden;\r\n    text-align: center;\r\n    line-height: 0.3rem;\r\n}\r\n.search_text_box h5{\r\n    font-size: 0.14rem;\r\n    color: #999999;\r\n    font-weight: bold;\r\n}\r\n.search_text_box p{\r\n    font-size: 0.16rem;\r\n    color: #000000;\r\n}\r\n.search_text_box span{\r\n    color: #000000;\r\n    font-size: 0.2rem;\r\n    font-weight: bold;\r\n}\r\n.search_img_box .cart_icon{\r\n    transition: bottom 0.2s;\r\n    width: 0.22rem;\r\n    height: 0.26rem;\r\n    margin:0 0 0.15rem 0.05rem;\r\n    position: absolute;\r\n    bottom: -0.41rem;\r\n    left: 0;\r\n}\r\n.cart_icon{\r\n    overflow: hidden;\r\n    position: relative;\r\n}\r\n.search_img_box .cart_icon strong{\r\n    font-weight: bold;\r\n    font-size: 0.2rem;\r\n    line-height: 0.16rem;\r\n    min-width: 0.18rem;\r\n    min-height: 0.15rem;\r\n}\r\n.cart_icon strong{\r\n    position: absolute;\r\n    bottom: 0;\r\n    color: #02b8e5;\r\n    border: 0.02rem solid #02b8e5;\r\n    display: inline-block;\r\n    text-align: center;\r\n}\r\n.cart_icon strong:hover{\r\n    color: #ffffff;\r\n    background-color: #02b8e5;\r\n}\r\n.search_img_box .cart_icon .cart_icon_handle{\r\n    border-top-left-radius: 0.99rem;\r\n    border-top-right-radius: 0.99rem;\r\n    height: 0.04rem;\r\n    width: 0.06rem;\r\n    bottom: 0.19rem;\r\n    left: 0.06rem;\r\n}\r\n.cart_icon .cart_icon_handle{\r\n    border: 0.02rem solid #02b8e5;\r\n    border-bottom: none;\r\n    position: absolute;\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
+	exports.push([module.id, ".wrap{\r\n    background-color: #ffffff;\r\n    width: 11.4rem;\r\n    overflow: hidden;\r\n    margin:0 auto;\r\n}\r\n.details{\r\n    width: 10.48rem;\r\n    padding: 0.37rem 0.46rem 0.56rem 0.46rem;\r\n    overflow: hidden;\r\n}\r\n.show_img{\r\n    padding: 0.3rem 0 0 2rem;\r\n    width: 3.24rem;\r\n    overflow: hidden;\r\n    text-align: center;\r\n}\r\n.text_info{\r\n    width: 3rem;\r\n    overflow: hidden;\r\n    text-align: left;\r\n    color: #555555;\r\n}\r\n.imgDetails_box{\r\n    width: 2rem;\r\n    position:relative;\r\n}\r\n.imgDetails_box img{\r\n    cursor: pointer;\r\n    width: 2rem;\r\n}\r\n.magnify_area{\r\n    display: none;\r\n    position: absolute;\r\n    top:1.5rem;\r\n    left: 1rem;\r\n    width: 1rem;\r\n    height: 1rem;\r\n    background:rgba(255,250,250,0.6);\r\n    z-index: 10;\r\n}\r\n.magnify_show{\r\n    position: absolute;\r\n    top: 1.7rem;\r\n    left: 6rem;\r\n    width: 2.55rem;\r\n    height: 2.2rem;\r\n    background-size:5.1rem 6.5rem ;\r\n    display: none;\r\n    z-index: 10;\r\n}\r\n/*.magnify_show1{*/\r\n    /*position: absolute;*/\r\n    /*top: 5rem;*/\r\n    /*left: 6rem;*/\r\n    /*width: 2.55rem;*/\r\n    /*height: 2.17rem;*/\r\n    /*background-size:5.1rem 6.5rem ;*/\r\n    /*background: url(\"../images/ziiiro-celeste-watch-black-mono-blue-side-510x650.jpg\") no-repeat;*/\r\n    /*z-index: 10;*/\r\n/*}*/\r\n.text_info h1{\r\n    line-height: 0.6rem;\r\n    font-weight: bold;\r\n    font-size: 0.20rem;\r\n}\r\n.text_info h4{\r\n    display: inline-block;\r\n    margin-bottom: 0.15rem;\r\n    color: #000000;\r\n    font-weight: bolder;\r\n    font-size: 0.18rem;\r\n}\r\n.text_info p{\r\n    line-height: 0.3rem;\r\n    font-size: 0.16rem;\r\n}\r\n.text_info button{\r\n    display: block;\r\n    margin: 0.26rem 0 0.35rem 0;\r\n    cursor: pointer;\r\n    background-color: #02b8e5;\r\n    width: 1.5rem;\r\n    height: 0.41rem;\r\n    color: #ffffff;\r\n    font-size: 0.18rem;\r\n    border-radius: 0.03rem;\r\n}\r\n.text_info span{\r\n    display: block;\r\n    line-height: 0.28rem;\r\n    height: 0.28rem;\r\n    width: 100%;\r\n    font-size: 0.14rem;\r\n    color: #555555;\r\n    border-top: 0.01rem dashed #b3b3b3;\r\n}\r\n.text_info a{\r\n    color: #02b8e5;\r\n}\r\n.row{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.row_border{\r\n    padding-bottom: 0.3rem;\r\n    border-bottom: 0.01rem solid #b3b3b3;\r\n}\r\n.details_nav{\r\n    display: block;\r\n    height: 1rem;\r\n    line-height: 0.1rem;\r\n    text-align: center;\r\n}\r\n.details_nav span{\r\n    margin-top: 0.4rem;\r\n    display: inline-block;\r\n    height: 0.3rem;\r\n    padding: 0 0.2rem;\r\n    overflow: hidden;\r\n    border-left: 0.01rem solid #b3b3b3;\r\n}\r\n.details_nav span:nth-of-type(1){\r\n    border-left:none;\r\n}\r\n.details_nav .details_nav_active{\r\n    background-color: #02b8e5;\r\n    color: #ffffff;\r\n}\r\n.details_nav a{\r\n    display: block;\r\n    height: 0.3rem;\r\n    line-height: 0.3rem;\r\n    padding: 0 0.2rem;\r\n    font-size: 0.14rem;\r\n    font-weight: bold;\r\n    color: #555555;\r\n    border-radius: 0.15rem;\r\n}\r\n.product_features fieldset {\r\n    display: block;\r\n    -webkit-margin-start: 2px;\r\n    -webkit-margin-end: 2px;\r\n    -webkit-padding-before: 0.35em;\r\n    -webkit-padding-start: 0.75em;\r\n    -webkit-padding-end: 0.75em;\r\n    -webkit-padding-after: 0.625em;\r\n    min-width: -webkit-min-content;\r\n    border-top: 2px groove #eeeeee;\r\n}\r\n.product_features legend{\r\n    padding: 0 0.15rem;\r\n    font-size: 0.22rem;\r\n    color: #555555;\r\n    font-weight: bold;\r\n    text-align: center;\r\n}\r\n.product_features_cell{\r\n    padding: 0 0.09rem;\r\n    width: 3.3rem;\r\n    text-align: center;\r\n}\r\n.product_features_cell h3{\r\n    font-size: 0.2rem;\r\n    font-weight: bold;\r\n    line-height: 0.6rem;\r\n}\r\n.product_features_cell p{\r\n    font-size: 0.16rem;\r\n    line-height: 0.3rem;\r\n}\r\n.product_features_cell img{\r\n    width: 0.6rem;\r\n    height: 0.6rem;\r\n}\r\n.useMethod img{\r\n    display: block;\r\n    margin-bottom: 0.3rem;\r\n    width: 10.4rem;\r\n}\r\n.booklet h2{\r\n    font-weight: normal;\r\n    line-height: 0.6rem;\r\n    font-size: 0.16rem;\r\n}\r\n.booklet a{\r\n    color: #02b8e5;\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
 
 	// exports
 
