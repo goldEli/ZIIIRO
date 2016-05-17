@@ -26167,7 +26167,6 @@
 	        var index=0;
 	        var timer;
 	        var dots;
-	        $(function(){
 	            //向右或者向左轮播
 	            $(this.refs.leftBtn).click(function(){
 	                stopMove();
@@ -26195,8 +26194,7 @@
 	                $(arr[$(this).index()]).css({'left':0});
 	                index=$(this).index();
 	                startMove();
-	            })
-	        }.bind(this));
+	            });
 	        //自动向右播放图片
 	        startMove();
 	        function startMove(){

@@ -25603,11 +25603,138 @@
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
 	var Home=React.createClass({displayName: "Home",
+	    componentDidMount:function(){
+	        var arr=[this.refs.banner_box,this.refs.banner_box1,this.
+	            refs.banner_box2,this.refs.banner_box3,
+	            this.refs.banner_box4];
+	        var index=0;
+	        var timer;
+	        var dots;
+	        //向右或者向左轮播
+	        $(this.refs.leftBtn).click(function(){
+	            stopMove();
+	            moveImage(false);
+	            startMove();
+	        });
+	        $(this.refs.rightBtn).click(function(){
+	            stopMove();
+	            moveImage(true);
+	            startMove();
+	        });
+	        //轮播圆点按钮isSelected
+	        var str=[];
+	        for(var i=0;i<arr.length;++i){
+	            str+='<li></li>';
+	        }
+	        $(this.refs.banner_pageDots).html(str);
+	        dots=$(this.refs.banner_pageDots).find('li');
+	        $(dots[0]).attr('class','isSelected');
+	        $(dots).click(function(){
+	            stopMove();
+	            $(dots).attr('class','');
+	            $(this).attr('class','isSelected');
+	            $(arr).css({'left':'-7.02rem'});
+	            $(arr[$(this).index()]).css({'left':0});
+	            index=$(this).index();
+	            startMove();
+	        });
+	        //自动向右播放图片
+	        startMove();
+	        function startMove(){
+	            timer=setInterval(function(){
+	                moveImage(true)
+	            },3000);
+	        }
+	        //停止动画
+	        function stopMove(){
+	            clearInterval(timer);
+	            $(arr).finish();
+	        }
+	        function moveImage(direction){
+	            var d=direction ? 1 : -1;
+	            for(var i=0;i<arr.length;++i){
+	                if($(arr[i]).position().left==0){
+	                    $(arr[i]).animate({left:7.02*d+'rem'});
+	                }
+	            }
+	            if(direction){
+	                ++index;
+	                if(index==arr.length){
+	                    index=0;
+	                }
+	            }  else{
+	                --index;
+	                if(index==-1){
+	                    index=arr.length-1;
+	                }
+	            }
+	            $(arr[index]).css({left:-7.02*d+'rem'});
+	            $(arr[index]).animate({
+	                left:0
+	            });
+	            $(dots).attr('class','');
+	            $(dots[index]).attr('class','isSelected');
+	        }
+	    },
 	    render:function(){
 	        return(
 	            React.createElement("div", {className: "home"}, 
 	                React.createElement("div", {className: "banner"}, 
-	                    React.createElement("img", {src: "images/banner-eon.jpg", alt: "banner"})
+	                    React.createElement("div", {className: "banner_box", ref: "banner_box"}, 
+	                        React.createElement("img", {src: "images/banner-eon.jpg", alt: "banner"}), 
+	                        React.createElement("div", {className: "banner_info"}, 
+	                            React.createElement("h1", null, "EON"), 
+	                            React.createElement("h4", null, "New! 3 Colors,", React.createElement("br", null), "interchangable with", React.createElement("br", null), "tansparent bracelet"), 
+	                            React.createElement("a", {href: "javascript:"}, "SHOP NOW")
+	                        )
+	                    ), 
+
+	                    React.createElement("div", {className: "banner_box1", ref: "banner_box1"}, 
+	                        React.createElement("img", {src: "images/banner-orbit.jpg", alt: "banner"}), 
+	                        React.createElement("div", {className: "banner_info1"}, 
+	                            React.createElement("h1", null, "ORBIT"), 
+	                            React.createElement("h4", null, "Available in 4 colors"), 
+	                            React.createElement("a", {href: "javascript:"}, "SHOP NOW")
+	                        )
+	                    ), 
+
+	                    React.createElement("div", {className: "banner_box2", ref: "banner_box2"}, 
+	                        React.createElement("img", {src: "images/banner-eclipse-steel.jpg", alt: "banner"}), 
+	                        React.createElement("div", {className: "banner_info2"}, 
+	                            React.createElement("h1", null, "ECLIPSE STEEL"), 
+	                            React.createElement("h4", null, "illuminated by Super-Luminova"), 
+	                            React.createElement("a", {href: "javascript:"}, "SHOP NOW")
+	                        )
+	                    ), 
+
+	                    React.createElement("div", {className: "banner_box3", ref: "banner_box3"}, 
+	                        React.createElement("img", {src: "images/banner-mercury-5.jpg", alt: "banner"}), 
+	                        React.createElement("div", {className: "banner_info3"}, 
+	                            React.createElement("h1", null, "MERCURY"), 
+	                            React.createElement("h4", null, "Our watches are unisex"), 
+	                            React.createElement("a", {href: "javascript:"}, "SHOP NOW")
+	                        )
+	                    ), 
+
+	                    React.createElement("div", {className: "banner_box4", ref: "banner_box4"}, 
+	                        React.createElement("img", {src: "images/banner-titan-1.jpg", alt: "banner"}), 
+	                        React.createElement("div", {className: "banner_info4"}, 
+	                            React.createElement("h1", null, "TITAN"), 
+	                            React.createElement("h4", null, "Super-light aluminium"), 
+	                            React.createElement("a", {href: "javascript:"}, "SHOP NOW")
+	                        )
+	                    ), 
+
+	                    React.createElement("div", {className: "banner_btn"}, 
+	                        React.createElement("div", {className: "banner_btn_left", ref: "leftBtn"}, 
+	                            React.createElement("a", {href: "javascript:"}, React.createElement("span", null, "<"))
+	                        ), 
+	                        React.createElement("div", {className: "banner_btn_right", ref: "rightBtn"}, 
+	                            React.createElement("a", {href: "javascript:"}, React.createElement("span", null, ">"))
+	                        )
+	                    ), 
+	                    React.createElement("ol", {className: "banner_pageDots", ref: "banner_pageDots"}
+	                    )
 	                ), 
 	                React.createElement("div", {className: "show_product"}, 
 	                    React.createElement("h1", null, "Unique. Minimal. Aesthetic."), 

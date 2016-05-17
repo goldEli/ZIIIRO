@@ -1,3 +1,4 @@
+img{border: none}
 .banner{
 
     width: 7.02rem;
@@ -6,6 +7,325 @@
 .banner img{
     width: 7.02rem;
 }
+.home .banner{
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.banner{
+    height: 4rem;
+}
+.banner_box{
+    position: absolute;
+    top:0;
+    left: 0;
+}
+.banner_box1,
+.banner_box2,
+.banner_box3,
+.banner_box4
+{
+    position: absolute;
+    top:0;
+    left: 7.02rem;
+}
+.banner_box{
+    width: 100%;
+    overflow: hidden;
+}
+.banner_box img{
+    width: 7.02rem;
+}
+.banner_info{
+    display: none;
+    width: 3.24rem;
+    height: 2.58rem;
+    position: absolute;
+    left: 1.2rem;
+    bottom: 2rem;
+}
+.banner_info h1{
+    font-size: 0.48rem;
+    color: #ebebeb;
+    display: block;
+    margin: 0.15rem 0;
+}
+.banner_info h4{
+    line-height: 0.3rem;
+    font-size: 0.22rem;
+    color: #ebebeb;
+    display: block;
+    margin: 0.15rem 0;
+}
+.banner_info a{
+    margin: 0.15rem 0;
+    display: block;
+    width: 1.37rem;
+    height: 0.47rem;
+    border-radius: 0.02rem;
+    background-color: #ffffff;
+    color: #888888;
+    font-size: 0.20rem;
+    line-height: 0.47rem;
+    text-align: center;
+}
+/*------------1*/
+.banner_box1{
+    width: 100%;
+    overflow: hidden;
+}
+.banner_box1 img{
+    width: 11.40rem;
+    height: 6.50rem;
+}
+.banner_info1{
+    display: none;
+    width: 3.24rem;
+    height: 2.58rem;
+    position: absolute;
+    right: 0;
+    top: 1rem;
+}
+.banner_info1 h1{
+    font-size: 0.48rem;
+    color: #555555;
+    display: block;
+    margin: 0.15rem 0;
+}
+.banner_info1 h4{
+    line-height: 0.3rem;
+    font-size: 0.22rem;
+    color: #555555;
+    display: block;
+    margin: 0.15rem 0;
+}
+.banner_info1 a{
+    margin: 0.15rem 0;
+    display: block;
+    width: 1.37rem;
+    height: 0.47rem;
+    border-radius: 0.02rem;
+    background-color: #ffffff;
+    color: #888888;
+    font-size: 0.20rem;
+    line-height: 0.47rem;
+    text-align: center;
+}
+/*----------2*/
+.banner_box2{
+    width: 100%;
+    overflow: hidden;
+}
+.banner_box2 img{
+    width: 11.40rem;
+    height: 6.50rem;
+}
+.banner_info2{
+    display: none;
+    width: 3.24rem;
+    height: 2.58rem;
+    position: absolute;
+    left: 1.2rem;
+    bottom: 1rem;
+}
+.banner_info2 h1{
+    font-size: 0.48rem;
+    color: #ebebeb;
+    display: block;
+    margin: 0.15rem 0;
+}
+.banner_info2 h4{
+    line-height: 0.3rem;
+    font-size: 0.22rem;
+    color: #ebebeb;
+    display: block;
+    margin: 0.15rem 0;
+}
+.banner_info2 a{
+    margin: 0.15rem 0;
+    display: block;
+    width: 1.37rem;
+    height: 0.47rem;
+    border-radius: 0.02rem;
+    background-color: #ffffff;
+    color: #888888;
+    font-size: 0.20rem;
+    line-height: 0.47rem;
+    text-align: center;
+}
+/*-----------3*/
+.banner_box3{
+    width: 100%;
+    overflow: hidden;
+}
+.banner_box3 img{
+    width: 11.40rem;
+    height: 6.50rem;
+}
+.banner_info3{
+    display: none;
+    width: 3.24rem;
+    height: 2.58rem;
+    position: absolute;
+    right: 1.2rem;
+    top: 0.8rem;
+}
+.banner_info3 h1{
+    font-size: 0.48rem;
+    color: #ebebeb;
+    display: block;
+    margin: 0.15rem 0;
+}
+.banner_info3 h4{
+    line-height: 0.3rem;
+    font-size: 0.22rem;
+    color: #ebebeb;
+    display: block;
+    margin: 0.15rem 0;
+}
+.banner_info3 a{
+    margin: 0.15rem 0;
+    display: block;
+    width: 1.37rem;
+    height: 0.47rem;
+    border-radius: 0.02rem;
+    background-color: #ffffff;
+    color: #888888;
+    font-size: 0.20rem;
+    line-height: 0.47rem;
+    text-align: center;
+}
+/*---------------4*/
+.banner_box4{
+    width: 100%;
+    overflow: hidden;
+}
+.banner_box4 img{
+    width: 11.40rem;
+    height: 6.50rem;
+}
+.banner_info4{
+    display: none;
+    width: 3.24rem;
+    height: 2.58rem;
+    position: absolute;
+    right: 1.2rem;
+    bottom: 0.8rem;
+}
+.banner_info4 h1{
+    font-size: 0.48rem;
+    color: #ebebeb;
+    display: block;
+    margin: 0.15rem 0;
+}
+.banner_info4 h4{
+    line-height: 0.3rem;
+    font-size: 0.22rem;
+    color: #ebebeb;
+    display: block;
+    margin: 0.15rem 0;
+}
+.banner_info4 a{
+    margin: 0.15rem 0;
+    display: block;
+    width: 1.37rem;
+    height: 0.47rem;
+    border-radius: 0.02rem;
+    background-color: #ffffff;
+    color: #888888;
+    font-size: 0.20rem;
+    line-height: 0.47rem;
+    text-align: center;
+}
+.banner_btn_left,.banner_btn_right{
+    cursor: pointer;
+    transition: opacity 0.5s,right 0.5s,left 0.5s;
+    position: absolute;
+    width: 0.8rem;
+    height: 4rem;
+    display: table;
+    top: 0;
+    opacity:0;
+}
+.banner_btn_left:hover{
+    opacity:0.4;
+    left: 0;
+}
+.banner_btn_right:hover{
+    opacity:0.4;
+    right: 0;
+}
+.banner_btn_left{
+    left: -0.2rem;
+}
+.banner_btn_left a{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+.banner_btn_left span{
+    transition: background-color 0.5s,opacity 0.5s;
+    background-color: transparent;
+    margin-left:0.3rem;
+    color: #ffffff;
+    font-size: 0.3rem;
+    line-height: 0.36rem;
+    display: block;
+    width: 0.36rem;
+    height: 0.36rem;
+    border-radius: 100%;
+    border: 3px solid #ffffff;
+}
+.banner_btn_right{
+    right: -0.2rem;
+}
+.banner_btn_right a{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+.banner_btn_right span{
+    margin-right:0.3rem;
+    color: #ffffff;
+    font-size: 0.3rem;
+    line-height: 0.36rem;
+    display: block;
+    width: 0.36rem;
+    height: 0.36rem;
+    border-radius: 100%;
+    border: 3px solid #ffffff;
+}
+.banner_pageDots{
+    position: absolute;
+    width: 100%;
+    bottom: 0.2rem;
+    left: 0;
+    right: 0;
+    list-style: none;
+    text-align: center;
+}
+.banner_pageDots li{
+    display: inline-block;
+    width: 0.08rem;
+    height: 0.08rem;
+    margin: 0 0.03rem;
+    border: 0.03rem solid #ffffff;
+    border-radius: 50%;
+    opacity: 0.4;
+    cursor: pointer;
+}
+.banner_pageDots .isSelected{
+    width: 0.14rem;
+    height: 0.14rem;
+    border:none;
+    opacity: 1;
+    background-color: #ffffff;
+}
+/*.show_product{*/
+    /*width: 10.48rem;*/
+    /*padding: 0.4rem 0.46rem;*/
+    /*overflow: hidden;*/
+/*}*/
 .show_product{
     padding-top: 0.75rem;
     width: 100%;
