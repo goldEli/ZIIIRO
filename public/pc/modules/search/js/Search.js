@@ -17,8 +17,6 @@ var Search=React.createClass({
             success:function(data){
                 this.setState({data:data});
             }.bind(this)
-
-
         });
     },
     render:function(){

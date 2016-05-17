@@ -5,7 +5,6 @@ var React=require('react');
 var ShowItem=React.createClass({
     render:function(){
         var data=this.props.data;
-        console.info(data);
         return(
             <div className="show_product_box_cell fl">
                 <div className="img_box">

@@ -83,7 +83,7 @@ var Home=React.createClass({
             type:'post',
             url:'/hot/showAllProduct',
             success:function(data){
-                console.info(data);
+
             }
         });
         return (

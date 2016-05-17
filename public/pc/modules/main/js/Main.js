@@ -4,7 +4,35 @@
 var React=require('react');
 var Link = require("react-router").Link;
 var Main=React.createClass({
+    getInitialState: function(){
+        return {
+            sessionName: []
+        };
+    },
+    getSession:function(){
+        $.ajax({
+            type:'post',
+            url:'/users/getSession',
+            success:function(data){
+                this.setState({
+                    sessionName:data
+                })
+            }.bind(this)
+        });
+    },
+    componentWillMount:function(){
+        this.getSession();
+    },
+    componentWillReceiveProps:function(){
+        this.getSession();
+    },
     render:function(){
+        var txt;
+        if(this.state.sessionName){
+            txt=<span><a href="javascript:">{this.state.sessionName}</a></span>
+        }else{
+            txt=<Link to="/login"><span><a href="javascript:">LOGIN</a></span></Link>
+        }
         return(
             <div className="wrap">
                 <div className="header">
@@ -24,7 +52,7 @@ var Main=React.createClass({
                             <span className="cart_icon_handle"></span>
                         </div>
                         <div className="header_right_nav fr">
-                            <Link to="/login"><span><a href="javascript:">LOGIN</a></span></Link>
+                            {txt}
                             <span><a href="javascript:">CART&nbsp;&nbsp;/&nbsp;&nbsp;$87.5</a></span>
                         </div>
                     </div>

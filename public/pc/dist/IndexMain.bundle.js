@@ -25872,7 +25872,7 @@
 	            type:'post',
 	            url:'/hot/showAllProduct',
 	            success:function(data){
-	                console.info(data);
+
 	            }
 	        });
 	        return (
@@ -26008,7 +26008,35 @@
 	var React=__webpack_require__(1);
 	var Link = __webpack_require__(166).Link;
 	var Main=React.createClass({displayName: "Main",
+	    getInitialState: function(){
+	        return {
+	            sessionName: []
+	        };
+	    },
+	    getSession:function(){
+	        $.ajax({
+	            type:'post',
+	            url:'/users/getSession',
+	            success:function(data){
+	                this.setState({
+	                    sessionName:data
+	                })
+	            }.bind(this)
+	        });
+	    },
+	    componentWillMount:function(){
+	        this.getSession();
+	    },
+	    componentWillReceiveProps:function(){
+	        this.getSession();
+	    },
 	    render:function(){
+	        var txt;
+	        if(this.state.sessionName){
+	            txt=React.createElement("span", null, React.createElement("a", {href: "javascript:"}, this.state.sessionName))
+	        }else{
+	            txt=React.createElement(Link, {to: "/login"}, React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "LOGIN")))
+	        }
 	        return(
 	            React.createElement("div", {className: "wrap"}, 
 	                React.createElement("div", {className: "header"}, 
@@ -26028,7 +26056,7 @@
 	                            React.createElement("span", {className: "cart_icon_handle"})
 	                        ), 
 	                        React.createElement("div", {className: "header_right_nav fr"}, 
-	                            React.createElement(Link, {to: "/login"}, React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "LOGIN"))), 
+	                            txt, 
 	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "CART  /  $87.5"))
 	                        )
 	                    )
@@ -26172,8 +26200,6 @@
 	            success:function(data){
 	                this.setState({data:data});
 	            }.bind(this)
-
-
 	        });
 	    },
 	    render:function(){
@@ -26231,7 +26257,6 @@
 	var ShowItem=React.createClass({displayName: "ShowItem",
 	    render:function(){
 	        var data=this.props.data;
-	        console.info(data);
 	        return(
 	            React.createElement("div", {className: "show_product_box_cell fl"}, 
 	                React.createElement("div", {className: "img_box"}, 
