@@ -20,6 +20,7 @@ var Details=require("../modules/details/js/Details").Details;
 ReactDom.render(
     <Router history={hashHistory}>
             <Route path="/" component={Main}>
+                <IndexRoute component={Home}></IndexRoute>
                 <Route path="/home" component={Home}></Route>
                 <Route path="/login" component={Login}></Route>
                 <Route path="/search" component={Search}></Route>

@@ -5,7 +5,6 @@ var React=require('react');
 var HomeHotItem=React.createClass({
     render:function(){
         var data=this.props.dataHot.product;
-        console.info(data.name);
         return(
             <div className="show_product_box_cell fl">
                 <div className="img_box">
