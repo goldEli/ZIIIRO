@@ -33,7 +33,6 @@ var Search=React.createClass({
         }
     },
     componentWillMount:function(){
-        console.info('componentWillMount');
         $.ajax({
             type:'post',
             url:'/product/showAllProduct',

@@ -25997,6 +25997,7 @@
 	 */
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
+	var hashHistory=__webpack_require__(166).hashHistory;
 	var Main=React.createClass({displayName: "Main",
 	    hideSideBar:function(){
 	           $(this.refs.side_bar).css({'left':'-5.2rem'});
@@ -26009,17 +26010,25 @@
 	        $(this.refs.side_bar_background).css({'zIndex':'2'});
 	        $(this.refs.side_bar_background).css({'opacity':'0.6'});
 	    },
+	    toSearch:function(){
+	        this.hideSideBar();
+	        hashHistory.push('/search');
+	    },
+	    toLogin:function(){
+	        this.hideSideBar();
+	        hashHistory.push('/login');
+	    },
 	    render:function(){
 	        return(
 	            React.createElement("div", null, 
 	                React.createElement("div", {className: "wrap"}, 
 	                    React.createElement("div", {className: "side_bar", ref: "side_bar"}, 
-	                        React.createElement(Link, {to: "/search"}, React.createElement("h3", null, "SHOP")), 
-	                        React.createElement(Link, {to: "/details"}, React.createElement("h3", null, "SUPPORT")), 
+	                        React.createElement("h3", {onClick: this.toSearch.bind(this)}, "SHOP"), 
+	                        React.createElement("h3", null, "SUPPORT"), 
 	                        React.createElement("h3", null, "NEWS"), 
 	                        React.createElement("h3", null, "RESELLERS"), 
 	                        React.createElement("h3", null, "ABOUT"), 
-	                        React.createElement(Link, {to: "/login"}, React.createElement("h3", null, "LOGIN"))
+	                        React.createElement("h3", {onClick: this.toLogin.bind(this)}, "LOGIN")
 	                    ), 
 	                    React.createElement("div", {onClick: this.hideSideBar.bind(this), className: "side_bar_background", ref: "side_bar_background"}), 
 	                    React.createElement("div", {className: "header"}, 
@@ -26166,49 +26175,63 @@
 	 */
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
+	var SearchItem=__webpack_require__(234).SearchItem;
 	var Search=React.createClass({displayName: "Search",
+	    getInitialState: function(){
+	        return {
+	            data: [],
+	            searchItems:9
+	        };
+	    },
+	    componentWillMount:function(){
+	        $.ajax({
+	            type:'post',
+	            url:'/product/showAllProduct',
+	            success:function(data){
+	                this.setState({data:data});
+	            }.bind(this)
+	        });
+	    },
+	    search:function(){
+	        console.info(this.refs.searchInput.value);
+	        if(this.refs.searchInput.value){
+	            $.ajax({
+	                type:'post',
+	                url:'/product/search',
+	                data:{
+	                    name:this.refs.searchInput.value,
+	                    price:this.refs.searchInput.value,
+	                    category:this.refs.searchInput.value
+	                },
+	                success:function(data){
+	                    this.setState({
+	                        data:data,
+	                        searchItems:data.length
+	                    })
+	                }.bind(this)
+	            });
+	        }
+	    },
 	    render:function(){
+	        var arr=[];
+	        if(this.state.data.length>0){
+	            arr=this.state.data.map(function(element){
+	                arr=element;
+	                return React.createElement(SearchItem, {data: arr})
+	            });
+	        }
 	        return(
 	            React.createElement("div", {className: "search"}, 
 	                React.createElement("div", {className: "search_input"}, 
 	                    React.createElement("div", {className: "search_input_area fr"}, 
-	                        React.createElement("button", null, "search"), 
-	                        React.createElement("input", {type: "text"})
+	                        React.createElement("button", {onClick: this.search.bind(this)}, "search"), 
+	                        React.createElement("input", {type: "text", ref: "searchInput"})
 	                    ), 
-	                    React.createElement("p", null, "Showing all 66 results")
+	                    React.createElement("p", null, "Showing all ", React.createElement("i", null, this.state.searchItems), " results")
 	                ), 
 	                React.createElement("div", {className: "show_product"}, 
 	                    React.createElement("div", {className: "show_product_box"}, 
-	                        React.createElement("div", {className: "show_product_box_cell fl"}, 
-	                            React.createElement("div", {className: "img_box"}, 
-	                                React.createElement("img", {className: "show", src: "images/ziiiro-celeste-watch-black-mono-front-200x300.jpg", alt: "img"}), 
-	                                React.createElement("img", {className: "hide", src: "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg", alt: "img"}), 
-	                                React.createElement("div", {className: "cart_icon fr"}, 
-	                                    React.createElement("strong", null, "+"), 
-	                                    React.createElement("span", {className: "cart_icon_handle"})
-	                                )
-	                            ), 
-	                            React.createElement("div", {className: "text_box"}, 
-	                                React.createElement("h5", null, "CELESTE"), 
-	                                React.createElement("p", null, "CELESTE Black/Mono"), 
-	                                React.createElement("span", null, "$199.00")
-	                            )
-	                        ), 
-	                        React.createElement("div", {className: "show_product_box_cell fl"}, 
-	                            React.createElement("div", {className: "img_box"}, 
-	                                React.createElement("img", {className: "show", src: "images/ziiiro-celeste-watch-black-mono-front-200x300.jpg", alt: "img"}), 
-	                                React.createElement("img", {className: "hide", src: "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg", alt: "img"}), 
-	                                React.createElement("div", {className: "cart_icon fr"}, 
-	                                    React.createElement("strong", null, "+"), 
-	                                    React.createElement("span", {className: "cart_icon_handle"})
-	                                )
-	                            ), 
-	                            React.createElement("div", {className: "text_box"}, 
-	                                React.createElement("h5", null, "CELESTE"), 
-	                                React.createElement("p", null, "CELESTE Black/Mono"), 
-	                                React.createElement("span", null, "$199.00")
-	                            )
-	                        )
+	                        arr
 	                    )
 	                )
 	            )
@@ -26338,6 +26361,38 @@
 	    }
 	});
 	exports.HomeHotItem=HomeHotItem;
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by Administrator on 2016/5/18.
+	 */
+	var React=__webpack_require__(1);
+	var SearchItem=React.createClass({displayName: "SearchItem",
+	    render:function(){
+	        var data=this.props.data;
+	        return(
+	            React.createElement("div", {className: "show_product_box_cell fl"}, 
+	                React.createElement("div", {className: "img_box"}, 
+	                    React.createElement("img", {className: "show", src: data.imgPathS[1], alt: "img"}), 
+	                    React.createElement("img", {className: "hide", src: "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg", alt: "img"}), 
+	                    React.createElement("div", {className: "cart_icon fr"}, 
+	                        React.createElement("strong", null, "+"), 
+	                        React.createElement("span", {className: "cart_icon_handle"})
+	                    )
+	                ), 
+	                React.createElement("div", {className: "text_box"}, 
+	                    React.createElement("h5", null, data.category), 
+	                    React.createElement("p", null, data.name), 
+	                    React.createElement("span", null, data.price)
+	                )
+	            )
+	        )
+	    }
+	});
+	exports.SearchItem=SearchItem;
 
 /***/ }
 /******/ ]);

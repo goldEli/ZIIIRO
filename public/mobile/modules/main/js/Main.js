@@ -3,6 +3,7 @@
  */
 var React=require('react');
 var Link=require('react-router').Link;
+var hashHistory=require("react-router").hashHistory;
 var Main=React.createClass({
     hideSideBar:function(){
            $(this.refs.side_bar).css({'left':'-5.2rem'});
@@ -15,17 +16,25 @@ var Main=React.createClass({
         $(this.refs.side_bar_background).css({'zIndex':'2'});
         $(this.refs.side_bar_background).css({'opacity':'0.6'});
     },
+    toSearch:function(){
+        this.hideSideBar();
+        hashHistory.push('/search');
+    },
+    toLogin:function(){
+        this.hideSideBar();
+        hashHistory.push('/login');
+    },
     render:function(){
         return(
             <div>
                 <div className="wrap">
                     <div className="side_bar" ref="side_bar">
-                        <Link to="/search"><h3>SHOP</h3></Link>
-                        <Link to="/details"><h3>SUPPORT</h3></Link>
+                        <h3 onClick={this.toSearch.bind(this)}>SHOP</h3>
+                        <h3>SUPPORT</h3>
                         <h3>NEWS</h3>
                         <h3>RESELLERS</h3>
                         <h3>ABOUT</h3>
-                        <Link to="/login"><h3>LOGIN</h3></Link>
+                        <h3 onClick={this.toLogin.bind(this)}>LOGIN</h3>
                     </div>
                     <div onClick={this.hideSideBar.bind(this)} className="side_bar_background" ref="side_bar_background"></div>
                     <div className="header">
