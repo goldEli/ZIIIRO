@@ -26249,25 +26249,51 @@
 	 */
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
+	var hashHistory=__webpack_require__(166).hashHistory;
 	var Details=React.createClass({displayName: "Details",
+	    getInitialState:function(){
+	        return({
+	            imgPath:null,
+	            dataDetails:[]
+	        })
+	    },
+	    componentWillMount:function(){
+	        $.ajax({
+	            type:'post',
+	            url:'/product/details',
+	            data:{
+	                id:this.props.location.query.id
+	            },
+	            success:function(data){
+	                $(this.refs.magnifyShow).css({
+	                    'background':'url("/pc/'+data[0].imgPathB+'") no-repeat'
+	                });
+	                this.setState({
+	                    imgPath:data[0].imgPathS[2],
+	                    dataDetails:data[0]
+	                });
+	            }.bind(this)
+	        });
+	    },
 	    render:function(){
+	        var data=this.state.dataDetails;
 	        return(
 	            React.createElement("div", {className: "details"}, 
 	                React.createElement("div", {className: "product_details"}, 
 	                    React.createElement("div", {className: "row row_border"}, 
 	                        React.createElement("div", {className: "show_img fl"}, 
-	                            React.createElement("img", {src: "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg", alt: "img"})
+	                            React.createElement("img", {src: this.state.imgPath, alt: "img"})
 	                        ), 
 	                        React.createElement("div", {className: "text_info fl"}, 
-	                            React.createElement("h1", null, "CELESTE Black / Mono"), 
-	                            React.createElement("h4", null, "$ 199.00"), 
-	                            React.createElement("p", null, "The design of Celeste is inspired by the Northern Lights, anyone who has experienced nature's most fascinating phenomenon never forgets it. Now, you get to experience the Aurora on your wrist, every day."), 
+	                            React.createElement("h1", null, data.name), 
+	                            React.createElement("h4", null, data.price), 
+	                            React.createElement("p", null, data.info), 
 	                            React.createElement("button", null, "ADD TO CART"), 
 	                            React.createElement("span", null, 
 	                                "SKU:Z0005WBBG"
 	                            ), 
 	                            React.createElement("span", null, 
-	                                "Category:", React.createElement("a", {href: "javascript:"}, "Celeste")
+	                                "Category:", React.createElement("a", {href: "javascript:"}, data.category)
 	                            ), 
 	                            React.createElement("span", null, 
 	                                "Tags:", React.createElement("a", {href: "javascript:"}, "black"), React.createElement("a", {href: "javascript:"}, "blue"), React.createElement("a", {href: "javascript:"}, "metal")
@@ -26312,7 +26338,7 @@
 	                                React.createElement("legend", null, "HOW TO READ THE TIME")
 	                            ), 
 	                            React.createElement("div", {className: "useMethod row"}, 
-	                                React.createElement("img", {src: "images/Howto_Celeste.jpg", alt: "img"})
+	                                React.createElement("img", {src: data.imgUse, alt: "img"})
 	                            ), 
 	                            React.createElement("fieldset", null, 
 	                                React.createElement("legend", null, "BOOKLET and CATALOGS")
@@ -26338,13 +26364,17 @@
 	 * Created by Administrator on 2016/5/18.
 	 */
 	var React=__webpack_require__(1);
+	var hashHistory=__webpack_require__(166).hashHistory;
 	var HomeHotItem=React.createClass({displayName: "HomeHotItem",
+	    toDetail:function(event){
+	        hashHistory.push("/details?id="+event.target.getAttribute("data"));
+	    },
 	    render:function(){
 	        var data=this.props.dataHot.product;
 	        return(
 	            React.createElement("div", {className: "show_product_box_cell fl"}, 
 	                React.createElement("div", {className: "img_box"}, 
-	                    React.createElement("img", {className: "show", src: data.imgPathS[1], alt: "img"}), 
+	                    React.createElement("img", {className: "show", onClick: this.toDetail.bind(this), data: data['_id'], src: data.imgPathS[1], alt: "img"}), 
 	                    React.createElement("img", {className: "hide", src: data.imgPathS[0], alt: "img"}), 
 	                    React.createElement("div", {className: "cart_icon fr"}, 
 	                        React.createElement("strong", null, "+"), 
@@ -26370,13 +26400,17 @@
 	 * Created by Administrator on 2016/5/18.
 	 */
 	var React=__webpack_require__(1);
+	var hashHistory=__webpack_require__(166).hashHistory;
 	var SearchItem=React.createClass({displayName: "SearchItem",
+	    toDetail:function(event){
+	        hashHistory.push("/details?id="+event.target.getAttribute("data"));
+	    },
 	    render:function(){
 	        var data=this.props.data;
 	        return(
 	            React.createElement("div", {className: "show_product_box_cell fl"}, 
 	                React.createElement("div", {className: "img_box"}, 
-	                    React.createElement("img", {className: "show", src: data.imgPathS[1], alt: "img"}), 
+	                    React.createElement("img", {className: "show", onClick: this.toDetail.bind(this), data: data['_id'], src: data.imgPathS[1], alt: "img"}), 
 	                    React.createElement("img", {className: "hide", src: "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg", alt: "img"}), 
 	                    React.createElement("div", {className: "cart_icon fr"}, 
 	                        React.createElement("strong", null, "+"), 

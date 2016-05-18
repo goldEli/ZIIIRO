@@ -2,13 +2,17 @@
  * Created by Administrator on 2016/5/18.
  */
 var React=require('react');
+var hashHistory=require("react-router").hashHistory;
 var HomeHotItem=React.createClass({
+    toDetail:function(event){
+        hashHistory.push("/details?id="+event.target.getAttribute("data"));
+    },
     render:function(){
         var data=this.props.dataHot.product;
         return(
             <div className="show_product_box_cell fl">
                 <div className="img_box">
-                    <img className="show" src={data.imgPathS[1]} alt="img"/>
+                    <img className="show" onClick={this.toDetail.bind(this)} data={data['_id']} src={data.imgPathS[1]} alt="img"/>
                     <img className="hide" src={data.imgPathS[0]} alt="img"/>
                     <div className="cart_icon fr">
                         <strong>+</strong>
