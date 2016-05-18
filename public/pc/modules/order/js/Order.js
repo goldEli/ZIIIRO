@@ -4,10 +4,12 @@
 var React=require('react');
 var Link=require('react-router').Link;
 require('../css/order.css');
+var Header=require('../../header/js/Header.js').Header;
 var Order=React.createClass({
     render:function(){
         return(
             <div className="order">
+                <Header/>
                 <h1>CART</h1>
                 <div className="order_left fl">
                     <table>

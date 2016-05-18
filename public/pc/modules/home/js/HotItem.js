@@ -5,7 +5,7 @@ var React=require('react');
 var hashHistory=require("react-router").hashHistory;
 var HotItem=React.createClass({
     toDetail:function(event){
-        hashHistory.push("/details?id="+event.target.getAttribute("data"));
+        hashHistory.push("/details?id="+event.target.getAttribute("data")+'&uid='+this.props.uid);
     },
     add:function(event){
         console.info(this.props.uid);
@@ -20,7 +20,7 @@ var HotItem=React.createClass({
                     uid:this.props.uid
                 },
                 success:function(){
-                    hashHistory.push('/?='+this.props.uid);
+                    hashHistory.push('/?uid='+this.props.uid);
                 }.bind(this)
             });
         }

@@ -16,6 +16,8 @@ var Main=require("../modules/main/js/Main").Main;
 var Order=require("../modules/order/js/Order").Order;
 var Search=require("../modules/search/js/Search").Search;
 var Details=require("../modules/details/js/Details").Details;
+var Header=require("../modules/header/js/Header").Header;
+
 
 ReactDom.render(
     <Router history={hashHistory}>

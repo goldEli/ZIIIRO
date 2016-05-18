@@ -3,6 +3,7 @@
  */
 require('../css/home.css');
 var React=require('react');
+var Header=require('../../header/js/Header.js').Header;
 var HotItem=require('./HotItem').HotItem;
 var hashHistory=require("react-router").hashHistory;
 var Home=React.createClass({
@@ -107,6 +108,7 @@ var Home=React.createClass({
         }
         return (
             <div className="home">
+                <Header/>
                 <div className="banner">
                     <div className="banner_box" ref="banner_box">
                         <img src="images/banner-eon.jpg" alt="banner"/>

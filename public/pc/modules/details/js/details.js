@@ -4,6 +4,7 @@
 var React=require('react');
 var Link=require('react-router').Link;
 var hashHistory=require("react-router").hashHistory;
+var Header=require('../../header/js/Header.js').Header;
 require('../css/details.css');
 var Details=React.createClass({
     getInitialState:function(){
@@ -11,6 +12,24 @@ var Details=React.createClass({
             imgPath:null,
           dataDetails:[]
         })
+    },
+    add:function(){
+        if(!this.props.location.query.uid){
+            hashHistory.push("/login");
+        }else{
+            $.ajax({
+                type:'post',
+                url:'/cart/add',
+                data:{
+                    pid:this.props.location.query.id,
+                    uid:this.props.location.query.uid
+                },
+                success:function(){
+                    hashHistory.push('/details?uid='+this.props.location.query.uid+'$id='+this.props.location.query.id);
+                }.bind(this)
+            });
+        }
+
     },
     componentWillMount:function(){
         $.ajax({
@@ -76,6 +95,7 @@ var Details=React.createClass({
         var data=this.state.dataDetails;
         return(
             <div className="details">
+                <Header/>
                 <div className="product_details">
                     <div className="row row_border">
                         <div className="magnify_show" ref="magnifyShow"></div>
@@ -90,7 +110,7 @@ var Details=React.createClass({
                             <h1>{data.name}</h1>
                             <h4>{data.price}</h4>
                             <p>{data.info}</p>
-                            <button>ADD TO CART</button>
+                            <button onClick={this.add}>ADD TO CART</button>
                         <span>
                             SKU:Z0005WBBG
                         </span>

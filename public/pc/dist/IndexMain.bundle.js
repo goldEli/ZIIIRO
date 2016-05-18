@@ -62,6 +62,8 @@
 	var Order=__webpack_require__(237).Order;
 	var Search=__webpack_require__(240).Search;
 	var Details=__webpack_require__(244).Details;
+	var Header=__webpack_require__(247).Header;
+
 
 	ReactDom.render(
 	    React.createElement(Router, {history: hashHistory}, 
@@ -25541,6 +25543,7 @@
 	var React=__webpack_require__(1);
 	var hashHistory=__webpack_require__(166).hashHistory;
 	__webpack_require__(228);
+	var Header=__webpack_require__(247).Header;
 	var Login=React.createClass({displayName: "Login",
 		componentDidMount:function(){
 			var warn=this.refs.warn;
@@ -25737,6 +25740,7 @@
 		render:function(){
 			return (
 				React.createElement("div", {className: "login_and_register"}, 
+					React.createElement(Header, null), 
 					React.createElement("div", {ref: "warnBox", className: "warn"}, 
 						React.createElement("p", {ref: "warn"})
 					), 
@@ -26141,6 +26145,7 @@
 	 */
 	__webpack_require__(233);
 	var React=__webpack_require__(1);
+	var Header=__webpack_require__(247).Header;
 	var HotItem=__webpack_require__(235).HotItem;
 	var hashHistory=__webpack_require__(166).hashHistory;
 	var Home=React.createClass({displayName: "Home",
@@ -26245,6 +26250,7 @@
 	        }
 	        return (
 	            React.createElement("div", {className: "home"}, 
+	                React.createElement(Header, null), 
 	                React.createElement("div", {className: "banner"}, 
 	                    React.createElement("div", {className: "banner_box", ref: "banner_box"}, 
 	                        React.createElement("img", {src: "images/banner-eon.jpg", alt: "banner"}), 
@@ -26388,7 +26394,7 @@
 	var hashHistory=__webpack_require__(166).hashHistory;
 	var HotItem=React.createClass({displayName: "HotItem",
 	    toDetail:function(event){
-	        hashHistory.push("/details?id="+event.target.getAttribute("data"));
+	        hashHistory.push("/details?id="+event.target.getAttribute("data")+'&uid='+this.props.uid);
 	    },
 	    add:function(event){
 	        console.info(this.props.uid);
@@ -26403,7 +26409,7 @@
 	                    uid:this.props.uid
 	                },
 	                success:function(){
-	                    hashHistory.push('/?='+this.props.uid);
+	                    hashHistory.push('/?uid='+this.props.uid);
 	                }.bind(this)
 	            });
 	        }
@@ -26451,98 +26457,12 @@
 	            orderNum:0
 	        };
 	    },
-	    getSession:function(){
-	        $.ajax({
-	            type:'post',
-	            url:'/users/getSession',
-	            success:function(data){
-	                this.getOrderNum(data[1]);
-	                this.setState({
-	                    sessionName:data[0],
-	                    uid:data[1]
-	                })
-	            }.bind(this)
-	        });
-	    },
-	    getOrderNum:function(uid){
-	        console.info(this.state.uid);
-	        if(this.state.uid){
-	            $.ajax({
-	                type:'post',
-	                url:'/cart/showAll',
-	                data:{
-	                    uid:this.state.uid
-	                },
-	                success:function(data){
-	                    console.info('1'+data.length);
-	                    this.setState({orderNum:data.length});
-	                }.bind(this)
-	            });
-	        }
-	        if(uid!=[]){
-	            $.ajax({
-	                type:'post',
-	                url:'/cart/showAll',
-	                data:{
-	                    uid:uid
-	                },
-	                success:function(data){
-	                    console.info('2'+data.length);
-	                    this.setState({orderNum:data.length});
-	                }.bind(this)
-	            });
-	        }
-	    },
-	    componentDidMount:function(){
-	        //this.getOrderNum();
-	    },
-	    componentWillMount:function(){
-	        this.getSession();
-	        //this.getOrderNum();
-	    },
-	    componentWillReceiveProps:function(){
-	        this.getSession();
-	        this.getOrderNum();
-	    },
-	    toOrder:function(){
-	       if(this.state.sessionName==[]){
-	           hashHistory.push('/login');
-	       }else{
-	           hashHistory.push('/order?uid='+this.state.uid);
-	       }
-	    },
+
 	    render:function(){
-	        var txt;
-	        if(this.state.sessionName){
-	            txt=React.createElement("span", null, React.createElement("a", {href: "javascript:"}, this.state.sessionName))
-	        }else{
-	            txt=React.createElement(Link, {to: "/login"}, React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "LOGIN")))
-	        }
+
 	        return(
 	            React.createElement("div", {className: "wrap"}, 
-	                React.createElement("div", {className: "header_area"}), 
-	                React.createElement("div", {className: "header"}, 
-	                    React.createElement("div", {className: "header_left fl"}, 
-	                        React.createElement(Link, {query: {'uid':this.state.uid}, to: "/home"}, React.createElement("img", {src: "images/logo-big.png", alt: "logo"})), 
-	                        React.createElement("div", {className: "header_nav fl"}, 
-	                            React.createElement(Link, {query: {'uid':this.state.uid}, to: "/search"}, React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "SHOP"))), 
-	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "SUPPORT")), 
-	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "NEWS")), 
-	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "RESELLERS")), 
-	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "ABOUT"))
-	                        )
-	                    ), 
-	                    React.createElement("div", {className: "header_right fr"}, 
-	                        React.createElement("div", {className: "cart_icon fr"}, 
-	                            React.createElement("strong", {onClick: this.toOrder}, this.state.orderNum), 
-	                            React.createElement("span", {className: "cart_icon_handle"})
-	                        ), 
-	                        React.createElement("div", {className: "header_right_nav fr"}, 
-	                            txt, 
-	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "CART  /  $", React.createElement("i", null, this.state.totalPrice)))
-	                        )
-	                    )
-	                ), 
+
 	                this.props.children, 
 	                React.createElement("div", {className: "footer"}, 
 	                    React.createElement("div", {className: "footer_box"}, 
@@ -26593,10 +26513,12 @@
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
 	__webpack_require__(238);
+	var Header=__webpack_require__(247).Header;
 	var Order=React.createClass({displayName: "Order",
 	    render:function(){
 	        return(
 	            React.createElement("div", {className: "order"}, 
+	                React.createElement(Header, null), 
 	                React.createElement("h1", null, "CART"), 
 	                React.createElement("div", {className: "order_left fl"}, 
 	                    React.createElement("table", null, 
@@ -26695,7 +26617,7 @@
 
 
 	// module
-	exports.push([module.id, ".wrap{\r\n    background-color: #ffffff;\r\n    width: 11.4rem;\r\n    overflow: hidden;\r\n    margin:0 auto;\r\n}\r\n.order{\r\n    width: 10.48rem;\r\n    padding: 0.37rem 0.46rem 0.56rem 0.46rem;\r\n    overflow: hidden;\r\n}\r\n.order h1{\r\n    font-weight: bold;\r\n    font-size: 0.24rem;\r\n    color: #555555;\r\n    margin-bottom: 0.5rem;\r\n}\r\n.order_left{\r\n    width: 6.58rem;\r\n    padding-right: 0.3rem;\r\n    padding-bottom: 0.5rem;\r\n    overflow: hidden;\r\n    border-right: 0.01rem solid #e4e4e4;\r\n}\r\n.order_left table,.order_right table{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.order_left_title,.order_right_title{\r\n    width: 100%;\r\n    border-bottom: 0.03rem solid #dddddd;\r\n    font-size: 0.14rem;\r\n    color: #555555;\r\n    font-weight: bold;\r\n    line-height: 0.3rem;\r\n}\r\n.order_left_grid{\r\n    overflow: hidden;\r\n    vertical-align: middle;\r\n    text-align: center;\r\n    width: 0.98rem;\r\n    border-bottom: 0.01rem solid #e4e4e4;\r\n}\r\n.order_left_grid td{\r\n    height: 100%;\r\n}\r\n.product{\r\n    width: 3.33rem;\r\n}\r\n.product span{\r\n    display: inline-block;\r\n    border: 0.03rem solid #dddddd;\r\n    width: 0.19rem;\r\n    height: 0.19rem;\r\n    line-height: 0.19rem;\r\n    text-align: center;\r\n    border-radius: 50%;\r\n    font-size: 0.16rem;\r\n    font-weight: bold;\r\n    color: #dddddd;\r\n    margin-right: 0.2rem;\r\n}\r\n.product img{\r\n    width: 0.98rem;\r\n    display: inline-block;\r\n    margin-right: 0.35rem;\r\n}\r\n.product p{\r\n    display: inline-block;\r\n    font-size: 0.16rem;\r\n    color: #02beeb;\r\n    width: 1.4rem;\r\n}\r\n.price p{\r\n    display: inline-block;\r\n    font-size: 0.16rem;\r\n    color: #555555;\r\n}\r\n.quantity span{\r\n    float: left;\r\n    border: 0.01rem solid #b1b1b1;\r\n    border-right: none;\r\n    border-left: none;\r\n    display: inline-block;\r\n    text-align: center;\r\n    width: 0.35rem;\r\n    height: 0.4rem;\r\n    line-height: 0.4rem;\r\n}\r\n.quantity button{\r\n    outline: none;\r\n    cursor: pointer;\r\n    float: left;\r\n    display: inline-block;\r\n    background-color: #ffffff;\r\n    width: 0.30rem;\r\n    height: 0.42rem;\r\n    border: 0.01rem solid #b1b1b1;\r\n}\r\n.total p{\r\n    font-weight: bold;\r\n    display: inline-block;\r\n    font-size: 0.16rem;\r\n    color: #555555;\r\n}\r\n.order_right{\r\n    width: 3.3rem;\r\n    overflow: hidden;\r\n}\r\n.subtotal{\r\n    font-size: 0.14rem;\r\n    line-height: 0.3rem;\r\n    border-bottom: 0.01rem solid #e4e4e4;\r\n}\r\n.subtotal td:nth-of-type(1){\r\n    font-weight: bold;\r\n}\r\n.subtotal td:nth-of-type(2){\r\n    text-align: right;\r\n}\r\n.shipping td:nth-of-type(1){\r\n    font-weight: bold;\r\n    vertical-align: bottom;\r\n    font-size: 0.14rem;\r\n}\r\n.shipping td:nth-of-type(2){\r\n    text-align: right;\r\n}\r\n.shipping div{\r\n    padding-top:0.1rem ;\r\n    line-height: 0.2rem;\r\n    height: 0.2rem;\r\n}\r\n.shipping .blank{\r\n    padding-top:0;\r\n    height: 0.1rem;\r\n}\r\n.shipping{\r\n    width: 100%;\r\n    overflow: hidden;\r\n    border-bottom: 0.01rem solid #e4e4e4;\r\n}\r\n.final_price{\r\n    height: 0.3rem;\r\n    font-size: 0.14rem;\r\n    font-weight: bold;\r\n    width: 100%;\r\n    overflow: hidden;\r\n    border-bottom: 0.03rem solid #e4e4e4;\r\n}\r\n.final_price td:nth-of-type(2){\r\n    text-align: right;\r\n}\r\n.pay_bth{\r\n    display: block;\r\n    margin-top: 0.2rem;\r\n    width: 100%;\r\n    height: 0.41rem;\r\n    background-color: #ff0055;\r\n    color: #ffffff;\r\n    font-size: 0.18rem;\r\n    border-radius: 0.03rem;\r\n    cursor: pointer;\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
+	exports.push([module.id, ".wrap{\r\n    background-color: #ffffff;\r\n    width: 11.4rem;\r\n    overflow: hidden;\r\n    margin:0 auto;\r\n}\r\n.order{\r\n    width: 10.48rem;\r\n    padding: 0 0.46rem 0.56rem 0.46rem;\r\n    overflow: hidden;\r\n}\r\n.order h1{\r\n    font-weight: bold;\r\n    font-size: 0.24rem;\r\n    color: #555555;\r\n    margin-bottom: 0.5rem;\r\n}\r\n.order_left{\r\n    width: 6.58rem;\r\n    padding-right: 0.3rem;\r\n    padding-bottom: 0.5rem;\r\n    overflow: hidden;\r\n    border-right: 0.01rem solid #e4e4e4;\r\n}\r\n.order_left table,.order_right table{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.order_left_title,.order_right_title{\r\n    width: 100%;\r\n    border-bottom: 0.03rem solid #dddddd;\r\n    font-size: 0.14rem;\r\n    color: #555555;\r\n    font-weight: bold;\r\n    line-height: 0.3rem;\r\n}\r\n.order_left_grid{\r\n    overflow: hidden;\r\n    vertical-align: middle;\r\n    text-align: center;\r\n    width: 0.98rem;\r\n    border-bottom: 0.01rem solid #e4e4e4;\r\n}\r\n.order_left_grid td{\r\n    height: 100%;\r\n}\r\n.product{\r\n    width: 3.33rem;\r\n}\r\n.product span{\r\n    display: inline-block;\r\n    border: 0.03rem solid #dddddd;\r\n    width: 0.19rem;\r\n    height: 0.19rem;\r\n    line-height: 0.19rem;\r\n    text-align: center;\r\n    border-radius: 50%;\r\n    font-size: 0.16rem;\r\n    font-weight: bold;\r\n    color: #dddddd;\r\n    margin-right: 0.2rem;\r\n}\r\n.product img{\r\n    width: 0.98rem;\r\n    display: inline-block;\r\n    margin-right: 0.35rem;\r\n}\r\n.product p{\r\n    display: inline-block;\r\n    font-size: 0.16rem;\r\n    color: #02beeb;\r\n    width: 1.4rem;\r\n}\r\n.price p{\r\n    display: inline-block;\r\n    font-size: 0.16rem;\r\n    color: #555555;\r\n}\r\n.quantity span{\r\n    float: left;\r\n    border: 0.01rem solid #b1b1b1;\r\n    border-right: none;\r\n    border-left: none;\r\n    display: inline-block;\r\n    text-align: center;\r\n    width: 0.35rem;\r\n    height: 0.4rem;\r\n    line-height: 0.4rem;\r\n}\r\n.quantity button{\r\n    outline: none;\r\n    cursor: pointer;\r\n    float: left;\r\n    display: inline-block;\r\n    background-color: #ffffff;\r\n    width: 0.30rem;\r\n    height: 0.42rem;\r\n    border: 0.01rem solid #b1b1b1;\r\n}\r\n.total p{\r\n    font-weight: bold;\r\n    display: inline-block;\r\n    font-size: 0.16rem;\r\n    color: #555555;\r\n}\r\n.order_right{\r\n    width: 3.3rem;\r\n    overflow: hidden;\r\n}\r\n.subtotal{\r\n    font-size: 0.14rem;\r\n    line-height: 0.3rem;\r\n    border-bottom: 0.01rem solid #e4e4e4;\r\n}\r\n.subtotal td:nth-of-type(1){\r\n    font-weight: bold;\r\n}\r\n.subtotal td:nth-of-type(2){\r\n    text-align: right;\r\n}\r\n.shipping td:nth-of-type(1){\r\n    font-weight: bold;\r\n    vertical-align: bottom;\r\n    font-size: 0.14rem;\r\n}\r\n.shipping td:nth-of-type(2){\r\n    text-align: right;\r\n}\r\n.shipping div{\r\n    padding-top:0.1rem ;\r\n    line-height: 0.2rem;\r\n    height: 0.2rem;\r\n}\r\n.shipping .blank{\r\n    padding-top:0;\r\n    height: 0.1rem;\r\n}\r\n.shipping{\r\n    width: 100%;\r\n    overflow: hidden;\r\n    border-bottom: 0.01rem solid #e4e4e4;\r\n}\r\n.final_price{\r\n    height: 0.3rem;\r\n    font-size: 0.14rem;\r\n    font-weight: bold;\r\n    width: 100%;\r\n    overflow: hidden;\r\n    border-bottom: 0.03rem solid #e4e4e4;\r\n}\r\n.final_price td:nth-of-type(2){\r\n    text-align: right;\r\n}\r\n.pay_bth{\r\n    display: block;\r\n    margin-top: 0.2rem;\r\n    width: 100%;\r\n    height: 0.41rem;\r\n    background-color: #ff0055;\r\n    color: #ffffff;\r\n    font-size: 0.18rem;\r\n    border-radius: 0.03rem;\r\n    cursor: pointer;\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
 
 	// exports
 
@@ -26709,6 +26631,7 @@
 	 */
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
+	var Header=__webpack_require__(247).Header;
 	var ShowItem=__webpack_require__(241).ShowItem;
 	__webpack_require__(242);
 	var Search=React.createClass({displayName: "Search",
@@ -26759,6 +26682,7 @@
 	        }
 	        return(
 	            React.createElement("div", {className: "search"}, 
+	                React.createElement(Header, null), 
 	                React.createElement("div", {className: "search_input"}, 
 	                    React.createElement("div", {className: "search_input_area fr"}, 
 	                        React.createElement("button", {onClick: this.search}, "search"), 
@@ -26802,7 +26726,7 @@
 	var hashHistory=__webpack_require__(166).hashHistory;
 	var ShowItem=React.createClass({displayName: "ShowItem",
 	    toDetail:function(event){
-	        hashHistory.push("/details?id="+event.target.getAttribute("data"));
+	        hashHistory.push("/details?id="+event.target.getAttribute("data")+'&uid='+this.props.uid);
 	    },
 	    add:function(event){
 	        console.info(this.props.uid);
@@ -26817,8 +26741,7 @@
 	                    uid:this.props.uid
 	                },
 	                success:function(){
-	                    hashHistory.push('/home?='+this.props.uid);
-	                    hashHistory.push('/search?='+this.props.uid);
+	                    hashHistory.push('/search?uid='+this.props.uid);
 	                }.bind(this)
 	            });
 	        }
@@ -26882,7 +26805,7 @@
 
 
 	// module
-	exports.push([module.id, ".wrap{\r\n    background-color: #ffffff;\r\n    width: 11.4rem;\r\n    overflow: hidden;\r\n    margin:0 auto;\r\n}\r\n.search{\r\n    width: 10.48rem;\r\n    padding: 0.37rem 0.46rem 0.56rem 0.46rem;\r\n    overflow: hidden;\r\n}\r\n.search_input{\r\n    height: 0.33rem;\r\n    width: 100%;\r\n    overflow: hidden;\r\n    margin-bottom: 0.2rem;\r\n}\r\n.search_input p{\r\n    margin-right:0.2rem;\r\n    line-height: 0.33rem;\r\n    font-size: 0.16rem;\r\n    display: block;\r\n    float: right;\r\n}\r\n.search_input_area input{\r\n    outline: none;\r\n    width: 1.6rem;\r\n    padding-left: 0.1rem;\r\n    display: inline-block;\r\n    float: right;\r\n    height: 0.31rem;\r\n    border: 0.01rem solid #555555;\r\n}\r\n.search_input_area button{\r\n    outline: none;\r\n    cursor: pointer;\r\n    width: 0.6rem;\r\n    display: inline-block;\r\n    float: right;\r\n    background-color: #ff0055;\r\n    height: 0.33rem;\r\n    color: #ffffff;\r\n    font-size: 0.14rem;\r\n    font-weight: bolder;\r\n}\r\n.side_nav{\r\n    width: 2.4rem;\r\n    overflow: hidden;\r\n}\r\n.side_nav h1{\r\n    display: block;\r\n    font-size: 0.14rem;\r\n    color: #555555;\r\n    line-height: 0.3rem;\r\n    border-bottom:0.03rem solid #e4e4e4;\r\n    margin-bottom: 0.2rem;\r\n}\r\n.side_nav p{\r\n    display: block;\r\n    font-size: 0.14rem;\r\n    color: #555555;\r\n    line-height: 0.4rem;\r\n    border-bottom:0.01rem solid #e4e4e4;\r\n}\r\n.side_nav p:hover{\r\n    text-decoration: underline;\r\n    color: #393939;\r\n}\r\n.show_result{\r\n    width: 7.5rem;\r\n    overflow: hidden;\r\n    margin-left: 0.5rem;\r\n}\r\n.search_show_product_box{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.search_show_product_box_cell{\r\n    width: 1.8rem;\r\n    overflow: hidden;\r\n    margin:0 0.03rem;\r\n}\r\n.search_img_box{\r\n    width: 1.8rem;\r\n    height: 3rem;\r\n    overflow: hidden;\r\n    position: relative;\r\n    cursor: pointer;\r\n}\r\n.search_hide,.search_show{\r\n    width: 1.8rem;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n}\r\n.search_hide{\r\n    transition: opacity 0.2s;\r\n    opacity: 0;\r\n}\r\n.search_show{\r\n    transition: opacity 0.2s;\r\n    opacity: 1;\r\n}\r\n.search_img_box:hover .search_hide{\r\n    opacity: 1;\r\n}\r\n.search_img_box:hover .search_show{\r\n    opacity: 0;\r\n}\r\n.search_img_box:hover .cart_icon{\r\n    bottom: 0.2rem;\r\n}\r\n.search_text_box{\r\n    width: 100%;\r\n    overflow: hidden;\r\n    text-align: center;\r\n    line-height: 0.3rem;\r\n}\r\n.search_text_box h5{\r\n    font-size: 0.14rem;\r\n    color: #999999;\r\n    font-weight: bold;\r\n}\r\n.search_text_box p{\r\n    font-size: 0.16rem;\r\n    color: #000000;\r\n}\r\n.search_text_box span{\r\n    color: #000000;\r\n    font-size: 0.2rem;\r\n    font-weight: bold;\r\n}\r\n.search_img_box .cart_icon{\r\n    transition: bottom 0.2s;\r\n    width: 0.22rem;\r\n    height: 0.26rem;\r\n    margin:0 0 0.15rem 0.05rem;\r\n    position: absolute;\r\n    bottom: -0.41rem;\r\n    left: 0;\r\n}\r\n.cart_icon{\r\n    overflow: hidden;\r\n    position: relative;\r\n}\r\n.search_img_box .cart_icon strong{\r\n    font-weight: bold;\r\n    font-size: 0.2rem;\r\n    line-height: 0.16rem;\r\n    min-width: 0.18rem;\r\n    min-height: 0.15rem;\r\n}\r\n.cart_icon strong{\r\n    position: absolute;\r\n    bottom: 0;\r\n    color: #02b8e5;\r\n    border: 0.02rem solid #02b8e5;\r\n    display: inline-block;\r\n    text-align: center;\r\n}\r\n.cart_icon strong:hover{\r\n    color: #ffffff;\r\n    background-color: #02b8e5;\r\n}\r\n.search_img_box .cart_icon .cart_icon_handle{\r\n    border-top-left-radius: 0.99rem;\r\n    border-top-right-radius: 0.99rem;\r\n    height: 0.04rem;\r\n    width: 0.06rem;\r\n    bottom: 0.19rem;\r\n    left: 0.06rem;\r\n}\r\n.cart_icon .cart_icon_handle{\r\n    border: 0.02rem solid #02b8e5;\r\n    border-bottom: none;\r\n    position: absolute;\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
+	exports.push([module.id, ".wrap{\r\n    background-color: #ffffff;\r\n    width: 11.4rem;\r\n    overflow: hidden;\r\n    margin:0 auto;\r\n}\r\n.search{\r\n    width: 10.48rem;\r\n    padding: 0 0.46rem 0.56rem 0.46rem;\r\n    overflow: hidden;\r\n}\r\n.search_input{\r\n    height: 0.33rem;\r\n    width: 100%;\r\n    overflow: hidden;\r\n    margin-bottom: 0.2rem;\r\n}\r\n.search_input p{\r\n    margin-right:0.2rem;\r\n    line-height: 0.33rem;\r\n    font-size: 0.16rem;\r\n    display: block;\r\n    float: right;\r\n}\r\n.search_input_area input{\r\n    outline: none;\r\n    width: 1.6rem;\r\n    padding-left: 0.1rem;\r\n    display: inline-block;\r\n    float: right;\r\n    height: 0.31rem;\r\n    border: 0.01rem solid #555555;\r\n}\r\n.search_input_area button{\r\n    outline: none;\r\n    cursor: pointer;\r\n    width: 0.6rem;\r\n    display: inline-block;\r\n    float: right;\r\n    background-color: #ff0055;\r\n    height: 0.33rem;\r\n    color: #ffffff;\r\n    font-size: 0.14rem;\r\n    font-weight: bolder;\r\n}\r\n.side_nav{\r\n    width: 2.4rem;\r\n    overflow: hidden;\r\n}\r\n.side_nav h1{\r\n    display: block;\r\n    font-size: 0.14rem;\r\n    color: #555555;\r\n    line-height: 0.3rem;\r\n    border-bottom:0.03rem solid #e4e4e4;\r\n    margin-bottom: 0.2rem;\r\n}\r\n.side_nav p{\r\n    display: block;\r\n    font-size: 0.14rem;\r\n    color: #555555;\r\n    line-height: 0.4rem;\r\n    border-bottom:0.01rem solid #e4e4e4;\r\n}\r\n.side_nav p:hover{\r\n    text-decoration: underline;\r\n    color: #393939;\r\n}\r\n.show_result{\r\n    width: 7.5rem;\r\n    overflow: hidden;\r\n    margin-left: 0.5rem;\r\n}\r\n.search_show_product_box{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.search_show_product_box_cell{\r\n    width: 1.8rem;\r\n    overflow: hidden;\r\n    margin:0 0.03rem;\r\n}\r\n.search_img_box{\r\n    width: 1.8rem;\r\n    height: 3rem;\r\n    overflow: hidden;\r\n    position: relative;\r\n    cursor: pointer;\r\n}\r\n.search_hide,.search_show{\r\n    width: 1.8rem;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n}\r\n.search_hide{\r\n    transition: opacity 0.2s;\r\n    opacity: 0;\r\n}\r\n.search_show{\r\n    transition: opacity 0.2s;\r\n    opacity: 1;\r\n}\r\n.search_img_box:hover .search_hide{\r\n    opacity: 1;\r\n}\r\n.search_img_box:hover .search_show{\r\n    opacity: 0;\r\n}\r\n.search_img_box:hover .cart_icon{\r\n    bottom: 0.2rem;\r\n}\r\n.search_text_box{\r\n    width: 100%;\r\n    overflow: hidden;\r\n    text-align: center;\r\n    line-height: 0.3rem;\r\n}\r\n.search_text_box h5{\r\n    font-size: 0.14rem;\r\n    color: #999999;\r\n    font-weight: bold;\r\n}\r\n.search_text_box p{\r\n    font-size: 0.16rem;\r\n    color: #000000;\r\n}\r\n.search_text_box span{\r\n    color: #000000;\r\n    font-size: 0.2rem;\r\n    font-weight: bold;\r\n}\r\n.search_img_box .cart_icon{\r\n    transition: bottom 0.2s;\r\n    width: 0.22rem;\r\n    height: 0.26rem;\r\n    margin:0 0 0.15rem 0.05rem;\r\n    position: absolute;\r\n    bottom: -0.41rem;\r\n    left: 0;\r\n}\r\n.cart_icon{\r\n    overflow: hidden;\r\n    position: relative;\r\n}\r\n.search_img_box .cart_icon strong{\r\n    font-weight: bold;\r\n    font-size: 0.2rem;\r\n    line-height: 0.16rem;\r\n    min-width: 0.18rem;\r\n    min-height: 0.15rem;\r\n}\r\n.cart_icon strong{\r\n    position: absolute;\r\n    bottom: 0;\r\n    color: #02b8e5;\r\n    border: 0.02rem solid #02b8e5;\r\n    display: inline-block;\r\n    text-align: center;\r\n}\r\n.cart_icon strong:hover{\r\n    color: #ffffff;\r\n    background-color: #02b8e5;\r\n}\r\n.search_img_box .cart_icon .cart_icon_handle{\r\n    border-top-left-radius: 0.99rem;\r\n    border-top-right-radius: 0.99rem;\r\n    height: 0.04rem;\r\n    width: 0.06rem;\r\n    bottom: 0.19rem;\r\n    left: 0.06rem;\r\n}\r\n.cart_icon .cart_icon_handle{\r\n    border: 0.02rem solid #02b8e5;\r\n    border-bottom: none;\r\n    position: absolute;\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
 
 	// exports
 
@@ -26897,6 +26820,7 @@
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
 	var hashHistory=__webpack_require__(166).hashHistory;
+	var Header=__webpack_require__(247).Header;
 	__webpack_require__(245);
 	var Details=React.createClass({displayName: "Details",
 	    getInitialState:function(){
@@ -26904,6 +26828,24 @@
 	            imgPath:null,
 	          dataDetails:[]
 	        })
+	    },
+	    add:function(){
+	        if(!this.props.location.query.uid){
+	            hashHistory.push("/login");
+	        }else{
+	            $.ajax({
+	                type:'post',
+	                url:'/cart/add',
+	                data:{
+	                    pid:this.props.location.query.id,
+	                    uid:this.props.location.query.uid
+	                },
+	                success:function(){
+	                    hashHistory.push('/details?uid='+this.props.location.query.uid+'$id='+this.props.location.query.id);
+	                }.bind(this)
+	            });
+	        }
+
 	    },
 	    componentWillMount:function(){
 	        $.ajax({
@@ -26969,6 +26911,7 @@
 	        var data=this.state.dataDetails;
 	        return(
 	            React.createElement("div", {className: "details"}, 
+	                React.createElement(Header, null), 
 	                React.createElement("div", {className: "product_details"}, 
 	                    React.createElement("div", {className: "row row_border"}, 
 	                        React.createElement("div", {className: "magnify_show", ref: "magnifyShow"}), 
@@ -26983,7 +26926,7 @@
 	                            React.createElement("h1", null, data.name), 
 	                            React.createElement("h4", null, data.price), 
 	                            React.createElement("p", null, data.info), 
-	                            React.createElement("button", null, "ADD TO CART"), 
+	                            React.createElement("button", {onClick: this.add}, "ADD TO CART"), 
 	                        React.createElement("span", null, 
 	                            "SKU:Z0005WBBG"
 	                        ), 
@@ -27086,7 +27029,162 @@
 
 
 	// module
-	exports.push([module.id, ".wrap{\r\n    background-color: #ffffff;\r\n    width: 11.4rem;\r\n    overflow: hidden;\r\n    margin:0 auto;\r\n}\r\n.details{\r\n    width: 10.48rem;\r\n    padding: 0.37rem 0.46rem 0.56rem 0.46rem;\r\n    overflow: hidden;\r\n}\r\n.show_img{\r\n    padding: 0.3rem 0 0 2rem;\r\n    width: 3.24rem;\r\n    overflow: hidden;\r\n    text-align: center;\r\n}\r\n.text_info{\r\n    width: 3rem;\r\n    overflow: hidden;\r\n    text-align: left;\r\n    color: #555555;\r\n}\r\n.imgDetails_box{\r\n    width: 2rem;\r\n    position:relative;\r\n}\r\n.imgDetails_box img{\r\n    cursor: pointer;\r\n    width: 2rem;\r\n}\r\n.magnify_area{\r\n    display: none;\r\n    position: absolute;\r\n    top:1.5rem;\r\n    left: 1rem;\r\n    width: 1rem;\r\n    height: 1rem;\r\n    background:rgba(255,250,250,0.6);\r\n    z-index: 10;\r\n}\r\n.magnify_show{\r\n    position: absolute;\r\n    top: 1.7rem;\r\n    left: 6rem;\r\n    width: 2.55rem;\r\n    height: 2.2rem;\r\n    background-size:5.1rem 6.5rem ;\r\n    display: none;\r\n    z-index: 10;\r\n}\r\n/*.magnify_show1{*/\r\n    /*position: absolute;*/\r\n    /*top: 5rem;*/\r\n    /*left: 6rem;*/\r\n    /*width: 2.55rem;*/\r\n    /*height: 2.17rem;*/\r\n    /*background-size:5.1rem 6.5rem ;*/\r\n    /*background: url(\"../images/ziiiro-celeste-watch-black-mono-blue-side-510x650.jpg\") no-repeat;*/\r\n    /*z-index: 10;*/\r\n/*}*/\r\n.text_info h1{\r\n    line-height: 0.6rem;\r\n    font-weight: bold;\r\n    font-size: 0.20rem;\r\n}\r\n.text_info h4{\r\n    display: inline-block;\r\n    margin-bottom: 0.15rem;\r\n    color: #000000;\r\n    font-weight: bolder;\r\n    font-size: 0.18rem;\r\n}\r\n.text_info p{\r\n    line-height: 0.3rem;\r\n    font-size: 0.16rem;\r\n}\r\n.text_info button{\r\n    display: block;\r\n    margin: 0.26rem 0 0.35rem 0;\r\n    cursor: pointer;\r\n    background-color: #02b8e5;\r\n    width: 1.5rem;\r\n    height: 0.41rem;\r\n    color: #ffffff;\r\n    font-size: 0.18rem;\r\n    border-radius: 0.03rem;\r\n}\r\n.text_info span{\r\n    display: block;\r\n    line-height: 0.28rem;\r\n    height: 0.28rem;\r\n    width: 100%;\r\n    font-size: 0.14rem;\r\n    color: #555555;\r\n    border-top: 0.01rem dashed #b3b3b3;\r\n}\r\n.text_info a{\r\n    color: #02b8e5;\r\n}\r\n.row{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.row_border{\r\n    padding-bottom: 0.3rem;\r\n    border-bottom: 0.01rem solid #b3b3b3;\r\n}\r\n.details_nav{\r\n    display: block;\r\n    height: 1rem;\r\n    line-height: 0.1rem;\r\n    text-align: center;\r\n}\r\n.details_nav span{\r\n    margin-top: 0.4rem;\r\n    display: inline-block;\r\n    height: 0.3rem;\r\n    padding: 0 0.2rem;\r\n    overflow: hidden;\r\n    border-left: 0.01rem solid #b3b3b3;\r\n}\r\n.details_nav span:nth-of-type(1){\r\n    border-left:none;\r\n}\r\n.details_nav .details_nav_active{\r\n    background-color: #02b8e5;\r\n    color: #ffffff;\r\n}\r\n.details_nav a{\r\n    display: block;\r\n    height: 0.3rem;\r\n    line-height: 0.3rem;\r\n    padding: 0 0.2rem;\r\n    font-size: 0.14rem;\r\n    font-weight: bold;\r\n    color: #555555;\r\n    border-radius: 0.15rem;\r\n}\r\n.product_features fieldset {\r\n    display: block;\r\n    -webkit-margin-start: 2px;\r\n    -webkit-margin-end: 2px;\r\n    -webkit-padding-before: 0.35em;\r\n    -webkit-padding-start: 0.75em;\r\n    -webkit-padding-end: 0.75em;\r\n    -webkit-padding-after: 0.625em;\r\n    min-width: -webkit-min-content;\r\n    border-top: 2px groove #eeeeee;\r\n}\r\n.product_features legend{\r\n    padding: 0 0.15rem;\r\n    font-size: 0.22rem;\r\n    color: #555555;\r\n    font-weight: bold;\r\n    text-align: center;\r\n}\r\n.product_features_cell{\r\n    padding: 0 0.09rem;\r\n    width: 3.3rem;\r\n    text-align: center;\r\n}\r\n.product_features_cell h3{\r\n    font-size: 0.2rem;\r\n    font-weight: bold;\r\n    line-height: 0.6rem;\r\n}\r\n.product_features_cell p{\r\n    font-size: 0.16rem;\r\n    line-height: 0.3rem;\r\n}\r\n.product_features_cell img{\r\n    width: 0.6rem;\r\n    height: 0.6rem;\r\n}\r\n.useMethod img{\r\n    display: block;\r\n    margin-bottom: 0.3rem;\r\n    width: 10.4rem;\r\n}\r\n.booklet h2{\r\n    font-weight: normal;\r\n    line-height: 0.6rem;\r\n    font-size: 0.16rem;\r\n}\r\n.booklet a{\r\n    color: #02b8e5;\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
+	exports.push([module.id, ".wrap{\r\n    background-color: #ffffff;\r\n    width: 11.4rem;\r\n    overflow: hidden;\r\n    margin:0 auto;\r\n}\r\n.details{\r\n    width: 10.48rem;\r\n    padding: 0 0.46rem 0.56rem 0.46rem;\r\n    overflow: hidden;\r\n}\r\n.show_img{\r\n    padding: 0.3rem 0 0 2rem;\r\n    width: 3.24rem;\r\n    overflow: hidden;\r\n    text-align: center;\r\n}\r\n.text_info{\r\n    width: 3rem;\r\n    overflow: hidden;\r\n    text-align: left;\r\n    color: #555555;\r\n}\r\n.imgDetails_box{\r\n    width: 2rem;\r\n    position:relative;\r\n}\r\n.imgDetails_box img{\r\n    cursor: pointer;\r\n    width: 2rem;\r\n}\r\n.magnify_area{\r\n    display: none;\r\n    position: absolute;\r\n    top:1.5rem;\r\n    left: 1rem;\r\n    width: 1rem;\r\n    height: 1rem;\r\n    background:rgba(255,250,250,0.6);\r\n    z-index: 10;\r\n}\r\n.magnify_show{\r\n    position: absolute;\r\n    top: 1.7rem;\r\n    left: 6rem;\r\n    width: 2.55rem;\r\n    height: 2.2rem;\r\n    background-size:5.1rem 6.5rem ;\r\n    display: none;\r\n    z-index: 10;\r\n}\r\n/*.magnify_show1{*/\r\n    /*position: absolute;*/\r\n    /*top: 5rem;*/\r\n    /*left: 6rem;*/\r\n    /*width: 2.55rem;*/\r\n    /*height: 2.17rem;*/\r\n    /*background-size:5.1rem 6.5rem ;*/\r\n    /*background: url(\"../images/ziiiro-celeste-watch-black-mono-blue-side-510x650.jpg\") no-repeat;*/\r\n    /*z-index: 10;*/\r\n/*}*/\r\n.text_info h1{\r\n    line-height: 0.6rem;\r\n    font-weight: bold;\r\n    font-size: 0.20rem;\r\n}\r\n.text_info h4{\r\n    display: inline-block;\r\n    margin-bottom: 0.15rem;\r\n    color: #000000;\r\n    font-weight: bolder;\r\n    font-size: 0.18rem;\r\n}\r\n.text_info p{\r\n    line-height: 0.3rem;\r\n    font-size: 0.16rem;\r\n}\r\n.text_info button{\r\n    display: block;\r\n    margin: 0.26rem 0 0.35rem 0;\r\n    cursor: pointer;\r\n    background-color: #02b8e5;\r\n    width: 1.5rem;\r\n    height: 0.41rem;\r\n    color: #ffffff;\r\n    font-size: 0.18rem;\r\n    border-radius: 0.03rem;\r\n}\r\n.text_info span{\r\n    display: block;\r\n    line-height: 0.28rem;\r\n    height: 0.28rem;\r\n    width: 100%;\r\n    font-size: 0.14rem;\r\n    color: #555555;\r\n    border-top: 0.01rem dashed #b3b3b3;\r\n}\r\n.text_info a{\r\n    color: #02b8e5;\r\n}\r\n.row{\r\n    width: 100%;\r\n    overflow: hidden;\r\n}\r\n.row_border{\r\n    padding-bottom: 0.3rem;\r\n    border-bottom: 0.01rem solid #b3b3b3;\r\n}\r\n.details_nav{\r\n    display: block;\r\n    height: 1rem;\r\n    line-height: 0.1rem;\r\n    text-align: center;\r\n}\r\n.details_nav span{\r\n    margin-top: 0.4rem;\r\n    display: inline-block;\r\n    height: 0.3rem;\r\n    padding: 0 0.2rem;\r\n    overflow: hidden;\r\n    border-left: 0.01rem solid #b3b3b3;\r\n}\r\n.details_nav span:nth-of-type(1){\r\n    border-left:none;\r\n}\r\n.details_nav .details_nav_active{\r\n    background-color: #02b8e5;\r\n    color: #ffffff;\r\n}\r\n.details_nav a{\r\n    display: block;\r\n    height: 0.3rem;\r\n    line-height: 0.3rem;\r\n    padding: 0 0.2rem;\r\n    font-size: 0.14rem;\r\n    font-weight: bold;\r\n    color: #555555;\r\n    border-radius: 0.15rem;\r\n}\r\n.product_features fieldset {\r\n    display: block;\r\n    -webkit-margin-start: 2px;\r\n    -webkit-margin-end: 2px;\r\n    -webkit-padding-before: 0.35em;\r\n    -webkit-padding-start: 0.75em;\r\n    -webkit-padding-end: 0.75em;\r\n    -webkit-padding-after: 0.625em;\r\n    min-width: -webkit-min-content;\r\n    border-top: 2px groove #eeeeee;\r\n}\r\n.product_features legend{\r\n    padding: 0 0.15rem;\r\n    font-size: 0.22rem;\r\n    color: #555555;\r\n    font-weight: bold;\r\n    text-align: center;\r\n}\r\n.product_features_cell{\r\n    padding: 0 0.09rem;\r\n    width: 3.3rem;\r\n    text-align: center;\r\n}\r\n.product_features_cell h3{\r\n    font-size: 0.2rem;\r\n    font-weight: bold;\r\n    line-height: 0.6rem;\r\n}\r\n.product_features_cell p{\r\n    font-size: 0.16rem;\r\n    line-height: 0.3rem;\r\n}\r\n.product_features_cell img{\r\n    width: 0.6rem;\r\n    height: 0.6rem;\r\n}\r\n.useMethod img{\r\n    display: block;\r\n    margin-bottom: 0.3rem;\r\n    width: 10.4rem;\r\n}\r\n.booklet h2{\r\n    font-weight: normal;\r\n    line-height: 0.6rem;\r\n    font-size: 0.16rem;\r\n}\r\n.booklet a{\r\n    color: #02b8e5;\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 247 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by Administrator on 2016/5/18.
+	 */
+	__webpack_require__(248);
+	var React=__webpack_require__(1);
+	var Link=__webpack_require__(166).Link;
+	var hashHistory=__webpack_require__(166).hashHistory;
+	var Header=React.createClass({displayName: "Header",
+	    getInitialState: function(){
+	        return {
+	            sessionName: [],
+	            totalPrice:0,
+	            uid:[],
+	            orderNum:0
+	        };
+	    },
+	    getSession:function(){
+	        $.ajax({
+	            type:'post',
+	            url:'/users/getSession',
+	            success:function(data){
+	                this.getOrderNum(data[1]);
+	                this.setState({
+	                    sessionName:data[0],
+	                    uid:data[1]
+	                })
+	            }.bind(this)
+	        });
+	    },
+	    getOrderNum:function(uid){
+	        if(this.state.uid){
+	            $.ajax({
+	                type:'post',
+	                url:'/cart/showAll',
+	                data:{
+	                    uid:this.state.uid
+	                },
+	                success:function(data){
+	                    this.setState({orderNum:data.length});
+	                }.bind(this)
+	            });
+	        }
+	        if(uid!=[]){
+	            $.ajax({
+	                type:'post',
+	                url:'/cart/showAll',
+	                data:{
+	                    uid:uid
+	                },
+	                success:function(data){
+	                    this.setState({orderNum:data.length});
+	                }.bind(this)
+	            });
+	        }
+	    },
+	    componentDidMount:function(){
+	        //this.getOrderNum();
+	    },
+	    componentWillMount:function(){
+	        this.getSession();
+	        //this.getOrderNum();
+	    },
+	    componentWillReceiveProps:function(){
+	        this.getSession();
+	        this.getOrderNum();
+	    },
+	    toOrder:function(){
+	        if(this.state.sessionName==[]){
+	            hashHistory.push('/login');
+	        }else{
+	            hashHistory.push('/order?uid='+this.state.uid);
+	        }
+	    },
+	    render:function(){
+	        var txt;
+	        if(this.state.sessionName){
+	            txt=React.createElement("span", null, React.createElement("a", {href: "javascript:"}, this.state.sessionName))
+	        }else{
+	            txt=React.createElement(Link, {to: "/login"}, React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "LOGIN")))
+	        }
+	        return(
+	            React.createElement("div", {className: "header_box"}, 
+	                React.createElement("div", {className: "header_area"}), 
+	                React.createElement("div", {className: "header"}, 
+	                    React.createElement("div", {className: "header_left fl"}, 
+	                        React.createElement(Link, {query: {'uid':this.state.uid}, to: "/home"}, React.createElement("img", {src: "images/logo-big.png", alt: "logo"})), 
+	                        React.createElement("div", {className: "header_nav fl"}, 
+	                            React.createElement(Link, {query: {'uid':this.state.uid}, to: "/search"}, React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "SHOP"))), 
+	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "SUPPORT")), 
+	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "NEWS")), 
+	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "RESELLERS")), 
+	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "ABOUT"))
+	                        )
+	                    ), 
+	                    React.createElement("div", {className: "header_right fr"}, 
+	                        React.createElement("div", {className: "cart_icon fr"}, 
+	                            React.createElement("strong", {onClick: this.toOrder}, this.state.orderNum), 
+	                            React.createElement("span", {className: "cart_icon_handle"})
+	                        ), 
+	                        React.createElement("div", {className: "header_right_nav fr"}, 
+	                            txt, 
+	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "      ShopCar"))
+	                        )
+	                    )
+	                )
+	            )
+	        )
+	    }
+	});
+	exports.Header=Header;
+
+/***/ },
+/* 248 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(249);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(231)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./header.css", function() {
+				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./header.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(230)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "", ""]);
 
 	// exports
 

@@ -5,7 +5,7 @@ var React=require('react');
 var hashHistory=require("react-router").hashHistory;
 var ShowItem=React.createClass({
     toDetail:function(event){
-        hashHistory.push("/details?id="+event.target.getAttribute("data"));
+        hashHistory.push("/details?id="+event.target.getAttribute("data")+'&uid='+this.props.uid);
     },
     add:function(event){
         console.info(this.props.uid);
@@ -20,8 +20,7 @@ var ShowItem=React.createClass({
                     uid:this.props.uid
                 },
                 success:function(){
-                    hashHistory.push('/home?='+this.props.uid);
-                    hashHistory.push('/search?='+this.props.uid);
+                    hashHistory.push('/search?uid='+this.props.uid);
                 }.bind(this)
             });
         }

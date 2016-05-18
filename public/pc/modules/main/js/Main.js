@@ -13,98 +13,12 @@ var Main=React.createClass({
             orderNum:0
         };
     },
-    getSession:function(){
-        $.ajax({
-            type:'post',
-            url:'/users/getSession',
-            success:function(data){
-                this.getOrderNum(data[1]);
-                this.setState({
-                    sessionName:data[0],
-                    uid:data[1]
-                })
-            }.bind(this)
-        });
-    },
-    getOrderNum:function(uid){
-        console.info(this.state.uid);
-        if(this.state.uid){
-            $.ajax({
-                type:'post',
-                url:'/cart/showAll',
-                data:{
-                    uid:this.state.uid
-                },
-                success:function(data){
-                    console.info('1'+data.length);
-                    this.setState({orderNum:data.length});
-                }.bind(this)
-            });
-        }
-        if(uid!=[]){
-            $.ajax({
-                type:'post',
-                url:'/cart/showAll',
-                data:{
-                    uid:uid
-                },
-                success:function(data){
-                    console.info('2'+data.length);
-                    this.setState({orderNum:data.length});
-                }.bind(this)
-            });
-        }
-    },
-    componentDidMount:function(){
-        //this.getOrderNum();
-    },
-    componentWillMount:function(){
-        this.getSession();
-        //this.getOrderNum();
-    },
-    componentWillReceiveProps:function(){
-        this.getSession();
-        this.getOrderNum();
-    },
-    toOrder:function(){
-       if(this.state.sessionName==[]){
-           hashHistory.push('/login');
-       }else{
-           hashHistory.push('/order?uid='+this.state.uid);
-       }
-    },
+
     render:function(){
-        var txt;
-        if(this.state.sessionName){
-            txt=<span><a href="javascript:">{this.state.sessionName}</a></span>
-        }else{
-            txt=<Link to="/login"><span><a href="javascript:">LOGIN</a></span></Link>
-        }
+
         return(
             <div className="wrap">
-                <div className="header_area"></div>
-                <div className="header">
-                    <div className="header_left fl">
-                        <Link query={{'uid':this.state.uid}} to="/home"><img src="images/logo-big.png" alt="logo"/></Link>
-                        <div className="header_nav fl">
-                            <Link query={{'uid':this.state.uid}} to="/search"><span><a href="javascript:">SHOP</a></span></Link>
-                            <span><a href="javascript:">SUPPORT</a></span>
-                            <span><a href="javascript:">NEWS</a></span>
-                            <span><a href="javascript:">RESELLERS</a></span>
-                            <span><a href="javascript:">ABOUT</a></span>
-                        </div>
-                    </div>
-                    <div className="header_right fr">
-                        <div className="cart_icon fr">
-                            <strong onClick={this.toOrder}>{this.state.orderNum}</strong>
-                            <span className="cart_icon_handle"></span>
-                        </div>
-                        <div className="header_right_nav fr">
-                            {txt}
-                            <span><a href="javascript:">CART&nbsp;&nbsp;/&nbsp;&nbsp;$<i>{this.state.totalPrice}</i></a></span>
-                        </div>
-                    </div>
-                </div>
+
                 {this.props.children}
                 <div className="footer">
                     <div className="footer_box">

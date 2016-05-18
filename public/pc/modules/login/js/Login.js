@@ -1,6 +1,7 @@
 var React=require('react');
 var hashHistory=require("react-router").hashHistory;
 require('../css/login.css');
+var Header=require('../../header/js/Header.js').Header;
 var Login=React.createClass({
 	componentDidMount:function(){
 		var warn=this.refs.warn;
@@ -197,6 +198,7 @@ var Login=React.createClass({
 	render(){
 		return (
 			<div className="login_and_register">
+				<Header/>
 				<div ref="warnBox" className="warn">
 					<p ref="warn"></p>
 				</div>

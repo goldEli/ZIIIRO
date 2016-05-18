@@ -3,6 +3,7 @@
  */
 var React=require('react');
 var Link=require('react-router').Link;
+var Header=require('../../header/js/Header.js').Header;
 var ShowItem=require('./ShowItem').ShowItem;
 require('../css/search.css');
 var Search=React.createClass({
@@ -53,6 +54,7 @@ var Search=React.createClass({
         }
         return(
             <div className="search">
+                <Header/>
                 <div className="search_input">
                     <div className="search_input_area fr">
                         <button onClick={this.search}>search</button>
