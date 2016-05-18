@@ -10,5 +10,6 @@
     <file url="file://$PROJECT_DIR$/public/pc/modules/home/js/Home.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/pc/modules/main/js/Main.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/public/pc/modules/order/js/Order.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/public/pc/modules/order/js/OrderItem.js" charset="UTF-8" />
   </component>
 </project>

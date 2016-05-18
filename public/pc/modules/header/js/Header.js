@@ -14,6 +14,18 @@ var Header=React.createClass({
             orderNum:0
         };
     },
+    getTotal:function(data){
+        var totalPrice=0;
+        for(var i=0 ;i<data.length;++i){
+            var count=parseInt(data[i].count);
+            var price=data[i].product.price;
+            var total=parseInt(price.substring(1))*count;
+            totalPrice+=total;
+        }
+        this.setState({
+            totalPrice:totalPrice
+        })
+    },
     getSession:function(){
         $.ajax({
             type:'post',
@@ -36,6 +48,7 @@ var Header=React.createClass({
                     uid:this.state.uid
                 },
                 success:function(data){
+                    this.getTotal(data);
                     this.setState({orderNum:data.length});
                 }.bind(this)
             });
@@ -99,7 +112,7 @@ var Header=React.createClass({
                         </div>
                         <div className="header_right_nav fr">
                             {txt}
-                            <span><a href="javascript:">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ShopCar</a></span>
+                            <span><a href="javascript:">cart&nbsp;&nbsp;/&nbsp;&nbsp;${this.state.totalPrice}</a></span>
                         </div>
                     </div>
                 </div>

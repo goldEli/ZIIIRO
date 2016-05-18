@@ -5,12 +5,73 @@ var React=require('react');
 var Link=require('react-router').Link;
 require('../css/order.css');
 var Header=require('../../header/js/Header.js').Header;
+var OrderItem=require('./OrderItem').OrderItem;
 var Order=React.createClass({
+    getInitialState:function(){
+        return({
+            data:[],
+            totalPrice:0,
+            totalPriceWithD:0
+        })
+    },
+    getTotal:function(data){
+        var totalPrice=0;
+        for(var i=0 ;i<data.length;++i){
+            var count=parseInt(data[i].count);
+            var price=data[i].product.price;
+            var total=parseInt(price.substring(1))*count;
+            totalPrice+=total;
+        }
+        this.setState({
+            totalPrice:totalPrice
+        });
+        this.setState({totalPriceWithD:totalPrice});
+    },
+    showAll:function(){
+        if(this.props.location.query.uid){
+            $.ajax({
+                type:'post',
+                url:'/cart/showAll',
+                data:{
+                    uid:this.props.location.query.uid
+                },
+                success:function(data){
+                    this.getTotal(data);
+                    this.setState({data:data});
+                }.bind(this)
+            });
+        }
+    },
+    componentDidMount:function(){
+        $(this.refs.standard).click(function(){
+            var num1=this.state.totalPrice+25;
+            this.setState({totalPriceWithD:num1});
+        }.bind(this));
+        $(this.refs.express).click(function(){
+            var num2=this.state.totalPrice+35;
+            this.setState({totalPriceWithD:num2});
+        }.bind(this));
+
+    },
+    //componentWillReceiveProps:function(){
+    //    this.totalPriceWithD();
+    //},
+    componentWillMount:function(){
+        this.showAll();
+        //this.totalPriceWithD();
+    },
     render:function(){
+        var arr=[];
+        if(this.state.data){
+            arr=this.state.data.map(function(element){
+                arr=element;
+                return <OrderItem data={arr}/>
+            });
+        }
         return(
             <div className="order">
                 <Header/>
-                <h1>CART</h1>
+                <h1></h1>
                 <div className="order_left fl">
                     <table>
                         <tr className="order_left_title">
@@ -19,20 +80,7 @@ var Order=React.createClass({
                             <th>QUANTITY</th>
                             <th>TOTAL</th>
                         </tr>
-                        <tr className="order_left_grid">
-                            <td className="product">
-                                <a href="javascript:"><span>×</span></a>
-                                <a href="javascript:"><img src="images/ziiiro-eclipse-metal-rosegold-front-200x300.jpg" alt="img"/></a>
-                                <a href="javascript:"><p>ECLIPSE Steel Rose Gold</p></a>
-                            </td>
-                            <td className="price"><p>$ 219.00</p></td>
-                            <td className="quantity">
-                                <button>+</button>
-                                <span>1</span>
-                                <button>-</button>
-                            </td>
-                            <td className="total"><p>$ 219.00</p></td>
-                        </tr>
+                        {arr}
                     </table>
                 </div>
                 <div className="order_right fr">
@@ -43,7 +91,7 @@ var Order=React.createClass({
                         </tr>
                         <tr className="subtotal">
                             <td>Subtotal</td>
-                            <td>$ 219.00</td>
+                            <td>$ {this.state.totalPrice}</td>
                         </tr>
                         <tr className="shipping">
                             <td>Shipping<br/><br/></td>
@@ -52,17 +100,17 @@ var Order=React.createClass({
                                     <input type="radio" name="express"/><label> Free Shipping</label>
                                 </div>
                                 <div>
-                                    <input type="radio" name="express"/><label> Standard Delivery: $ 25.00</label>
+                                    <input type="radio" ref="standard" name="express"/><label> Standard Delivery: $ 25.00</label>
                                 </div>
                                 <div>
-                                    <input type="radio" name="express"/><label> Express Delivery: $ 35.00</label>
+                                    <input type="radio" ref="express" name="express"/><label> Express Delivery: $ 35.00</label>
                                 </div>
                                 <div className="blank"></div>
                             </td>
                         </tr>
                         <tr className="final_price">
                             <td>Total</td>
-                            <td>$ 219.00</td>
+                            <td ref="total">$ {this.state.totalPriceWithD}</td>
                         </tr>
                     </table>
                     <button className="pay_bth">PROCEED TO CHECKOUT</button>
