@@ -10,6 +10,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var product=require('./routes/product');
 var hot=require('./routes/hot');
+var cart=require('./routes/cart');
 
 
 var app = express();
@@ -36,6 +37,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/product',product);
 app.use('/hot',hot);
+app.use('/cart',cart);
 
 var server = app.listen(3000, function () {
   var host = server.address().address;

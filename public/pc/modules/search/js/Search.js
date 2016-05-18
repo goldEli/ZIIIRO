@@ -9,7 +9,8 @@ var Search=React.createClass({
     getInitialState: function(){
     return {
         data: [],
-        searchItems:9
+        searchItems:9,
+        uid:null
         };
     },
     search:function(){
@@ -33,6 +34,7 @@ var Search=React.createClass({
         }
     },
     componentWillMount:function(){
+        this.setState({uid:this.props.location.query.uid});
         $.ajax({
             type:'post',
             url:'/product/showAllProduct',
@@ -46,14 +48,14 @@ var Search=React.createClass({
         if(this.state.data.length>0){
             arr=this.state.data.map(function(element){
                 arr=element;
-                return <ShowItem data={arr}/>
+                return <ShowItem uid={this.state.uid} data={arr}/>
             }.bind(this));
         }
         return(
             <div className="search">
                 <div className="search_input">
                     <div className="search_input_area fr">
-                        <button onClick={this.search.bind(this)}>search</button>
+                        <button onClick={this.search}>search</button>
                         <input ref="searchInput" type="text"/>
                     </div>
                     <p>Showing all <i>{this.state.searchItems}</i> results</p>

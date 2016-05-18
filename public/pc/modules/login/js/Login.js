@@ -42,8 +42,8 @@ var Login=React.createClass({
 										pwd:$(pwdL).val()
 									},
 									success:function(data){
-										if(data=='suc'){
-											hashHistory.push('/');
+										if(data!='Error:  The password you entered is incorrect.'){
+											hashHistory.push('/home?uid='+data);
 										}else{
 											$(warn).css({'backgroundColor':'#b20000'});
 											$(warnBox).show();

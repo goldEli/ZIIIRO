@@ -25582,8 +25582,8 @@
 											pwd:$(pwdL).val()
 										},
 										success:function(data){
-											if(data=='suc'){
-												hashHistory.push('/');
+											if(data!='Error:  The password you entered is incorrect.'){
+												hashHistory.push('/home?uid='+data);
 											}else{
 												$(warn).css({'backgroundColor':'#b20000'});
 												$(warnBox).show();
@@ -26147,11 +26147,13 @@
 	    getInitialState:function(){
 	      return(
 	        {
-	            dataHot:[]
+	            dataHot:[],
+	            uid:null
 	        }
 	      );
 	    },
 	    componentWillMount:function(){
+	        this.setState({uid:this.props.location.query.uid});
 	        $.ajax({
 	            type:'post',
 	            url:'/hot/showAllProduct',
@@ -26238,8 +26240,8 @@
 	            var arr=[];
 	            arr=this.state.dataHot.map(function(element){
 	                arr=element;
-	                return React.createElement(HotItem, {dataHot: arr})
-	            });
+	                return React.createElement(HotItem, {uid: this.state.uid, dataHot: arr})
+	            }.bind(this));
 	        }
 	        return (
 	            React.createElement("div", {className: "home"}, 
@@ -26388,15 +26390,34 @@
 	    toDetail:function(event){
 	        hashHistory.push("/details?id="+event.target.getAttribute("data"));
 	    },
+	    add:function(event){
+	        console.info(this.props.uid);
+	        if(!this.props.uid){
+	            hashHistory.push("/login");
+	        }else{
+	            $.ajax({
+	                type:'post',
+	                url:'/cart/add',
+	                data:{
+	                    pid:event.target.getAttribute("data"),
+	                    uid:this.props.uid
+	                },
+	                success:function(){
+	                    hashHistory.push('/?='+this.props.uid);
+	                }.bind(this)
+	            });
+	        }
+
+	    },
 	    render:function(){
 	        var data=this.props.dataHot.product;
 	        return(
 	            React.createElement("div", {className: "show_product_box_cell fl"}, 
 	                React.createElement("div", {className: "img_box"}, 
 	                    React.createElement("img", {className: "show", src: data.imgPathS[1], alt: "img"}), 
-	                    React.createElement("img", {className: "hide", onClick: this.toDetail.bind(this), src: data.imgPathS[0], data: data['_id'], alt: "img"}), 
+	                    React.createElement("img", {className: "hide", onClick: this.toDetail, src: data.imgPathS[0], data: data['_id'], alt: "img"}), 
 	                    React.createElement("div", {className: "cart_icon fr"}, 
-	                        React.createElement("strong", null, "+"), 
+	                        React.createElement("strong", {onClick: this.add, data: data['_id']}, "+"), 
 	                        React.createElement("span", {className: "cart_icon_handle"})
 	                    )
 	                ), 
@@ -26420,10 +26441,14 @@
 	 */
 	var React=__webpack_require__(1);
 	var Link = __webpack_require__(166).Link;
+	var hashHistory=__webpack_require__(166).hashHistory;
 	var Main=React.createClass({displayName: "Main",
 	    getInitialState: function(){
 	        return {
-	            sessionName: []
+	            sessionName: [],
+	            totalPrice:0,
+	            uid:[],
+	            orderNum:0
 	        };
 	    },
 	    getSession:function(){
@@ -26431,17 +26456,60 @@
 	            type:'post',
 	            url:'/users/getSession',
 	            success:function(data){
+	                this.getOrderNum(data[1]);
 	                this.setState({
-	                    sessionName:data
+	                    sessionName:data[0],
+	                    uid:data[1]
 	                })
 	            }.bind(this)
 	        });
 	    },
+	    getOrderNum:function(uid){
+	        console.info(this.state.uid);
+	        if(this.state.uid){
+	            $.ajax({
+	                type:'post',
+	                url:'/cart/showAll',
+	                data:{
+	                    uid:this.state.uid
+	                },
+	                success:function(data){
+	                    console.info('1'+data.length);
+	                    this.setState({orderNum:data.length});
+	                }.bind(this)
+	            });
+	        }
+	        if(uid!=[]){
+	            $.ajax({
+	                type:'post',
+	                url:'/cart/showAll',
+	                data:{
+	                    uid:uid
+	                },
+	                success:function(data){
+	                    console.info('2'+data.length);
+	                    this.setState({orderNum:data.length});
+	                }.bind(this)
+	            });
+	        }
+	    },
+	    componentDidMount:function(){
+	        //this.getOrderNum();
+	    },
 	    componentWillMount:function(){
 	        this.getSession();
+	        //this.getOrderNum();
 	    },
 	    componentWillReceiveProps:function(){
 	        this.getSession();
+	        this.getOrderNum();
+	    },
+	    toOrder:function(){
+	       if(this.state.sessionName==[]){
+	           hashHistory.push('/login');
+	       }else{
+	           hashHistory.push('/order?uid='+this.state.uid);
+	       }
 	    },
 	    render:function(){
 	        var txt;
@@ -26452,12 +26520,13 @@
 	        }
 	        return(
 	            React.createElement("div", {className: "wrap"}, 
+	                React.createElement("div", {className: "header_area"}), 
 	                React.createElement("div", {className: "header"}, 
 	                    React.createElement("div", {className: "header_left fl"}, 
-	                        React.createElement(Link, {to: "/home"}, React.createElement("img", {src: "images/logo-big.png", alt: "logo"})), 
+	                        React.createElement(Link, {query: {'uid':this.state.uid}, to: "/home"}, React.createElement("img", {src: "images/logo-big.png", alt: "logo"})), 
 	                        React.createElement("div", {className: "header_nav fl"}, 
-	                            React.createElement(Link, {to: "/search"}, React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "SHOP"))), 
-	                            React.createElement(Link, {to: "/details"}, React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "SUPPORT"))), 
+	                            React.createElement(Link, {query: {'uid':this.state.uid}, to: "/search"}, React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "SHOP"))), 
+	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "SUPPORT")), 
 	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "NEWS")), 
 	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "RESELLERS")), 
 	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "ABOUT"))
@@ -26465,12 +26534,12 @@
 	                    ), 
 	                    React.createElement("div", {className: "header_right fr"}, 
 	                        React.createElement("div", {className: "cart_icon fr"}, 
-	                            React.createElement(Link, {to: "/order"}, React.createElement("strong", null, "4")), 
+	                            React.createElement("strong", {onClick: this.toOrder}, this.state.orderNum), 
 	                            React.createElement("span", {className: "cart_icon_handle"})
 	                        ), 
 	                        React.createElement("div", {className: "header_right_nav fr"}, 
 	                            txt, 
-	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "CART  /  $87.5"))
+	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "CART  /  $", React.createElement("i", null, this.state.totalPrice)))
 	                        )
 	                    )
 	                ), 
@@ -26646,7 +26715,8 @@
 	    getInitialState: function(){
 	    return {
 	        data: [],
-	        searchItems:9
+	        searchItems:9,
+	        uid:null
 	        };
 	    },
 	    search:function(){
@@ -26670,7 +26740,7 @@
 	        }
 	    },
 	    componentWillMount:function(){
-	        console.info('componentWillMount');
+	        this.setState({uid:this.props.location.query.uid});
 	        $.ajax({
 	            type:'post',
 	            url:'/product/showAllProduct',
@@ -26684,14 +26754,14 @@
 	        if(this.state.data.length>0){
 	            arr=this.state.data.map(function(element){
 	                arr=element;
-	                return React.createElement(ShowItem, {data: arr})
+	                return React.createElement(ShowItem, {uid: this.state.uid, data: arr})
 	            }.bind(this));
 	        }
 	        return(
 	            React.createElement("div", {className: "search"}, 
 	                React.createElement("div", {className: "search_input"}, 
 	                    React.createElement("div", {className: "search_input_area fr"}, 
-	                        React.createElement("button", {onClick: this.search.bind(this)}, "search"), 
+	                        React.createElement("button", {onClick: this.search}, "search"), 
 	                        React.createElement("input", {ref: "searchInput", type: "text"})
 	                    ), 
 	                    React.createElement("p", null, "Showing all ", React.createElement("i", null, this.state.searchItems), " results")
@@ -26734,15 +26804,35 @@
 	    toDetail:function(event){
 	        hashHistory.push("/details?id="+event.target.getAttribute("data"));
 	    },
+	    add:function(event){
+	        console.info(this.props.uid);
+	        if(!this.props.uid){
+	            hashHistory.push("/login");
+	        }else{
+	            $.ajax({
+	                type:'post',
+	                url:'/cart/add',
+	                data:{
+	                    pid:event.target.getAttribute("data"),
+	                    uid:this.props.uid
+	                },
+	                success:function(){
+	                    hashHistory.push('/home?='+this.props.uid);
+	                    hashHistory.push('/search?='+this.props.uid);
+	                }.bind(this)
+	            });
+	        }
+
+	    },
 	    render:function(){
 	        var data=this.props.data;
 	        return(
 	            React.createElement("div", {className: "search_show_product_box_cell fl"}, 
-	                React.createElement("div", {className: "search_img_box", onClick: this.toDetail.bind(this)}, 
+	                React.createElement("div", {className: "search_img_box"}, 
 	                    React.createElement("img", {className: "search_show", src: data.imgPathS[1], alt: "img"}), 
-	                    React.createElement("img", {className: "search_hide", src: data.imgPathS[0], data: data['_id'], alt: "img"}), 
+	                    React.createElement("img", {className: "search_hide", onClick: this.toDetail, src: data.imgPathS[0], data: data['_id'], alt: "img"}), 
 	                    React.createElement("div", {className: "cart_icon fr"}, 
-	                        React.createElement("strong", null, "+"), 
+	                        React.createElement("strong", {onClick: this.add, data: data['_id']}, "+"), 
 	                        React.createElement("span", {className: "cart_icon_handle"})
 	                    )
 	                ), 

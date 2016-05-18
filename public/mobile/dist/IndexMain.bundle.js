@@ -58,10 +58,10 @@
 
 	var Login=__webpack_require__(227).Login;
 	var Home=__webpack_require__(228).Home;
-	var Main=__webpack_require__(229).Main;
-	var Order=__webpack_require__(230).Order;
-	var Search=__webpack_require__(231).Search;
-	var Details=__webpack_require__(232).Details;
+	var Main=__webpack_require__(230).Main;
+	var Order=__webpack_require__(231).Order;
+	var Search=__webpack_require__(232).Search;
+	var Details=__webpack_require__(234).Details;
 
 	ReactDom.render(
 	    React.createElement(Router, {history: hashHistory}, 
@@ -25796,7 +25796,7 @@
 	 */
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
-	var HomeHotItem=__webpack_require__(233).HomeHotItem;
+	var HomeHotItem=__webpack_require__(229).HomeHotItem;
 	var Home=React.createClass({displayName: "Home",
 	    getInitialState:function(){
 	      return(
@@ -25993,6 +25993,42 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
+	 * Created by Administrator on 2016/5/18.
+	 */
+	var React=__webpack_require__(1);
+	var hashHistory=__webpack_require__(166).hashHistory;
+	var HomeHotItem=React.createClass({displayName: "HomeHotItem",
+	    toDetail:function(event){
+	        hashHistory.push("/details?id="+event.target.getAttribute("data"));
+	    },
+	    render:function(){
+	        var data=this.props.dataHot.product;
+	        return(
+	            React.createElement("div", {className: "show_product_box_cell fl"}, 
+	                React.createElement("div", {className: "img_box"}, 
+	                    React.createElement("img", {className: "show", onClick: this.toDetail.bind(this), data: data['_id'], src: data.imgPathS[1], alt: "img"}), 
+	                    React.createElement("img", {className: "hide", src: data.imgPathS[0], alt: "img"}), 
+	                    React.createElement("div", {className: "cart_icon fr"}, 
+	                        React.createElement("strong", null, "+"), 
+	                        React.createElement("span", {className: "cart_icon_handle"})
+	                    )
+	                ), 
+	                React.createElement("div", {className: "text_box"}, 
+	                    React.createElement("h5", null, data.category), 
+	                    React.createElement("p", null, data.name), 
+	                    React.createElement("span", null, data.price)
+	                )
+	            )
+	        )
+	    }
+	});
+	exports.HomeHotItem=HomeHotItem;
+
+/***/ },
+/* 230 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
 	 * Created by Administrator on 2016/5/12.
 	 */
 	var React=__webpack_require__(1);
@@ -26093,7 +26129,7 @@
 	exports.Main=Main;
 
 /***/ },
-/* 230 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26167,7 +26203,7 @@
 	exports.Order=Order;
 
 /***/ },
-/* 231 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26175,7 +26211,7 @@
 	 */
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
-	var SearchItem=__webpack_require__(234).SearchItem;
+	var SearchItem=__webpack_require__(233).SearchItem;
 	var Search=React.createClass({displayName: "Search",
 	    getInitialState: function(){
 	        return {
@@ -26241,7 +26277,43 @@
 	exports.Search=Search;
 
 /***/ },
-/* 232 */
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by Administrator on 2016/5/18.
+	 */
+	var React=__webpack_require__(1);
+	var hashHistory=__webpack_require__(166).hashHistory;
+	var SearchItem=React.createClass({displayName: "SearchItem",
+	    toDetail:function(event){
+	        hashHistory.push("/details?id="+event.target.getAttribute("data"));
+	    },
+	    render:function(){
+	        var data=this.props.data;
+	        return(
+	            React.createElement("div", {className: "show_product_box_cell fl"}, 
+	                React.createElement("div", {className: "img_box"}, 
+	                    React.createElement("img", {className: "show", onClick: this.toDetail.bind(this), data: data['_id'], src: data.imgPathS[1], alt: "img"}), 
+	                    React.createElement("img", {className: "hide", src: "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg", alt: "img"}), 
+	                    React.createElement("div", {className: "cart_icon fr"}, 
+	                        React.createElement("strong", null, "+"), 
+	                        React.createElement("span", {className: "cart_icon_handle"})
+	                    )
+	                ), 
+	                React.createElement("div", {className: "text_box"}, 
+	                    React.createElement("h5", null, data.category), 
+	                    React.createElement("p", null, data.name), 
+	                    React.createElement("span", null, data.price)
+	                )
+	            )
+	        )
+	    }
+	});
+	exports.SearchItem=SearchItem;
+
+/***/ },
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26355,78 +26427,6 @@
 	    }
 	});
 	exports.Details=Details;
-
-/***/ },
-/* 233 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Created by Administrator on 2016/5/18.
-	 */
-	var React=__webpack_require__(1);
-	var hashHistory=__webpack_require__(166).hashHistory;
-	var HomeHotItem=React.createClass({displayName: "HomeHotItem",
-	    toDetail:function(event){
-	        hashHistory.push("/details?id="+event.target.getAttribute("data"));
-	    },
-	    render:function(){
-	        var data=this.props.dataHot.product;
-	        return(
-	            React.createElement("div", {className: "show_product_box_cell fl"}, 
-	                React.createElement("div", {className: "img_box"}, 
-	                    React.createElement("img", {className: "show", onClick: this.toDetail.bind(this), data: data['_id'], src: data.imgPathS[1], alt: "img"}), 
-	                    React.createElement("img", {className: "hide", src: data.imgPathS[0], alt: "img"}), 
-	                    React.createElement("div", {className: "cart_icon fr"}, 
-	                        React.createElement("strong", null, "+"), 
-	                        React.createElement("span", {className: "cart_icon_handle"})
-	                    )
-	                ), 
-	                React.createElement("div", {className: "text_box"}, 
-	                    React.createElement("h5", null, data.category), 
-	                    React.createElement("p", null, data.name), 
-	                    React.createElement("span", null, data.price)
-	                )
-	            )
-	        )
-	    }
-	});
-	exports.HomeHotItem=HomeHotItem;
-
-/***/ },
-/* 234 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Created by Administrator on 2016/5/18.
-	 */
-	var React=__webpack_require__(1);
-	var hashHistory=__webpack_require__(166).hashHistory;
-	var SearchItem=React.createClass({displayName: "SearchItem",
-	    toDetail:function(event){
-	        hashHistory.push("/details?id="+event.target.getAttribute("data"));
-	    },
-	    render:function(){
-	        var data=this.props.data;
-	        return(
-	            React.createElement("div", {className: "show_product_box_cell fl"}, 
-	                React.createElement("div", {className: "img_box"}, 
-	                    React.createElement("img", {className: "show", onClick: this.toDetail.bind(this), data: data['_id'], src: data.imgPathS[1], alt: "img"}), 
-	                    React.createElement("img", {className: "hide", src: "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg", alt: "img"}), 
-	                    React.createElement("div", {className: "cart_icon fr"}, 
-	                        React.createElement("strong", null, "+"), 
-	                        React.createElement("span", {className: "cart_icon_handle"})
-	                    )
-	                ), 
-	                React.createElement("div", {className: "text_box"}, 
-	                    React.createElement("h5", null, data.category), 
-	                    React.createElement("p", null, data.name), 
-	                    React.createElement("span", null, data.price)
-	                )
-	            )
-	        )
-	    }
-	});
-	exports.SearchItem=SearchItem;
 
 /***/ }
 /******/ ]);

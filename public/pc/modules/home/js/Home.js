@@ -9,11 +9,13 @@ var Home=React.createClass({
     getInitialState:function(){
       return(
         {
-            dataHot:[]
+            dataHot:[],
+            uid:null
         }
       );
     },
     componentWillMount:function(){
+        this.setState({uid:this.props.location.query.uid});
         $.ajax({
             type:'post',
             url:'/hot/showAllProduct',
@@ -100,8 +102,8 @@ var Home=React.createClass({
             var arr=[];
             arr=this.state.dataHot.map(function(element){
                 arr=element;
-                return <HotItem dataHot={arr}/>
-            });
+                return <HotItem uid={this.state.uid} dataHot={arr}/>
+            }.bind(this));
         }
         return (
             <div className="home">

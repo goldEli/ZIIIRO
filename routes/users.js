@@ -33,9 +33,8 @@ router.post('/login',function(req,res){
 			console.log('失败'+err);
 		}else {
 			if(data.length>0){
-				req.session.name=data[0].name;
-				console.info(req.session.name);
-				res.send('suc');
+				req.session.name=[data[0].name,data[0]._id];
+				res.send(data[0]._id);
 			}else{
 				res.send('Error:  The password you entered is incorrect.');
 			}

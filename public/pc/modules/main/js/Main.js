@@ -3,10 +3,14 @@
  */
 var React=require('react');
 var Link = require("react-router").Link;
+var hashHistory=require("react-router").hashHistory;
 var Main=React.createClass({
     getInitialState: function(){
         return {
-            sessionName: []
+            sessionName: [],
+            totalPrice:0,
+            uid:[],
+            orderNum:0
         };
     },
     getSession:function(){
@@ -14,17 +18,60 @@ var Main=React.createClass({
             type:'post',
             url:'/users/getSession',
             success:function(data){
+                this.getOrderNum(data[1]);
                 this.setState({
-                    sessionName:data
+                    sessionName:data[0],
+                    uid:data[1]
                 })
             }.bind(this)
         });
     },
+    getOrderNum:function(uid){
+        console.info(this.state.uid);
+        if(this.state.uid){
+            $.ajax({
+                type:'post',
+                url:'/cart/showAll',
+                data:{
+                    uid:this.state.uid
+                },
+                success:function(data){
+                    console.info('1'+data.length);
+                    this.setState({orderNum:data.length});
+                }.bind(this)
+            });
+        }
+        if(uid!=[]){
+            $.ajax({
+                type:'post',
+                url:'/cart/showAll',
+                data:{
+                    uid:uid
+                },
+                success:function(data){
+                    console.info('2'+data.length);
+                    this.setState({orderNum:data.length});
+                }.bind(this)
+            });
+        }
+    },
+    componentDidMount:function(){
+        //this.getOrderNum();
+    },
     componentWillMount:function(){
         this.getSession();
+        //this.getOrderNum();
     },
     componentWillReceiveProps:function(){
         this.getSession();
+        this.getOrderNum();
+    },
+    toOrder:function(){
+       if(this.state.sessionName==[]){
+           hashHistory.push('/login');
+       }else{
+           hashHistory.push('/order?uid='+this.state.uid);
+       }
     },
     render:function(){
         var txt;
@@ -35,12 +82,13 @@ var Main=React.createClass({
         }
         return(
             <div className="wrap">
+                <div className="header_area"></div>
                 <div className="header">
                     <div className="header_left fl">
-                        <Link to="/home"><img src="images/logo-big.png" alt="logo"/></Link>
+                        <Link query={{'uid':this.state.uid}} to="/home"><img src="images/logo-big.png" alt="logo"/></Link>
                         <div className="header_nav fl">
-                            <Link to="/search"><span><a href="javascript:">SHOP</a></span></Link>
-                            <Link to="/details"><span><a href="javascript:">SUPPORT</a></span></Link>
+                            <Link query={{'uid':this.state.uid}} to="/search"><span><a href="javascript:">SHOP</a></span></Link>
+                            <span><a href="javascript:">SUPPORT</a></span>
                             <span><a href="javascript:">NEWS</a></span>
                             <span><a href="javascript:">RESELLERS</a></span>
                             <span><a href="javascript:">ABOUT</a></span>
@@ -48,12 +96,12 @@ var Main=React.createClass({
                     </div>
                     <div className="header_right fr">
                         <div className="cart_icon fr">
-                            <Link to="/order"><strong>4</strong></Link>
+                            <strong onClick={this.toOrder}>{this.state.orderNum}</strong>
                             <span className="cart_icon_handle"></span>
                         </div>
                         <div className="header_right_nav fr">
                             {txt}
-                            <span><a href="javascript:">CART&nbsp;&nbsp;/&nbsp;&nbsp;$87.5</a></span>
+                            <span><a href="javascript:">CART&nbsp;&nbsp;/&nbsp;&nbsp;$<i>{this.state.totalPrice}</i></a></span>
                         </div>
                     </div>
                 </div>
