@@ -25602,7 +25602,23 @@
 	 */
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
+	var HomeHotItem=__webpack_require__(233).HomeHotItem;
 	var Home=React.createClass({displayName: "Home",
+	    getInitialState:function(){
+	      return(
+	        {dataHot:[]}
+	      )
+	    },
+	    componentWillMount:function(){
+	        //获取热销商品
+	        $.ajax({
+	            type:'post',
+	            url:'/hot/showAllProduct',
+	            success:function(data){
+	                this.setState({dataHot:data});
+	            }.bind(this)
+	        });
+	    },
 	    componentDidMount:function(){
 	        var arr=[this.refs.banner_box,this.refs.banner_box1,this.
 	            refs.banner_box2,this.refs.banner_box3,
@@ -25677,6 +25693,13 @@
 	        }
 	    },
 	    render:function(){
+	        if(this.state.dataHot){
+	            var arr=[];
+	            arr=this.state.dataHot.map(function(element){
+	                arr=element;
+	                return React.createElement(HomeHotItem, {dataHot: arr})
+	            });
+	        }
 	        return(
 	            React.createElement("div", {className: "home"}, 
 	                React.createElement("div", {className: "banner"}, 
@@ -25740,50 +25763,7 @@
 	                    React.createElement("h1", null, "Unique. Minimal. Aesthetic."), 
 	                    React.createElement("h3", null, "ZIIIRO watches are designed to make time for fun. Futuristic, minimalist, bold. Every design embodies the ZIIIRO vision of creating incredible timepieces with unique appearance and style. These space-age timekeepers remind us to zig while the world zags, and to take all the time we need to live and enjoy a life that’s awesome."), 
 	                    React.createElement("div", {className: "show_product_box"}, 
-	                        React.createElement("div", {className: "show_product_box_cell fl"}, 
-	                            React.createElement("div", {className: "img_box"}, 
-	                                React.createElement("img", {className: "show", src: "images/ziiiro-celeste-watch-black-mono-front-200x300.jpg", alt: "img"}), 
-	                                React.createElement("img", {className: "hide", src: "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg", alt: "img"}), 
-	                                React.createElement("div", {className: "cart_icon fr"}, 
-	                                    React.createElement("strong", null, "+"), 
-	                                    React.createElement("span", {className: "cart_icon_handle"})
-	                                )
-	                            ), 
-	                            React.createElement("div", {className: "text_box"}, 
-	                                React.createElement("h5", null, "CELESTE"), 
-	                                React.createElement("p", null, "CELESTE Black/Mono"), 
-	                                React.createElement("span", null, "$199.00")
-	                            )
-	                        ), 
-	                        React.createElement("div", {className: "show_product_box_cell fl"}, 
-	                            React.createElement("div", {className: "img_box"}, 
-	                                React.createElement("img", {className: "show", src: "images/ziiiro-celeste-watch-black-mono-front-200x300.jpg", alt: "img"}), 
-	                                React.createElement("img", {className: "hide", src: "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg", alt: "img"}), 
-	                                React.createElement("div", {className: "cart_icon fr"}, 
-	                                    React.createElement("strong", null, "+"), 
-	                                    React.createElement("span", {className: "cart_icon_handle"})
-	                                )
-	                            ), 
-	                            React.createElement("div", {className: "text_box"}, 
-	                                React.createElement("h5", null, "CELESTE"), 
-	                                React.createElement("p", null, "CELESTE Black/Mono"), 
-	                                React.createElement("span", null, "$199.00")
-	                            )
-	                        ), 
-	                        React.createElement("div", {className: "show_product_box_cell fl"}, 
-	                            React.createElement("div", {className: "img_box"}, 
-	                                React.createElement("img", {className: "show", src: "images/ziiiro-celeste-watch-black-mono-front-200x300.jpg", alt: "img"}), 
-	                                React.createElement("div", {className: "cart_icon fr"}, 
-	                                    React.createElement("strong", null, "+"), 
-	                                    React.createElement("span", {className: "cart_icon_handle"})
-	                                )
-	                            ), 
-	                            React.createElement("div", {className: "text_box"}, 
-	                                React.createElement("h5", null, "CELESTE"), 
-	                                React.createElement("p", null, "CELESTE Black/Mono"), 
-	                                React.createElement("span", null, "$199.00")
-	                            )
-	                        )
+	                        arr
 	                    ), 
 	                    React.createElement("div", {className: "customer_care"}, 
 	                        React.createElement("fieldset", null, 
@@ -26132,6 +26112,39 @@
 	    }
 	});
 	exports.Details=Details;
+
+/***/ },
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by Administrator on 2016/5/18.
+	 */
+	var React=__webpack_require__(1);
+	var HomeHotItem=React.createClass({displayName: "HomeHotItem",
+	    render:function(){
+	        var data=this.props.dataHot.product;
+	        console.info(data.name);
+	        return(
+	            React.createElement("div", {className: "show_product_box_cell fl"}, 
+	                React.createElement("div", {className: "img_box"}, 
+	                    React.createElement("img", {className: "show", src: data.imgPathS[1], alt: "img"}), 
+	                    React.createElement("img", {className: "hide", src: data.imgPathS[0], alt: "img"}), 
+	                    React.createElement("div", {className: "cart_icon fr"}, 
+	                        React.createElement("strong", null, "+"), 
+	                        React.createElement("span", {className: "cart_icon_handle"})
+	                    )
+	                ), 
+	                React.createElement("div", {className: "text_box"}, 
+	                    React.createElement("h5", null, data.category), 
+	                    React.createElement("p", null, data.name), 
+	                    React.createElement("span", null, data.price)
+	                )
+	            )
+	        )
+	    }
+	});
+	exports.HomeHotItem=HomeHotItem;
 
 /***/ }
 /******/ ]);

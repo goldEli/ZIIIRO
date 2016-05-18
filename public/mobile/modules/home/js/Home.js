@@ -3,7 +3,23 @@
  */
 var React=require('react');
 var Link=require('react-router').Link;
+var HomeHotItem=require('./HomeHotItem').HomeHotItem;
 var Home=React.createClass({
+    getInitialState:function(){
+      return(
+        {dataHot:[]}
+      )
+    },
+    componentWillMount:function(){
+        //获取热销商品
+        $.ajax({
+            type:'post',
+            url:'/hot/showAllProduct',
+            success:function(data){
+                this.setState({dataHot:data});
+            }.bind(this)
+        });
+    },
     componentDidMount:function(){
         var arr=[this.refs.banner_box,this.refs.banner_box1,this.
             refs.banner_box2,this.refs.banner_box3,
@@ -78,6 +94,13 @@ var Home=React.createClass({
         }
     },
     render:function(){
+        if(this.state.dataHot){
+            var arr=[];
+            arr=this.state.dataHot.map(function(element){
+                arr=element;
+                return <HomeHotItem dataHot={arr}/>
+            });
+        }
         return(
             <div className="home">
                 <div className="banner">
@@ -141,50 +164,7 @@ var Home=React.createClass({
                     <h1>Unique. Minimal. Aesthetic.</h1>
                     <h3>ZIIIRO watches are designed to make time for fun. Futuristic, minimalist, bold. Every design embodies the ZIIIRO vision of creating incredible timepieces with unique appearance and style. These space-age timekeepers remind us to zig while the world zags, and to take all the time we need to live and enjoy a life that’s awesome.</h3>
                     <div className="show_product_box">
-                        <div className="show_product_box_cell fl">
-                            <div className="img_box">
-                                <img className="show" src="images/ziiiro-celeste-watch-black-mono-front-200x300.jpg" alt="img"/>
-                                <img className="hide" src="images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg" alt="img"/>
-                                <div className="cart_icon fr">
-                                    <strong>+</strong>
-                                    <span className="cart_icon_handle"></span>
-                                </div>
-                            </div>
-                            <div className="text_box">
-                                <h5>CELESTE</h5>
-                                <p>CELESTE Black/Mono</p>
-                                <span>$199.00</span>
-                            </div>
-                        </div>
-                        <div className="show_product_box_cell fl">
-                            <div className="img_box">
-                                <img className="show" src="images/ziiiro-celeste-watch-black-mono-front-200x300.jpg" alt="img"/>
-                                <img className="hide" src="images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg" alt="img"/>
-                                <div className="cart_icon fr">
-                                    <strong>+</strong>
-                                    <span className="cart_icon_handle"></span>
-                                </div>
-                            </div>
-                            <div className="text_box">
-                                <h5>CELESTE</h5>
-                                <p>CELESTE Black/Mono</p>
-                                <span>$199.00</span>
-                            </div>
-                        </div>
-                        <div className="show_product_box_cell fl">
-                            <div className="img_box">
-                                <img className="show" src="images/ziiiro-celeste-watch-black-mono-front-200x300.jpg" alt="img"/>
-                                <div className="cart_icon fr">
-                                    <strong>+</strong>
-                                    <span className="cart_icon_handle"></span>
-                                </div>
-                            </div>
-                            <div className="text_box">
-                                <h5>CELESTE</h5>
-                                <p>CELESTE Black/Mono</p>
-                                <span>$199.00</span>
-                            </div>
-                        </div>
+                        {arr}
                     </div>
                     <div className="customer_care">
                         <fieldset>
