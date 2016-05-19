@@ -28,6 +28,9 @@ exports.findAll=function(uid,func){
      db.findJoin(data,'product',func);
   });
 };
+exports.del=function(id,func){
+    db.collection('cart').remove({_id:db.ObjectID(id)},func);
+};
 
 
 

@@ -8,7 +8,6 @@ var HotItem=React.createClass({
         hashHistory.push("/details?id="+event.target.getAttribute("data")+'&uid='+this.props.uid);
     },
     add:function(event){
-        console.info(this.props.uid);
         if(!this.props.uid){
             hashHistory.push("/login");
         }else{

@@ -60,13 +60,58 @@ var Order=React.createClass({
         this.showAll();
         //this.totalPriceWithD();
     },
+    del:function(id){
+      $.ajax({
+          type:'post',
+          url:'/cart/del',
+          data:{
+              id:id
+          },
+          success:function(){
+              this.showAll();
+          }.bind(this)
+      })
+    },
+    plus:function(pid,count){
+        $.ajax({
+            type:'post',
+            url:'/cart/add',
+            data:{
+                pid:pid,
+                count:count,
+                uid:this.props.location.query.uid
+            },
+            success:function(){
+                this.showAll();
+            }.bind(this)
+        })
+    },
+    minus:function(pid,count,id){
+        console.info([{pid},{count},{id}]);
+        if(count>1){
+            $.ajax({
+                type:'post',
+                url:'/cart/addMinus',
+                data:{
+                    pid:pid,
+                    count:count,
+                    uid:this.props.location.query.uid
+                },
+                success:function(){
+                    this.showAll();
+                }.bind(this)
+            })
+        }else{
+            this.del(id);
+        }
+    },
     render:function(){
         var arr=[];
         if(this.state.data){
             arr=this.state.data.map(function(element){
                 arr=element;
-                return <OrderItem data={arr}/>
-            });
+                return <OrderItem minus={this.minus} plus={this.plus} del={this.del} data={arr}/>
+            }.bind(this));
         }
         return(
             <div className="order">

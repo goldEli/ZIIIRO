@@ -57,12 +57,12 @@
 
 
 	var Login=__webpack_require__(227).Login;
-	var Home=__webpack_require__(232).Home;
-	var Main=__webpack_require__(236).Main;
-	var Order=__webpack_require__(237).Order;
-	var Search=__webpack_require__(240).Search;
-	var Details=__webpack_require__(244).Details;
-	var Header=__webpack_require__(247).Header;
+	var Home=__webpack_require__(235).Home;
+	var Main=__webpack_require__(239).Main;
+	var Order=__webpack_require__(240).Order;
+	var Search=__webpack_require__(244).Search;
+	var Details=__webpack_require__(248).Details;
+	var Header=__webpack_require__(232).Header;
 
 
 	ReactDom.render(
@@ -25543,7 +25543,7 @@
 	var React=__webpack_require__(1);
 	var hashHistory=__webpack_require__(166).hashHistory;
 	__webpack_require__(228);
-	var Header=__webpack_require__(247).Header;
+	var Header=__webpack_require__(232).Header;
 	var Login=React.createClass({displayName: "Login",
 		componentDidMount:function(){
 			var warn=this.refs.warn;
@@ -26141,12 +26141,180 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * Created by Administrator on 2016/5/12.
+	 * Created by Administrator on 2016/5/18.
 	 */
 	__webpack_require__(233);
 	var React=__webpack_require__(1);
-	var Header=__webpack_require__(247).Header;
-	var HotItem=__webpack_require__(235).HotItem;
+	var Link=__webpack_require__(166).Link;
+	var hashHistory=__webpack_require__(166).hashHistory;
+	var Header=React.createClass({displayName: "Header",
+	    getInitialState: function(){
+	        return {
+	            sessionName: [],
+	            totalPrice:0,
+	            uid:[],
+	            orderNum:0
+	        };
+	    },
+	    getTotal:function(data){
+	        var totalPrice=0;
+	        for(var i=0 ;i<data.length;++i){
+	            var count=parseInt(data[i].count);
+	            var price=data[i].product.price;
+	            var total=parseInt(price.substring(1))*count;
+	            totalPrice+=total;
+	        }
+	        this.setState({
+	            totalPrice:totalPrice
+	        })
+	    },
+	    getSession:function(){
+	        $.ajax({
+	            type:'post',
+	            url:'/users/getSession',
+	            success:function(data){
+	                this.getOrderNum(data[1]);
+	                this.setState({
+	                    sessionName:data[0],
+	                    uid:data[1]
+	                })
+	            }.bind(this)
+	        });
+	    },
+	    getOrderNum:function(uid){
+	        if(this.state.uid){
+	            $.ajax({
+	                type:'post',
+	                url:'/cart/showAll',
+	                data:{
+	                    uid:this.state.uid
+	                },
+	                success:function(data){
+	                    this.getTotal(data);
+	                    this.setState({orderNum:data.length});
+	                }.bind(this)
+	            });
+	        }
+	        if(uid!=[]){
+	            $.ajax({
+	                type:'post',
+	                url:'/cart/showAll',
+	                data:{
+	                    uid:uid
+	                },
+	                success:function(data){
+	                    this.setState({orderNum:data.length});
+	                }.bind(this)
+	            });
+	        }
+	    },
+	    componentDidMount:function(){
+	        //this.getOrderNum();
+	    },
+	    componentWillMount:function(){
+	        this.getSession();
+	        //this.getOrderNum();
+	    },
+	    componentWillReceiveProps:function(){
+	        this.getSession();
+	        this.getOrderNum();
+	    },
+	    toOrder:function(){
+	        if(this.state.sessionName==[]){
+	            hashHistory.push('/login');
+	        }else{
+	            hashHistory.push('/order?uid='+this.state.uid);
+	        }
+	    },
+	    render:function(){
+	        var txt;
+	        if(this.state.sessionName){
+	            txt=React.createElement("span", null, React.createElement("a", {href: "javascript:"}, this.state.sessionName))
+	        }else{
+	            txt=React.createElement(Link, {to: "/login"}, React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "LOGIN")))
+	        }
+	        return(
+	            React.createElement("div", {className: "header_box"}, 
+	                React.createElement("div", {className: "header_area"}), 
+	                React.createElement("div", {className: "header"}, 
+	                    React.createElement("div", {className: "header_left fl"}, 
+	                        React.createElement(Link, {query: {'uid':this.state.uid}, to: "/home"}, React.createElement("img", {src: "images/logo-big.png", alt: "logo"})), 
+	                        React.createElement("div", {className: "header_nav fl"}, 
+	                            React.createElement(Link, {query: {'uid':this.state.uid}, to: "/search"}, React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "SHOP"))), 
+	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "SUPPORT")), 
+	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "NEWS")), 
+	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "RESELLERS")), 
+	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "ABOUT"))
+	                        )
+	                    ), 
+	                    React.createElement("div", {className: "header_right fr"}, 
+	                        React.createElement("div", {className: "cart_icon fr"}, 
+	                            React.createElement("strong", {onClick: this.toOrder}, this.state.orderNum), 
+	                            React.createElement("span", {className: "cart_icon_handle"})
+	                        ), 
+	                        React.createElement("div", {className: "header_right_nav fr"}, 
+	                            txt, 
+	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "cart  /  $", this.state.totalPrice))
+	                        )
+	                    )
+	                )
+	            )
+	        )
+	    }
+	});
+	exports.Header=Header;
+
+/***/ },
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(234);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(231)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./header.css", function() {
+				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./header.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(230)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "", ""]);
+
+	// exports
+
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by Administrator on 2016/5/12.
+	 */
+	__webpack_require__(236);
+	var React=__webpack_require__(1);
+	var Header=__webpack_require__(232).Header;
+	var HotItem=__webpack_require__(238).HotItem;
 	var hashHistory=__webpack_require__(166).hashHistory;
 	var Home=React.createClass({displayName: "Home",
 	    getInitialState:function(){
@@ -26344,13 +26512,13 @@
 	exports.Home=Home;
 
 /***/ },
-/* 233 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(234);
+	var content = __webpack_require__(237);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(231)(content, {});
@@ -26370,7 +26538,7 @@
 	}
 
 /***/ },
-/* 234 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(230)();
@@ -26384,7 +26552,7 @@
 
 
 /***/ },
-/* 235 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26397,7 +26565,6 @@
 	        hashHistory.push("/details?id="+event.target.getAttribute("data")+'&uid='+this.props.uid);
 	    },
 	    add:function(event){
-	        console.info(this.props.uid);
 	        if(!this.props.uid){
 	            hashHistory.push("/login");
 	        }else{
@@ -26439,7 +26606,7 @@
 	exports.HotItem=HotItem;
 
 /***/ },
-/* 236 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26504,7 +26671,7 @@
 	exports.Main=Main;
 
 /***/ },
-/* 237 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26512,9 +26679,9 @@
 	 */
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
-	__webpack_require__(238);
-	var Header=__webpack_require__(247).Header;
-	var OrderItem=__webpack_require__(250).OrderItem;
+	__webpack_require__(241);
+	var Header=__webpack_require__(232).Header;
+	var OrderItem=__webpack_require__(243).OrderItem;
 	var Order=React.createClass({displayName: "Order",
 	    getInitialState:function(){
 	        return({
@@ -26569,13 +26736,58 @@
 	        this.showAll();
 	        //this.totalPriceWithD();
 	    },
+	    del:function(id){
+	      $.ajax({
+	          type:'post',
+	          url:'/cart/del',
+	          data:{
+	              id:id
+	          },
+	          success:function(){
+	              this.showAll();
+	          }.bind(this)
+	      })
+	    },
+	    plus:function(pid,count){
+	        $.ajax({
+	            type:'post',
+	            url:'/cart/add',
+	            data:{
+	                pid:pid,
+	                count:count,
+	                uid:this.props.location.query.uid
+	            },
+	            success:function(){
+	                this.showAll();
+	            }.bind(this)
+	        })
+	    },
+	    minus:function(pid,count,id){
+	        console.info([{pid:pid},{count:count},{id:id}]);
+	        if(count>1){
+	            $.ajax({
+	                type:'post',
+	                url:'/cart/addMinus',
+	                data:{
+	                    pid:pid,
+	                    count:count,
+	                    uid:this.props.location.query.uid
+	                },
+	                success:function(){
+	                    this.showAll();
+	                }.bind(this)
+	            })
+	        }else{
+	            this.del(id);
+	        }
+	    },
 	    render:function(){
 	        var arr=[];
 	        if(this.state.data){
 	            arr=this.state.data.map(function(element){
 	                arr=element;
-	                return React.createElement(OrderItem, {data: arr})
-	            });
+	                return React.createElement(OrderItem, {minus: this.minus, plus: this.plus, del: this.del, data: arr})
+	            }.bind(this));
 	        }
 	        return(
 	            React.createElement("div", {className: "order"}, 
@@ -26631,13 +26843,13 @@
 	exports.Order=Order;
 
 /***/ },
-/* 238 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(239);
+	var content = __webpack_require__(242);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(231)(content, {});
@@ -26657,7 +26869,7 @@
 	}
 
 /***/ },
-/* 239 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(230)();
@@ -26671,7 +26883,55 @@
 
 
 /***/ },
-/* 240 */
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by Administrator on 2016/5/18.
+	 */
+	var React=__webpack_require__(1);
+	var OrderItem=React.createClass({displayName: "OrderItem",
+	    del:function(){
+	        this.props.del(this.props.data['_id']);
+	    },
+	    plus:function(){
+	        var pid=this.props.data.product['_id'];
+	        var count=this.props.data.count;
+	        this.props.plus(pid,count);
+	    },
+	    minus:function(){
+	        var pid=this.props.data.product['_id'];
+	        var count=this.props.data.count;
+	        var id=this.props.data['_id'];
+	        this.props.minus(pid,count,id);
+	    },
+	    render: function () {
+	        var data=this.props.data.product;
+	        var count=parseInt(this.props.data.count);
+	        var price=data.price;
+	        var total=parseInt(price.substring(1))*count;
+	        return(
+	            React.createElement("tr", {className: "order_left_grid"}, 
+	                React.createElement("td", {className: "product"}, 
+	                    React.createElement("a", {onClick: this.del.bind(this), href: "javascript:"}, React.createElement("span", null, "×")), 
+	                    React.createElement("a", {href: "javascript:"}, React.createElement("img", {src: data.imgPathS[1], alt: "img"})), 
+	                    React.createElement("a", {href: "javascript:"}, React.createElement("p", null, data.name))
+	                ), 
+	                React.createElement("td", {className: "price"}, React.createElement("p", null, data.price)), 
+	                React.createElement("td", {className: "quantity"}, 
+	                    React.createElement("button", {onClick: this.plus.bind(this)}, "+"), 
+	                    React.createElement("span", null, this.props.data.count), 
+	                    React.createElement("button", {onClick: this.minus.bind(this)}, "-")
+	                ), 
+	                React.createElement("td", {className: "total"}, React.createElement("p", null, "$", total))
+	            )
+	        )
+	    }
+	});
+	exports.OrderItem=OrderItem;
+
+/***/ },
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26679,9 +26939,9 @@
 	 */
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
-	var Header=__webpack_require__(247).Header;
-	var ShowItem=__webpack_require__(241).ShowItem;
-	__webpack_require__(242);
+	var Header=__webpack_require__(232).Header;
+	var ShowItem=__webpack_require__(245).ShowItem;
+	__webpack_require__(246);
 	var Search=React.createClass({displayName: "Search",
 	    getInitialState: function(){
 	    return {
@@ -26764,7 +27024,7 @@
 	exports.Search=Search;
 
 /***/ },
-/* 241 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26819,13 +27079,13 @@
 	exports.ShowItem=ShowItem;
 
 /***/ },
-/* 242 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(243);
+	var content = __webpack_require__(247);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(231)(content, {});
@@ -26845,7 +27105,7 @@
 	}
 
 /***/ },
-/* 243 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(230)();
@@ -26859,7 +27119,7 @@
 
 
 /***/ },
-/* 244 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26868,8 +27128,8 @@
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
 	var hashHistory=__webpack_require__(166).hashHistory;
-	var Header=__webpack_require__(247).Header;
-	__webpack_require__(245);
+	var Header=__webpack_require__(232).Header;
+	__webpack_require__(249);
 	var Details=React.createClass({displayName: "Details",
 	    getInitialState:function(){
 	        return({
@@ -27043,13 +27303,13 @@
 	exports.Details=Details;
 
 /***/ },
-/* 245 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(246);
+	var content = __webpack_require__(250);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(231)(content, {});
@@ -27069,7 +27329,7 @@
 	}
 
 /***/ },
-/* 246 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(230)();
@@ -27081,208 +27341,6 @@
 
 	// exports
 
-
-/***/ },
-/* 247 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Created by Administrator on 2016/5/18.
-	 */
-	__webpack_require__(248);
-	var React=__webpack_require__(1);
-	var Link=__webpack_require__(166).Link;
-	var hashHistory=__webpack_require__(166).hashHistory;
-	var Header=React.createClass({displayName: "Header",
-	    getInitialState: function(){
-	        return {
-	            sessionName: [],
-	            totalPrice:0,
-	            uid:[],
-	            orderNum:0
-	        };
-	    },
-	    getTotal:function(data){
-	        var totalPrice=0;
-	        for(var i=0 ;i<data.length;++i){
-	            var count=parseInt(data[i].count);
-	            var price=data[i].product.price;
-	            var total=parseInt(price.substring(1))*count;
-	            totalPrice+=total;
-	        }
-	        this.setState({
-	            totalPrice:totalPrice
-	        })
-	    },
-	    getSession:function(){
-	        $.ajax({
-	            type:'post',
-	            url:'/users/getSession',
-	            success:function(data){
-	                this.getOrderNum(data[1]);
-	                this.setState({
-	                    sessionName:data[0],
-	                    uid:data[1]
-	                })
-	            }.bind(this)
-	        });
-	    },
-	    getOrderNum:function(uid){
-	        if(this.state.uid){
-	            $.ajax({
-	                type:'post',
-	                url:'/cart/showAll',
-	                data:{
-	                    uid:this.state.uid
-	                },
-	                success:function(data){
-	                    this.getTotal(data);
-	                    this.setState({orderNum:data.length});
-	                }.bind(this)
-	            });
-	        }
-	        if(uid!=[]){
-	            $.ajax({
-	                type:'post',
-	                url:'/cart/showAll',
-	                data:{
-	                    uid:uid
-	                },
-	                success:function(data){
-	                    this.setState({orderNum:data.length});
-	                }.bind(this)
-	            });
-	        }
-	    },
-	    componentDidMount:function(){
-	        //this.getOrderNum();
-	    },
-	    componentWillMount:function(){
-	        this.getSession();
-	        //this.getOrderNum();
-	    },
-	    componentWillReceiveProps:function(){
-	        this.getSession();
-	        this.getOrderNum();
-	    },
-	    toOrder:function(){
-	        if(this.state.sessionName==[]){
-	            hashHistory.push('/login');
-	        }else{
-	            hashHistory.push('/order?uid='+this.state.uid);
-	        }
-	    },
-	    render:function(){
-	        var txt;
-	        if(this.state.sessionName){
-	            txt=React.createElement("span", null, React.createElement("a", {href: "javascript:"}, this.state.sessionName))
-	        }else{
-	            txt=React.createElement(Link, {to: "/login"}, React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "LOGIN")))
-	        }
-	        return(
-	            React.createElement("div", {className: "header_box"}, 
-	                React.createElement("div", {className: "header_area"}), 
-	                React.createElement("div", {className: "header"}, 
-	                    React.createElement("div", {className: "header_left fl"}, 
-	                        React.createElement(Link, {query: {'uid':this.state.uid}, to: "/home"}, React.createElement("img", {src: "images/logo-big.png", alt: "logo"})), 
-	                        React.createElement("div", {className: "header_nav fl"}, 
-	                            React.createElement(Link, {query: {'uid':this.state.uid}, to: "/search"}, React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "SHOP"))), 
-	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "SUPPORT")), 
-	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "NEWS")), 
-	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "RESELLERS")), 
-	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "ABOUT"))
-	                        )
-	                    ), 
-	                    React.createElement("div", {className: "header_right fr"}, 
-	                        React.createElement("div", {className: "cart_icon fr"}, 
-	                            React.createElement("strong", {onClick: this.toOrder}, this.state.orderNum), 
-	                            React.createElement("span", {className: "cart_icon_handle"})
-	                        ), 
-	                        React.createElement("div", {className: "header_right_nav fr"}, 
-	                            txt, 
-	                            React.createElement("span", null, React.createElement("a", {href: "javascript:"}, "cart  /  $", this.state.totalPrice))
-	                        )
-	                    )
-	                )
-	            )
-	        )
-	    }
-	});
-	exports.Header=Header;
-
-/***/ },
-/* 248 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(249);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(231)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./header.css", function() {
-				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./header.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 249 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(230)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "", ""]);
-
-	// exports
-
-
-/***/ },
-/* 250 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Created by Administrator on 2016/5/18.
-	 */
-	var React=__webpack_require__(1);
-	var OrderItem=React.createClass({displayName: "OrderItem",
-	    render: function () {
-	        var data=this.props.data.product;
-	        var count=parseInt(this.props.data.count);
-	        var price=data.price;
-	        var total=parseInt(price.substring(1))*count;
-	        return(
-	            React.createElement("tr", {className: "order_left_grid"}, 
-	                React.createElement("td", {className: "product"}, 
-	                    React.createElement("a", {href: "javascript:"}, React.createElement("span", null, "×")), 
-	                    React.createElement("a", {href: "javascript:"}, React.createElement("img", {src: data.imgPathS[1], alt: "img"})), 
-	                    React.createElement("a", {href: "javascript:"}, React.createElement("p", null, data.name))
-	                ), 
-	                React.createElement("td", {className: "price"}, React.createElement("p", null, data.price)), 
-	                React.createElement("td", {className: "quantity"}, 
-	                    React.createElement("button", null, "+"), 
-	                    React.createElement("span", null, this.props.data.count), 
-	                    React.createElement("button", null, "-")
-	                ), 
-	                React.createElement("td", {className: "total"}, React.createElement("p", null, "$", total))
-	            )
-	        )
-	    }
-	});
-	exports.OrderItem=OrderItem;
 
 /***/ }
 /******/ ]);
