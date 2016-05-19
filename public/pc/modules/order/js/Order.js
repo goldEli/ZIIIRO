@@ -51,6 +51,10 @@ var Order=React.createClass({
             var num2=this.state.totalPrice+35;
             this.setState({totalPriceWithD:num2});
         }.bind(this));
+        $(this.refs.free).click(function(){
+            var num3=this.state.totalPrice;
+            this.setState({totalPriceWithD:num3});
+        }.bind(this));
 
     },
     //componentWillReceiveProps:function(){
@@ -142,7 +146,7 @@ var Order=React.createClass({
                             <td>Shipping<br/><br/></td>
                             <td>
                                 <div>
-                                    <input type="radio" name="express"/><label> Free Shipping</label>
+                                    <input type="radio" ref="free" name="express"/><label> Free Shipping</label>
                                 </div>
                                 <div>
                                     <input type="radio" ref="standard" name="express"/><label> Standard Delivery: $ 25.00</label>

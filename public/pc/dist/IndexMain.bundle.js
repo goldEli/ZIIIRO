@@ -26727,6 +26727,10 @@
 	            var num2=this.state.totalPrice+35;
 	            this.setState({totalPriceWithD:num2});
 	        }.bind(this));
+	        $(this.refs.free).click(function(){
+	            var num3=this.state.totalPrice;
+	            this.setState({totalPriceWithD:num3});
+	        }.bind(this));
 
 	    },
 	    //componentWillReceiveProps:function(){
@@ -26818,7 +26822,7 @@
 	                            React.createElement("td", null, "Shipping", React.createElement("br", null), React.createElement("br", null)), 
 	                            React.createElement("td", null, 
 	                                React.createElement("div", null, 
-	                                    React.createElement("input", {type: "radio", name: "express"}), React.createElement("label", null, " Free Shipping")
+	                                    React.createElement("input", {type: "radio", ref: "free", name: "express"}), React.createElement("label", null, " Free Shipping")
 	                                ), 
 	                                React.createElement("div", null, 
 	                                    React.createElement("input", {type: "radio", ref: "standard", name: "express"}), React.createElement("label", null, " Standard Delivery: $ 25.00")
