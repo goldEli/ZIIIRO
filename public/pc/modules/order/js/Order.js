@@ -57,9 +57,6 @@ var Order=React.createClass({
         }.bind(this));
 
     },
-    //componentWillReceiveProps:function(){
-    //    this.totalPriceWithD();
-    //},
     componentWillMount:function(){
         this.showAll();
         //this.totalPriceWithD();

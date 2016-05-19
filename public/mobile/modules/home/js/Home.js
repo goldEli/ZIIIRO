@@ -3,11 +3,15 @@
  */
 var React=require('react');
 var Link=require('react-router').Link;
+var Header=require('../../header/js/Header.js').Header;
 var HomeHotItem=require('./HomeHotItem').HomeHotItem;
 var Home=React.createClass({
     getInitialState:function(){
       return(
-        {dataHot:[]}
+        {
+            dataHot:[],
+            uid:null
+        }
       )
     },
     componentWillMount:function(){
@@ -21,6 +25,8 @@ var Home=React.createClass({
         });
     },
     componentDidMount:function(){
+        //保存用户ID
+        this.setState({uid:this.props.location.query.uid});
         var arr=[this.refs.banner_box,this.refs.banner_box1,this.
             refs.banner_box2,this.refs.banner_box3,
             this.refs.banner_box4];
@@ -94,15 +100,17 @@ var Home=React.createClass({
         }
     },
     render:function(){
+        console.info(this.state.uid);
         if(this.state.dataHot){
             var arr=[];
             arr=this.state.dataHot.map(function(element){
                 arr=element;
-                return <HomeHotItem dataHot={arr}/>
-            });
+                return <HomeHotItem uid={this.state.uid} dataHot={arr}/>
+            }.bind(this));
         }
         return(
             <div className="home">
+                <Header uid={this.state.uid}/>
                 <div className="banner">
                     <div className="banner_box" ref="banner_box">
                         <img src="images/banner-eon.jpg" alt="banner"/>

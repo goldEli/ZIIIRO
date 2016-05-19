@@ -4,7 +4,13 @@
 var React=require('react');
 var Link=require('react-router').Link;
 var hashHistory=require("react-router").hashHistory;
+var Header=require('../../header/js/Header.js').Header;
 var Login=React.createClass({
+    getInitialState: function(){
+        return {
+            uid: null
+        };
+    },
     componentDidMount:function(){
         var warn=this.refs.warn;
         var warnBox=this.refs.warnBox;
@@ -45,8 +51,8 @@ var Login=React.createClass({
                                         pwd:$(pwdL).val()
                                     },
                                     success:function(data){
-                                        if(data=='suc'){
-                                            hashHistory.push('/');
+                                        if(data!='Error:  The password you entered is incorrect.'){
+                                            hashHistory.push('/?uid='+data);
                                         }else{
                                             $(warn).css({'backgroundColor':'#b20000'});
                                             $(warnBox).show();
@@ -200,6 +206,7 @@ var Login=React.createClass({
     render:function(){
         return(
             <div className="login_and_register">
+                <Header/>
                 <div ref="warnBox" className="warn">
                     <p ref="warn"></p>
                 </div>
@@ -230,7 +237,7 @@ var Login=React.createClass({
                         </div>
                         <div className="login_grid">
                             <p>Password</p>
-                            <input ref="pwdR" onChange={this.pwdStrength.bind(this)} type="password"/>
+                            <input ref="pwdR" onChange={this.pwdStrength} type="password"/>
                             <div className="safe_note">
                                 <h4 ref="pwdStrength"></h4>
                                 <small ref="pwdStrengthNote"></small>

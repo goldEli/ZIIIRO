@@ -57,11 +57,11 @@
 
 
 	var Login=__webpack_require__(227).Login;
-	var Home=__webpack_require__(228).Home;
-	var Main=__webpack_require__(230).Main;
-	var Order=__webpack_require__(231).Order;
-	var Search=__webpack_require__(232).Search;
-	var Details=__webpack_require__(234).Details;
+	var Home=__webpack_require__(229).Home;
+	var Main=__webpack_require__(231).Main;
+	var Order=__webpack_require__(232).Order;
+	var Search=__webpack_require__(233).Search;
+	var Details=__webpack_require__(235).Details;
 
 	ReactDom.render(
 	    React.createElement(Router, {history: hashHistory}, 
@@ -25544,7 +25544,13 @@
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
 	var hashHistory=__webpack_require__(166).hashHistory;
+	var Header=__webpack_require__(228).Header;
 	var Login=React.createClass({displayName: "Login",
+	    getInitialState: function(){
+	        return {
+	            uid: null
+	        };
+	    },
 	    componentDidMount:function(){
 	        var warn=this.refs.warn;
 	        var warnBox=this.refs.warnBox;
@@ -25585,8 +25591,8 @@
 	                                        pwd:$(pwdL).val()
 	                                    },
 	                                    success:function(data){
-	                                        if(data=='suc'){
-	                                            hashHistory.push('/');
+	                                        if(data!='Error:  The password you entered is incorrect.'){
+	                                            hashHistory.push('/?uid='+data);
 	                                        }else{
 	                                            $(warn).css({'backgroundColor':'#b20000'});
 	                                            $(warnBox).show();
@@ -25740,6 +25746,7 @@
 	    render:function(){
 	        return(
 	            React.createElement("div", {className: "login_and_register"}, 
+	                React.createElement(Header, null), 
 	                React.createElement("div", {ref: "warnBox", className: "warn"}, 
 	                    React.createElement("p", {ref: "warn"})
 	                ), 
@@ -25770,7 +25777,7 @@
 	                        ), 
 	                        React.createElement("div", {className: "login_grid"}, 
 	                            React.createElement("p", null, "Password"), 
-	                            React.createElement("input", {ref: "pwdR", onChange: this.pwdStrength.bind(this), type: "password"}), 
+	                            React.createElement("input", {ref: "pwdR", onChange: this.pwdStrength, type: "password"}), 
 	                            React.createElement("div", {className: "safe_note"}, 
 	                                React.createElement("h4", {ref: "pwdStrength"}), 
 	                                React.createElement("small", {ref: "pwdStrengthNote"})
@@ -25792,15 +25799,155 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
+	 * Created by Administrator on 2016/5/19.
+	 */
+	var React=__webpack_require__(1);
+	var Link=__webpack_require__(166).Link;
+	var hashHistory=__webpack_require__(166).hashHistory;
+	var Header=React.createClass({displayName: "Header",
+	    getInitialState: function(){
+	        return {
+	            sessionName: null,
+	            totalPrice:0,
+	            uid:[],
+	            orderNum:0
+	        };
+	    },
+	    getOrderNum:function(uid){
+	        if(this.state.uid){
+	            $.ajax({
+	                type:'post',
+	                url:'/cart/showAll',
+	                data:{
+	                    uid:this.state.uid
+	                },
+	                success:function(data){
+	                    //this.getTotal(data);
+	                    this.setState({orderNum:data.length});
+	                }.bind(this)
+	            });
+	        }
+	        if(uid){
+	            $.ajax({
+	                type:'post',
+	                url:'/cart/showAll',
+	                data:{
+	                    uid:uid
+	                },
+	                success:function(data){
+	                    this.setState({orderNum:data.length});
+	                }.bind(this)
+	            });
+	        }
+	    },
+	    getSession:function(){
+	        $.ajax({
+	            type:'post',
+	            url:'/users/getSession',
+	            success:function(data){
+	                //this.getOrderNum(data[1]);
+	                if(data){
+	                    this.getOrderNum(data[1]);
+	                    this.setState({
+	                        sessionName:data[0],
+	                        uid:data[1]
+	                    })
+	                }
+	            }.bind(this)
+	        });
+	    },
+	    componentWillMount:function(){
+	        this.getSession();
+	        //this.getOrderNum();
+	    },
+	    componentWillReceiveProps:function(){
+	        this.getSession();
+	        //this.getOrderNum();
+	    },
+	    toOrder:function(){
+	        if(!this.state.sessionName){
+	            hashHistory.push('/login');
+	        }else{
+	            hashHistory.push('/order?uid='+this.state.uid);
+	        }
+	    },
+	    hideSideBar:function(){
+	        $(this.refs.side_bar).css({'left':'-5.2rem'});
+	        $(this.refs.side_bar_background).css({'opacity':'0'});
+	        $(this.refs.side_bar_background).css({'zIndex':'-1'});
+	    },
+	    sideBar:function(){
+	        $(this.refs.side_bar).css({'left':'0'});
+	        $(this.refs.side_bar_background).css({'zIndex':'2'});
+	        $(this.refs.side_bar_background).css({'opacity':'0.6'});
+	    },
+	    toSearch:function(){
+	        this.hideSideBar();
+	        hashHistory.push('/search?uid='+this.state.uid);
+	    },
+	    toLogin:function(){
+	        this.hideSideBar();
+	        hashHistory.push('/login?uid='+this.state.uid);
+	    },
+	   render:function(){
+	       var txt;
+	       if(this.state.sessionName){
+	           txt=React.createElement("h3", null, this.state.sessionName)
+	       }else{
+	           txt=React.createElement("h3", {className: "header_login", onClick: this.toLogin}, "LOGIN")
+	       }
+	       return(
+	           React.createElement("div", {className: "header"}, 
+	               React.createElement("div", {className: "side_bar", ref: "side_bar"}, 
+	                   React.createElement("h3", {onClick: this.toSearch}, "SHOP"), 
+	                   React.createElement("h3", null, "SUPPORT"), 
+	                   React.createElement("h3", null, "NEWS"), 
+	                   React.createElement("h3", null, "RESELLERS"), 
+	                   React.createElement("h3", null, "ABOUT"), 
+	                   txt
+	               ), 
+	               React.createElement("div", {onClick: this.hideSideBar, className: "side_bar_background", ref: "side_bar_background"}), 
+
+	               React.createElement("div", {className: "left_box"}, 
+	                   React.createElement("div", {className: "more_btn fl", onClick: this.sideBar}, 
+	                       React.createElement("span", null), 
+	                       React.createElement("span", null), 
+	                       React.createElement("span", null)
+	                   )
+	               ), 
+	               React.createElement("div", {className: "middle_box"}, 
+	                   React.createElement(Link, {query: {'uid':this.state.uid}, to: "/home"}, React.createElement("img", {src: "images/logo-big.png", alt: "logo"}))
+	               ), 
+	               React.createElement("div", {className: "right_box"}, 
+	                   React.createElement("div", {className: "cart_icon fr"}, 
+	                       React.createElement("strong", {onClick: this.toOrder}, this.state.orderNum), 
+	                       React.createElement("span", {className: "cart_icon_handle"})
+	                   )
+	               )
+	           )
+	       )
+	   }
+	});
+	exports.Header=Header;
+
+/***/ },
+/* 229 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
 	 * Created by Administrator on 2016/5/13.
 	 */
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
-	var HomeHotItem=__webpack_require__(229).HomeHotItem;
+	var Header=__webpack_require__(228).Header;
+	var HomeHotItem=__webpack_require__(230).HomeHotItem;
 	var Home=React.createClass({displayName: "Home",
 	    getInitialState:function(){
 	      return(
-	        {dataHot:[]}
+	        {
+	            dataHot:[],
+	            uid:null
+	        }
 	      )
 	    },
 	    componentWillMount:function(){
@@ -25814,6 +25961,8 @@
 	        });
 	    },
 	    componentDidMount:function(){
+	        //保存用户ID
+	        this.setState({uid:this.props.location.query.uid});
 	        var arr=[this.refs.banner_box,this.refs.banner_box1,this.
 	            refs.banner_box2,this.refs.banner_box3,
 	            this.refs.banner_box4];
@@ -25887,15 +26036,17 @@
 	        }
 	    },
 	    render:function(){
+	        console.info(this.state.uid);
 	        if(this.state.dataHot){
 	            var arr=[];
 	            arr=this.state.dataHot.map(function(element){
 	                arr=element;
-	                return React.createElement(HomeHotItem, {dataHot: arr})
-	            });
+	                return React.createElement(HomeHotItem, {uid: this.state.uid, dataHot: arr})
+	            }.bind(this));
 	        }
 	        return(
 	            React.createElement("div", {className: "home"}, 
+	                React.createElement(Header, {uid: this.state.uid}), 
 	                React.createElement("div", {className: "banner"}, 
 	                    React.createElement("div", {className: "banner_box", ref: "banner_box"}, 
 	                        React.createElement("img", {src: "images/banner-eon.jpg", alt: "banner"}), 
@@ -25989,7 +26140,7 @@
 	exports.Home=Home;
 
 /***/ },
-/* 229 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -25999,17 +26150,36 @@
 	var hashHistory=__webpack_require__(166).hashHistory;
 	var HomeHotItem=React.createClass({displayName: "HomeHotItem",
 	    toDetail:function(event){
-	        hashHistory.push("/details?id="+event.target.getAttribute("data"));
+	        console.info('todetail');
+	        hashHistory.push("/details?id="+event.target.getAttribute("data")+'&uid='+this.props.uid);
+	    },
+	    add:function(event){
+	        if(!this.props.uid){
+	            hashHistory.push("/login");
+	        }else{
+	            $.ajax({
+	                type:'post',
+	                url:'/cart/add',
+	                data:{
+	                    pid:event.target.getAttribute("data"),
+	                    uid:this.props.uid
+	                },
+	                success:function(){
+	                    hashHistory.push('/?uid='+this.props.uid);
+	                }.bind(this)
+	            });
+	        }
+
 	    },
 	    render:function(){
 	        var data=this.props.dataHot.product;
 	        return(
 	            React.createElement("div", {className: "show_product_box_cell fl"}, 
 	                React.createElement("div", {className: "img_box"}, 
-	                    React.createElement("img", {className: "show", onClick: this.toDetail.bind(this), data: data['_id'], src: data.imgPathS[1], alt: "img"}), 
+	                    React.createElement("img", {className: "show", onClick: this.toDetail, data: data['_id'], src: data.imgPathS[1], alt: "img"}), 
 	                    React.createElement("img", {className: "hide", src: data.imgPathS[0], alt: "img"}), 
 	                    React.createElement("div", {className: "cart_icon fr"}, 
-	                        React.createElement("strong", null, "+"), 
+	                        React.createElement("strong", {onClick: this.add, data: data['_id']}, "+"), 
 	                        React.createElement("span", {className: "cart_icon_handle"})
 	                    )
 	                ), 
@@ -26025,7 +26195,7 @@
 	exports.HomeHotItem=HomeHotItem;
 
 /***/ },
-/* 230 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26035,56 +26205,12 @@
 	var Link=__webpack_require__(166).Link;
 	var hashHistory=__webpack_require__(166).hashHistory;
 	var Main=React.createClass({displayName: "Main",
-	    hideSideBar:function(){
-	           $(this.refs.side_bar).css({'left':'-5.2rem'});
-	           $(this.refs.side_bar_background).css({'opacity':'0'});
-	           $(this.refs.side_bar_background).css({'zIndex':'-1'});
-	    },
-	    sideBar:function(){
-	        console.info(this.refs.side_bar);
-	        $(this.refs.side_bar).css({'left':'0'});
-	        $(this.refs.side_bar_background).css({'zIndex':'2'});
-	        $(this.refs.side_bar_background).css({'opacity':'0.6'});
-	    },
-	    toSearch:function(){
-	        this.hideSideBar();
-	        hashHistory.push('/search');
-	    },
-	    toLogin:function(){
-	        this.hideSideBar();
-	        hashHistory.push('/login');
-	    },
+
 	    render:function(){
 	        return(
 	            React.createElement("div", null, 
 	                React.createElement("div", {className: "wrap"}, 
-	                    React.createElement("div", {className: "side_bar", ref: "side_bar"}, 
-	                        React.createElement("h3", {onClick: this.toSearch.bind(this)}, "SHOP"), 
-	                        React.createElement("h3", null, "SUPPORT"), 
-	                        React.createElement("h3", null, "NEWS"), 
-	                        React.createElement("h3", null, "RESELLERS"), 
-	                        React.createElement("h3", null, "ABOUT"), 
-	                        React.createElement("h3", {onClick: this.toLogin.bind(this)}, "LOGIN")
-	                    ), 
-	                    React.createElement("div", {onClick: this.hideSideBar.bind(this), className: "side_bar_background", ref: "side_bar_background"}), 
-	                    React.createElement("div", {className: "header"}, 
-	                        React.createElement("div", {className: "left_box"}, 
-	                            React.createElement("div", {onClick: this.sideBar.bind(this), className: "more_btn fl"}, 
-	                                React.createElement("span", null), 
-	                                React.createElement("span", null), 
-	                                React.createElement("span", null)
-	                            )
-	                        ), 
-	                        React.createElement("div", {className: "middle_box"}, 
-	                            React.createElement(Link, {to: "/home"}, React.createElement("img", {src: "images/logo-big.png", alt: "logo"}))
-	                        ), 
-	                        React.createElement("div", {className: "right_box"}, 
-	                            React.createElement("div", {className: "cart_icon fr"}, 
-	                                React.createElement(Link, {to: "/order"}, React.createElement("strong", null, "4")), 
-	                                React.createElement("span", {className: "cart_icon_handle"})
-	                            )
-	                        )
-	                    ), 
+
 	                    this.props.children, 
 	                    React.createElement("div", {className: "footer"}, 
 	                        React.createElement("div", {className: "footer_box_cell fl"}, 
@@ -26129,7 +26255,7 @@
 	exports.Main=Main;
 
 /***/ },
-/* 231 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26137,10 +26263,118 @@
 	 */
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
+	var Header=__webpack_require__(228).Header;
+	var OrderItem=__webpack_require__(236).OrderItem;
 	var Order=React.createClass({displayName: "Order",
+	    getInitialState:function(){
+	        return({
+	            data:[],
+	            totalPrice:0,
+	            totalPriceWithD:0
+	        })
+	    },
+	    getTotal:function(data){
+	        var totalPrice=0;
+	        for(var i=0 ;i<data.length;++i){
+	            var count=parseInt(data[i].count);
+	            var price=data[i].product.price;
+	            var total=parseInt(price.substring(1))*count;
+	            totalPrice+=total;
+	        }
+	        this.setState({
+	            totalPrice:totalPrice
+	        });
+	        this.setState({totalPriceWithD:totalPrice});
+	    },
+	    showAll:function(){
+	        if(this.props.location.query.uid){
+	            $.ajax({
+	                type:'post',
+	                url:'/cart/showAll',
+	                data:{
+	                    uid:this.props.location.query.uid
+	                },
+	                success:function(data){
+	                    this.getTotal(data);
+	                    this.setState({data:data});
+	                }.bind(this)
+	            });
+	        }
+	    },
+	    componentDidMount:function(){
+	        $(this.refs.standard).click(function(){
+	            var num1=this.state.totalPrice+25;
+	            this.setState({totalPriceWithD:num1});
+	        }.bind(this));
+	        $(this.refs.express).click(function(){
+	            var num2=this.state.totalPrice+35;
+	            this.setState({totalPriceWithD:num2});
+	        }.bind(this));
+	        $(this.refs.free).click(function(){
+	            var num3=this.state.totalPrice;
+	            this.setState({totalPriceWithD:num3});
+	        }.bind(this));
+
+	    },
+	    componentWillMount:function(){
+	        this.showAll();
+	        //this.totalPriceWithD();
+	    },
+	    del:function(id){
+	        $.ajax({
+	            type:'post',
+	            url:'/cart/del',
+	            data:{
+	                id:id
+	            },
+	            success:function(){
+	                this.showAll();
+	            }.bind(this)
+	        })
+	    },
+	    plus:function(pid,count){
+	        $.ajax({
+	            type:'post',
+	            url:'/cart/add',
+	            data:{
+	                pid:pid,
+	                count:count,
+	                uid:this.props.location.query.uid
+	            },
+	            success:function(){
+	                this.showAll();
+	            }.bind(this)
+	        })
+	    },
+	    minus:function(pid,count,id){
+	        if(count>1){
+	            $.ajax({
+	                type:'post',
+	                url:'/cart/addMinus',
+	                data:{
+	                    pid:pid,
+	                    count:count,
+	                    uid:this.props.location.query.uid
+	                },
+	                success:function(){
+	                    this.showAll();
+	                }.bind(this)
+	            })
+	        }else{
+	            this.del(id);
+	        }
+	    },
 	    render:function(){
+	        var arr=[];
+	        if(this.state.data){
+	            arr=this.state.data.map(function(element){
+	                arr=element;
+	                return React.createElement(OrderItem, {minus: this.minus, plus: this.plus, del: this.del, data: arr})
+	            }.bind(this));
+	        }
 	        return(
 	            React.createElement("div", {className: "order"}, 
+	                React.createElement(Header, null), 
 	                React.createElement("h1", null, "CART"), 
 	                React.createElement("div", {className: "order_left fl"}, 
 	                    React.createElement("table", null, 
@@ -26149,19 +26383,7 @@
 	                            React.createElement("th", null, "QUANTITY"), 
 	                            React.createElement("th", null, "TOTAL")
 	                        ), 
-	                        React.createElement("tr", {className: "order_left_grid"}, 
-	                            React.createElement("td", {className: "product"}, 
-	                                React.createElement("a", {href: "javascript:"}, React.createElement("span", null, "×")), 
-	                                React.createElement("a", {href: "javascript:"}, React.createElement("img", {src: "images/ziiiro-eclipse-metal-rosegold-front-200x300.jpg", alt: "img"})), 
-	                                React.createElement("a", {href: "javascript:"}, React.createElement("p", null, "ECLIPSE Steel Rose Gold"))
-	                            ), 
-	                            React.createElement("td", {className: "quantity"}, 
-	                                React.createElement("button", null, "+"), 
-	                                React.createElement("span", null, "1"), 
-	                                React.createElement("button", null, "-")
-	                            ), 
-	                            React.createElement("td", {className: "total"}, React.createElement("p", null, "$ 219.00"))
-	                        )
+	                        arr
 	                    )
 	                ), 
 	                React.createElement("div", {className: "order_right"}, 
@@ -26172,26 +26394,26 @@
 	                        ), 
 	                        React.createElement("tr", {className: "subtotal"}, 
 	                            React.createElement("td", null, "Subtotal"), 
-	                            React.createElement("td", null, "$ 219.00")
+	                            React.createElement("td", null, "$ ", this.state.totalPrice)
 	                        ), 
 	                        React.createElement("tr", {className: "shipping"}, 
 	                            React.createElement("td", null, "Shipping", React.createElement("br", null), React.createElement("br", null)), 
 	                            React.createElement("td", null, 
 	                                React.createElement("div", null, 
-	                                    React.createElement("input", {type: "radio", name: "express"}), React.createElement("label", null, " Free Shipping")
+	                                    React.createElement("input", {type: "radio", ref: "free", name: "express"}), React.createElement("label", null, " Free Shipping")
 	                                ), 
 	                                React.createElement("div", null, 
-	                                    React.createElement("input", {type: "radio", name: "express"}), React.createElement("label", null, " Standard Delivery: $ 25.00")
+	                                    React.createElement("input", {type: "radio", ref: "standard", name: "express"}), React.createElement("label", null, " Standard Delivery: $ 25.00")
 	                                ), 
 	                                React.createElement("div", null, 
-	                                    React.createElement("input", {type: "radio", name: "express"}), React.createElement("label", null, " Express Delivery: $ 35.00")
+	                                    React.createElement("input", {type: "radio", ref: "express", name: "express"}), React.createElement("label", null, " Express Delivery: $ 35.00")
 	                                ), 
 	                                React.createElement("div", {className: "blank"})
 	                            )
 	                        ), 
 	                        React.createElement("tr", {className: "final_price"}, 
 	                            React.createElement("td", null, "Total"), 
-	                            React.createElement("td", null, "$ 219.00")
+	                            React.createElement("td", null, "$ ", this.state.totalPriceWithD)
 	                        )
 	                    ), 
 	                    React.createElement("button", {className: "pay_bth"}, "PROCEED TO CHECKOUT")
@@ -26203,7 +26425,7 @@
 	exports.Order=Order;
 
 /***/ },
-/* 232 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26211,13 +26433,19 @@
 	 */
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
-	var SearchItem=__webpack_require__(233).SearchItem;
+	var Header=__webpack_require__(228).Header;
+	var SearchItem=__webpack_require__(234).SearchItem;
 	var Search=React.createClass({displayName: "Search",
 	    getInitialState: function(){
 	        return {
 	            data: [],
-	            searchItems:9
+	            searchItems:9,
+	            uid:null
 	        };
+	    },
+	    componentDidMount:function(){
+	        //保存用户ID
+	        this.setState({uid:this.props.location.query.uid});
 	    },
 	    componentWillMount:function(){
 	        $.ajax({
@@ -26229,7 +26457,6 @@
 	        });
 	    },
 	    search:function(){
-	        console.info(this.refs.searchInput.value);
 	        if(this.refs.searchInput.value){
 	            $.ajax({
 	                type:'post',
@@ -26253,14 +26480,15 @@
 	        if(this.state.data.length>0){
 	            arr=this.state.data.map(function(element){
 	                arr=element;
-	                return React.createElement(SearchItem, {data: arr})
-	            });
+	                return React.createElement(SearchItem, {uid: this.state.uid, data: arr})
+	            }.bind(this));
 	        }
 	        return(
 	            React.createElement("div", {className: "search"}, 
+	                React.createElement(Header, null), 
 	                React.createElement("div", {className: "search_input"}, 
 	                    React.createElement("div", {className: "search_input_area fr"}, 
-	                        React.createElement("button", {onClick: this.search.bind(this)}, "search"), 
+	                        React.createElement("button", {onClick: this.search}, "search"), 
 	                        React.createElement("input", {type: "text", ref: "searchInput"})
 	                    ), 
 	                    React.createElement("p", null, "Showing all ", React.createElement("i", null, this.state.searchItems), " results")
@@ -26277,7 +26505,7 @@
 	exports.Search=Search;
 
 /***/ },
-/* 233 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26287,17 +26515,35 @@
 	var hashHistory=__webpack_require__(166).hashHistory;
 	var SearchItem=React.createClass({displayName: "SearchItem",
 	    toDetail:function(event){
-	        hashHistory.push("/details?id="+event.target.getAttribute("data"));
+	        hashHistory.push("/details?id="+event.target.getAttribute("data")+'&uid='+this.props.uid);
+	    },
+	    add:function(event){
+	        if(!this.props.uid){
+	            hashHistory.push("/login");
+	        }else{
+	            $.ajax({
+	                type:'post',
+	                url:'/cart/add',
+	                data:{
+	                    pid:event.target.getAttribute("data"),
+	                    uid:this.props.uid
+	                },
+	                success:function(){
+	                    hashHistory.push('/search?uid='+this.props.uid);
+	                }.bind(this)
+	            });
+	        }
+
 	    },
 	    render:function(){
 	        var data=this.props.data;
 	        return(
 	            React.createElement("div", {className: "show_product_box_cell fl"}, 
 	                React.createElement("div", {className: "img_box"}, 
-	                    React.createElement("img", {className: "show", onClick: this.toDetail.bind(this), data: data['_id'], src: data.imgPathS[1], alt: "img"}), 
+	                    React.createElement("img", {className: "show", onClick: this.toDetail, data: data['_id'], src: data.imgPathS[1], alt: "img"}), 
 	                    React.createElement("img", {className: "hide", src: "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg", alt: "img"}), 
 	                    React.createElement("div", {className: "cart_icon fr"}, 
-	                        React.createElement("strong", null, "+"), 
+	                        React.createElement("strong", {onClick: this.add, data: data['_id']}, "+"), 
 	                        React.createElement("span", {className: "cart_icon_handle"})
 	                    )
 	                ), 
@@ -26313,7 +26559,7 @@
 	exports.SearchItem=SearchItem;
 
 /***/ },
-/* 234 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26322,6 +26568,7 @@
 	var React=__webpack_require__(1);
 	var Link=__webpack_require__(166).Link;
 	var hashHistory=__webpack_require__(166).hashHistory;
+	var Header=__webpack_require__(228).Header;
 	var Details=React.createClass({displayName: "Details",
 	    getInitialState:function(){
 	        return({
@@ -26329,7 +26576,27 @@
 	            dataDetails:[]
 	        })
 	    },
+	    add:function(){
+	        if(!this.props.location.query.uid){
+	            hashHistory.push("/login");
+	        }else{
+	            $.ajax({
+	                type:'post',
+	                url:'/cart/add',
+	                data:{
+	                    pid:this.props.location.query.id,
+	                    uid:this.props.location.query.uid
+	                },
+	                success:function(){
+	                    hashHistory.push('/details?uid='+this.props.location.query.uid+'$id='+this.props.location.query.id);
+	                }.bind(this)
+	            });
+	        }
+
+	    },
 	    componentWillMount:function(){
+	        console.info(this.props.location.query.id);
+	        console.info(this.props.location.query.uid);
 	        $.ajax({
 	            type:'post',
 	            url:'/product/details',
@@ -26351,6 +26618,7 @@
 	        var data=this.state.dataDetails;
 	        return(
 	            React.createElement("div", {className: "details"}, 
+	                React.createElement(Header, null), 
 	                React.createElement("div", {className: "product_details"}, 
 	                    React.createElement("div", {className: "row row_border"}, 
 	                        React.createElement("div", {className: "show_img fl"}, 
@@ -26360,7 +26628,7 @@
 	                            React.createElement("h1", null, data.name), 
 	                            React.createElement("h4", null, data.price), 
 	                            React.createElement("p", null, data.info), 
-	                            React.createElement("button", null, "ADD TO CART"), 
+	                            React.createElement("button", {onClick: this.add}, "ADD TO CART"), 
 	                            React.createElement("span", null, 
 	                                "SKU:Z0005WBBG"
 	                            ), 
@@ -26427,6 +26695,53 @@
 	    }
 	});
 	exports.Details=Details;
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Created by Administrator on 2016/5/19.
+	 */
+	var React=__webpack_require__(1);
+	var OrderItem=React.createClass({displayName: "OrderItem",
+	    del:function(){
+	        this.props.del(this.props.data['_id']);
+	    },
+	    plus:function(){
+	        var pid=this.props.data.product['_id'];
+	        var count=this.props.data.count;
+	        this.props.plus(pid,count);
+	    },
+	    minus:function(){
+	        var pid=this.props.data.product['_id'];
+	        var count=this.props.data.count;
+	        var id=this.props.data['_id'];
+	        this.props.minus(pid,count,id);
+	    },
+	    render:function(){
+	        var data=this.props.data.product;
+	        var count=parseInt(this.props.data.count);
+	        var price=data.price;
+	        var total=parseInt(price.substring(1))*count;
+	        return(
+	            React.createElement("tr", {className: "order_left_grid"}, 
+	                React.createElement("td", {className: "product"}, 
+	                    React.createElement("a", {onClick: this.del.bind(this), href: "javascript:"}, React.createElement("span", null, "×")), 
+	                    React.createElement("a", {href: "javascript:"}, React.createElement("img", {src: data.imgPathS[1], alt: "img"})), 
+	                    React.createElement("a", {href: "javascript:"}, React.createElement("p", null, data.name))
+	                ), 
+	                React.createElement("td", {className: "quantity"}, 
+	                    React.createElement("button", {onClick: this.plus.bind(this)}, "+"), 
+	                    React.createElement("span", null, this.props.data.count), 
+	                    React.createElement("button", {onClick: this.minus.bind(this)}, "-")
+	                ), 
+	                React.createElement("td", {className: "total"}, React.createElement("p", null, "$ ", total))
+	            )
+	        )
+	    }
+	});
+	exports.OrderItem=OrderItem;
 
 /***/ }
 /******/ ]);

@@ -3,13 +3,19 @@
  */
 var React=require('react');
 var Link=require('react-router').Link;
+var Header=require('../../header/js/Header.js').Header;
 var SearchItem=require('./SearchItem').SearchItem;
 var Search=React.createClass({
     getInitialState: function(){
         return {
             data: [],
-            searchItems:9
+            searchItems:9,
+            uid:null
         };
+    },
+    componentDidMount:function(){
+        //保存用户ID
+        this.setState({uid:this.props.location.query.uid});
     },
     componentWillMount:function(){
         $.ajax({
@@ -21,7 +27,6 @@ var Search=React.createClass({
         });
     },
     search:function(){
-        console.info(this.refs.searchInput.value);
         if(this.refs.searchInput.value){
             $.ajax({
                 type:'post',
@@ -45,14 +50,15 @@ var Search=React.createClass({
         if(this.state.data.length>0){
             arr=this.state.data.map(function(element){
                 arr=element;
-                return <SearchItem data={arr}/>
-            });
+                return <SearchItem uid={this.state.uid} data={arr}/>
+            }.bind(this));
         }
         return(
             <div className="search">
+                <Header/>
                 <div className="search_input">
                     <div className="search_input_area fr">
-                        <button onClick={this.search.bind(this)}>search</button>
+                        <button onClick={this.search}>search</button>
                         <input type="text" ref="searchInput"/>
                     </div>
                     <p>Showing all <i>{this.state.searchItems}</i> results</p>
