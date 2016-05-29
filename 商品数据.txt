@@ -1,131 +1,131 @@
 {
-    "category":"CELESTE",
-    "name" : "CELESTE Black/Mono",
-    "price" : "199",
-    "describle":"The design of Celeste is inspired by the Northern Lights, anyone who has experienced nature's most fascinating phenomenon never forgets it. Now, you get to experience the Aurora on your wrist, every day.",
-    "imgPathB" : "ziiiro-celeste-watch-black-mono-blue-side-510x650.jpg",
-    "imgPathS" : [
-        "ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg",
-        "ziiiro-celeste-watch-black-mono-front-200x300.jpg",
-        "ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg"
-        ],
-    "imgUse":"Howto_Celeste.jpg"
+	"category":"CELESTE",
+	"name" : "CELESTE Black/Mono",
+	"price" : "199",
+	"describle":"The design of Celeste is inspired by the Northern Lights, anyone who has experienced nature's most fascinating phenomenon never forgets it. Now, you get to experience the Aurora on your wrist, every day.",
+	"imgPathB" : "images/ziiiro-celeste-watch-black-mono-blue-side-510x650.jpg",
+	"imgPathS" : [
+	    "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg",
+	    "images/ziiiro-celeste-watch-black-mono-front-200x300.jpg",
+	    "images/ziiiro-celeste-watch-black-mono-blue-side-200x300.jpg"
+	    ],
+	"imgUse":"images/Howto_Celeste.jpg"
 },
 {
-    "category":"GRAVITY PLUS+",
-    "name" : "GRAVITY Ocean +",
-    "price" : "159",
-    "describle":"The Gravity Plus+ watch displays time in a simple and unique way without any alphanumeric characters or traditional watch hands. ",
-    "imgPathB" : "ziiiro-gravity-adjustable-ocean-ocean-side-510x650.jpg",
-    "imgPathS" : [
-        "ziiiro-gravity-adjustable-ocean-ocean-side-200x300.jpg",
-        "ziiiro-gravity-watch-ocean-blue-front-200x300.jpg",
-        "ziiiro-gravity-adjustable-ocean-ocean-side-200x300.jpg"
-        ],
-    "imgUse":"howto-gravity-adjustable.jpg"
+	"category":"GRAVITY PLUS+",
+	"name" : "GRAVITY Ocean +",
+	"price" : "159",
+	"describle":"The Gravity Plus+ watch displays time in a simple and unique way without any alphanumeric characters or traditional watch hands. ",
+	"imgPathB" : "images/ziiiro-gravity-adjustable-ocean-ocean-side-510x650.jpg",
+	"imgPathS" : [
+	    "images/ziiiro-gravity-adjustable-ocean-ocean-side-200x300.jpg",
+	    "images/ziiiro-gravity-watch-ocean-blue-front-200x300.jpg",
+	    "images/ziiiro-gravity-adjustable-ocean-ocean-side-200x300.jpg"
+	    ],
+	"imgUse":"images/howto-gravity-adjustable.jpg"
 },
 {
-    "category":"TITAN",
-    "name" : "TITAN Purple",
-    "price" : "189",
-    "describle":"Moving with time. Whether you need it as a pocket watch or stylish pendant accessory. Titan is your brightly colored special charm. Incredibly lightweight with a beautifully crafted aluminum casing. Time is read from the outer hour ring of 12 segments and inner minute ring of 60 segments. Available in 5 colors of azure, chrome, purple, black and cherry. ",
-    "imgPathB" : "ziiiro-titan-pocket-watch-purple-front-510x650.jpg",
-    "imgPathS" : [
-        "ziiiro-titan-pocket-watch-purple-back-200x300.jpg",
-        "ziiiro-titan-pocket-watch-purple-front-200x300.jpg" ,
-        "ziiiro-titan-pocket-watch-purple-back-200x300.jpg"       
-        ],
-    "imgUse":"Howto_Titan.jpg"
+	"category":"TITAN",
+	"name" : "TITAN Purple",
+	"price" : "189",
+	"describle":"Moving with time. Whether you need it as a pocket watch or stylish pendant accessory. Titan is your brightly colored special charm. Incredibly lightweight with a beautifully crafted aluminum casing. Time is read from the outer hour ring of 12 segments and inner minute ring of 60 segments. Available in 5 colors of azure, chrome, purple, black and cherry. ",
+	"imgPathB" : "images/ziiiro-titan-pocket-watch-purple-front-510x650.jpg",
+	"imgPathS" : [
+	    "images/ziiiro-titan-pocket-watch-purple-back-200x300.jpg",
+	    "images/ziiiro-titan-pocket-watch-purple-front-200x300.jpg" ,
+	    "images/ziiiro-titan-pocket-watch-purple-back-200x300.jpg"       
+	    ],
+	"imgUse":"images/Howto_Titan.jpg"
 },
 {
-    "category":"ECLIPSE",
-    "name" : "ECLIPSE Black",
-    "price" : "199",
-    "describle":"Anyone who has experienced nature's most amazing and unusual phenomenon never forgets it. Now, you get to experience the Eclipse on your wrist, every day.",
-    "imgPathB" : "ziiiro-eclipse-watch-black-front-510x650.jpg",
-    "imgPathS" : [    
-        "ziiiro-eclipse-watch-luminous-black-back-200x300.jpg",
-        "ziiiro-eclipse-watch-black-front-200x300.jpg",
-        "ziiiro-eclipse-watch-black-front-200x300.jpg"          
-        ],
-    "imgUse":"Howto_Eclipse.jpg"
+	"category":"ECLIPSE",
+	"name" : "ECLIPSE Black",
+	"price" : "199",
+	"describle":"Anyone who has experienced nature's most amazing and unusual phenomenon never forgets it. Now, you get to experience the Eclipse on your wrist, every day.",
+	"imgPathB" : "images/ziiiro-eclipse-watch-black-front-510x650.jpg",
+	"imgPathS" : [    
+	    "images/ziiiro-eclipse-watch-luminous-black-back-200x300.jpg",
+	    "images/ziiiro-eclipse-watch-black-front-200x300.jpg",
+	    "images/ziiiro-eclipse-watch-black-front-200x300.jpg"          
+	    ],
+	"imgUse":"images/Howto_Eclipse.jpg"
 },
 {
-    "category":"ORBIT",
-    "name" : "ORBIT ONE Grey",
-    "price" : "179",
-    "describle":"Inspired by the Solar System, time is told by the constantly orbiting planets around parent star Ziiiro. The Orbit displays time by utilising two planets, the colored orb representing the hour and white orb displaying the minute.",
-    "imgPathB" : "ziiiro-orbit-watch-grey-magenta-side.jpg",
-    "imgPathS" : [
-        "ziiiro-orbit-watch-grey-magenta-side-200x300.jpg",
-        "ziiiro-orbit-watch-grey-magenta-front-200x300.jpg",
-        "ziiiro-orbit-watch-grey-magenta-side-200x300.jpg"          
-        ],
-    "imgUse":"Howto_Orbit_2.jpg"
+	"category":"ORBIT",
+	"name" : "ORBIT ONE Grey",
+	"price" : "179",
+	"describle":"Inspired by the Solar System, time is told by the constantly orbiting planets around parent star Ziiiro. The Orbit displays time by utilising two planets, the colored orb representing the hour and white orb displaying the minute.",
+	"imgPathB" : "images/ziiiro-orbit-watch-grey-magenta-side.jpg",
+	"imgPathS" : [
+	    "images/ziiiro-orbit-watch-grey-magenta-side-200x300.jpg",
+	    "images/ziiiro-orbit-watch-grey-magenta-front-200x300.jpg",
+	    "images/ziiiro-orbit-watch-grey-magenta-side-200x300.jpg"          
+	    ],
+	"imgUse":"Howto_Orbit_2.jpg"
 },
---------------------------------------
+---- 
 {
-    "category":"GRAVITY ONE",
-    "name" : "GRAVITY ONE Banana",
-    "price" : "159",
-    "describle":"The Gravity watch displays time in a simple and unique way without any alphanumeric characters or traditional watch hands.",
-    "imgPathB" : "ziiiro-gravity-watch-banana-yellow-side-2.jpg",
-    "imgPathS" : [
-        "ziiiro-gravity-watch-banana-yellow-side-2-200x300.jpg",
-        "ziiiro-gravity-watch-banana-yellow-front-200x300.jpg",
-        "ziiiro-gravity-watch-banana-yellow-side-2-200x300.jpg"          
-        ],
-    "imgUse":"Howto_Gravity.jpg"
-},
-{
-    "category":"MERCURY",
-    "name" : "MERCURY / Magenta",
-    "price" : "199",
-    "describle":"The Mercury watch displays time in a simple and unique way without any alphanumeric characters or traditional watch hands.",
-    "imgPathB" : "ziiiro-mercury-watch-chrome-magenta-side-510x650.jpg",
-    "imgPathS" : [
-        "ziiiro-mercury-watch-chrome-magenta-side-200x300.jpg",
-        "ziiiro-mercury-watch-chrome-magenta-front-200x300.jpg",
-        "ziiiro-mercury-watch-chrome-magenta-side-200x300.jpg"          
-        ],
-    "imgUse":"Howto_Mercury.jpg"
+	"category":"GRAVITY ONE",
+	"name" : "GRAVITY ONE Banana",
+	"price" : "159",
+	"describle":"The Gravity watch displays time in a simple and unique way without any alphanumeric characters or traditional watch hands.",
+	"imgPathB" : "images/ziiiro-gravity-watch-banana-yellow-side-2.jpg",
+	"imgPathS" : [
+	    "images/ziiiro-gravity-watch-banana-yellow-side-2-200x300.jpg",
+	    "images/ziiiro-gravity-watch-banana-yellow-front-200x300.jpg",
+	    "images/ziiiro-gravity-watch-banana-yellow-side-2-200x300.jpg"          
+	    ],
+	"imgUse":"images/Howto_Gravity.jpg"
 },
 {
-    "category":"SATURN",
-    "name" : "SATURN Gunmetal",
-    "price" : "229",
-    "describle":"Introducing the future. Saturn's unique digital display rides through time by propelling its hour and minute through black segments. The hour can be deciphered from its outer ring of 12 segments and minute from inner ring of 60 segments. This futuristic piece comes with a stainless steel casing and 24 mm stainless steel mesh strap.",
-    "imgPathB" : "ziiiro-saturn-watch-gunmetal-up.jpg",
-    "imgPathS" : [
-        "ziiiro-saturn-watch-gunmetal-up-200x300.jpg",
-        "ziiiro-saturn-watch-gunmetal-front-200x300.jpg",
-        "ziiiro-saturn-watch-gunmetal-up-200x300.jpg"          
-        ],
-    "imgUse":"Howto_Saturn.jpg"
+	"category":"MERCURY",
+	"name" : "MERCURY / Magenta",
+	"price" : "199",
+	"describle":"The Mercury watch displays time in a simple and unique way without any alphanumeric characters or traditional watch hands.",
+	"imgPathB" : "images/ziiiro-mercury-watch-chrome-magenta-side-510x650.jpg",
+	"imgPathS" : [
+	    "images/ziiiro-mercury-watch-chrome-magenta-side-200x300.jpg",
+	    "images/ziiiro-mercury-watch-chrome-magenta-front-200x300.jpg",
+	    "images/ziiiro-mercury-watch-chrome-magenta-side-200x300.jpg"          
+	    ],
+	"imgUse":"images/Howto_Mercury.jpg"
 },
 {
-    "category":"PROTON",
-    "name" : "PROTON Milky / Colored",
-    "price" : "179",
-    "describle":"Inspired by the Northern Lights, anyone who has experienced nature's most fascinating phenomenon never forgets it. Now, you get to experience the Aurora on your wrist, every day.",
-    "imgPathB" : "ziiiro-proton-watch-transparent-milky-colored-front-510x650.jpg",
-    "imgPathS" : [
-        "ziiiro-proton-watch-transparent-milky-colored-up-200x300.jpg",
-        "ziiiro-proton-watch-transparent-milky-colored-front-200x300.jpg",
-        "ziiiro-proton-watch-transparent-milky-colored-front-200x300.jpg"          
-        ],
-    "imgUse":"Howto_Proton.jpg"
+	"category":"SATURN",
+	"name" : "SATURN Gunmetal",
+	"price" : "229",
+	"describle":"Introducing the future. Saturn's unique digital display rides through time by propelling its hour and minute through black segments. The hour can be deciphered from its outer ring of 12 segments and minute from inner ring of 60 segments. This futuristic piece comes with a stainless steel casing and 24 mm stainless steel mesh strap.",
+	"imgPathB" : "images/ziiiro-saturn-watch-gunmetal-up.jpg",
+	"imgPathS" : [
+	    "images/ziiiro-saturn-watch-gunmetal-up-200x300.jpg",
+	    "images/ziiiro-saturn-watch-gunmetal-front-200x300.jpg",
+	    "images/ziiiro-saturn-watch-gunmetal-up-200x300.jpg"          
+	    ],
+	"imgUse":"images/Howto_Saturn.jpg"
 },
 {
-    "category":"ION",
-    "name" : "ION Milky",
-    "price" : "149",
-    "describle":"The Ion offers a touch of simplicity with its minimalistic dial and two-hand analog movement. Comes together with an understated transparent bracelet strap, this combination reveals a truly elegant timepiece.",
-    "imgPathB" : "",
-    "imgPathS" : [
-        "",
-        "",
-        ""          
-        ],
-    "imgUse":""
+	"category":"PROTON",
+	"name" : "PROTON Milky / Colored",
+	"price" : "179",
+	"describle":"Inspired by the Northern Lights, anyone who has experienced nature's most fascinating phenomenon never forgets it. Now, you get to experience the Aurora on your wrist, every day.",
+	"imgPathB" : "images/ziiiro-proton-watch-transparent-milky-colored-front-510x650.jpg",
+	"imgPathS" : [
+	    "images/ziiiro-proton-watch-transparent-milky-colored-up-200x300.jpg",
+	    "images/ziiiro-proton-watch-transparent-milky-colored-front-200x300.jpg",
+	    "images/ziiiro-proton-watch-transparent-milky-colored-front-200x300.jpg"          
+	    ],
+	"imgUse":"images/Howto_Proton.jpg"
+},
+{
+	"category":"ION",
+	"name" : "ION Milky",
+	"price" : "149",
+	"describle":"The Ion offers a touch of simplicity with its minimalistic dial and two-hand analog movement. Comes together with an understated transparent bracelet strap, this combination reveals a truly elegant timepiece.",
+	"imgPathB" : "",
+	"imgPathS" : [
+	    "",
+	    "",
+	    ""          
+	    ],
+	"imgUse":""
 },

@@ -26727,14 +26727,14 @@
 	        return(
 	            React.createElement("tr", {className: "order_left_grid"}, 
 	                React.createElement("td", {className: "product"}, 
-	                    React.createElement("a", {onClick: this.del.bind(this), href: "javascript:"}, React.createElement("span", null, "×")), 
+	                    React.createElement("a", {onClick: this.del, href: "javascript:"}, React.createElement("span", null, "×")), 
 	                    React.createElement("a", {href: "javascript:"}, React.createElement("img", {src: data.imgPathS[1], alt: "img"})), 
 	                    React.createElement("a", {href: "javascript:"}, React.createElement("p", null, data.name))
 	                ), 
 	                React.createElement("td", {className: "quantity"}, 
-	                    React.createElement("button", {onClick: this.plus.bind(this)}, "+"), 
+	                    React.createElement("button", {onClick: this.plus}, "+"), 
 	                    React.createElement("span", null, this.props.data.count), 
-	                    React.createElement("button", {onClick: this.minus.bind(this)}, "-")
+	                    React.createElement("button", {onClick: this.minus}, "-")
 	                ), 
 	                React.createElement("td", {className: "total"}, React.createElement("p", null, "$ ", total))
 	            )
